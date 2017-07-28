@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?selectableRectDrawableColored">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/black"/>
+            <corners android:radius="@dimen/selectable_rounded_rect_corner_radius"/>
+        </shape>
+</selector>
