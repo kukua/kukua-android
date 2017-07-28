@@ -43,6 +43,12 @@
                 android:inputType="textPassword"
                 android:hint="Password"/>
 
+            <Button android:id="@+id/btn_submit"
+                style="@style/ButtonStyle.Colored"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:text="LOGIN" />
         </android.support.design.widget.TextInputLayout>
 
         <TextView android:id="@+id/txt_forgot_password"
@@ -68,12 +74,6 @@
                 style="@style/ButtonStyle.Borderless.ColoredText"
                 android:text="Sign up" />
         </LinearLayout>
-        <Button android:id="@+id/btn_submit"
-            style="@style/ButtonStyle.Colored"
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-            android:text="LOGIN" />
 
     </LinearLayout>
     </ScrollView>
