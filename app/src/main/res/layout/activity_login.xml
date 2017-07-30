@@ -23,12 +23,12 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/txt_username"
+                android:id="@+id/et_username"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:inputType="text"
                 android:maxLines="1"
-                android:hint="Phone (include country code eg 256) or Email"/>
+                android:hint="Phone or Email"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/txt_password"
+                android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:inputType="textPassword"
@@ -46,7 +46,6 @@
             <Button android:id="@+id/btn_submit"
                 style="@style/ButtonStyle.Colored"
                 android:layout_width="wrap_content"
-
                 android:layout_height="wrap_content"
                 android:text="LOGIN" />
         </android.support.design.widget.TextInputLayout>

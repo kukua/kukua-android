@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
+import cc.kukua.android.auth.LoginActivity;
+
 /**
  * Created by mistaguy on 7/28/2017.
  */
