@@ -22,7 +22,6 @@ import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -33,6 +32,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
+import cc.kukua.android.activity.FirstTimeActivity;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -59,8 +59,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    private View mProgressView;
-    private View mLoginFormView;
+    @BindView(R.id.login_progress)
+    View mProgressView;
+    @BindView(R.id.login_form)
+    View mLoginFormView;
 
     @BindView(R.id.et_password)
     EditText mPasswordView;
@@ -260,10 +262,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             emails.add(cursor.getString(ProfileQuery.ADDRESS));
-            cursor.moveToNext();
-        }
 
         addEmailsToAutoComplete(emails);
+        cursor.moveToNext();
+    }
     }
 
     @Override
@@ -339,6 +341,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
+                Intent i = new Intent(LoginActivity.this, FirstTimeActivity.class);
+                startActivity(i);
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

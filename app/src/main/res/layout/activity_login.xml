@@ -2,8 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <ProgressBar
+        android:foregroundGravity="center_vertical"
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="521dp"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
     <ScrollView
+        android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <LinearLayout
@@ -14,8 +24,8 @@
         android:layout_centerInParent="true">
         <ImageView
             android:src="@drawable/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="221dp"
+            android:layout_height="155dp"
             android:scaleType="fitCenter"
             android:layout_gravity="center_horizontal"/>
         <android.support.design.widget.TextInputLayout
