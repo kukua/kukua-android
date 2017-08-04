@@ -12,7 +12,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.Green">
         <activity
             android:name=".SplashActivity"
             android:label="@string/app_name"
@@ -25,7 +25,7 @@
         </activity>
         <activity android:name=".auth.LoginActivity" />
         <activity android:name=".auth.RegisterActivity" />
-        <activity android:name=".activity.FirstTimeActivity" />
+        <activity android:name=".activity.FirstTimeActivity" android:label="First Time Login" />
     </application>
 
 </manifest>
