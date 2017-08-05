@@ -75,4 +75,7 @@
     <!-- Snackbars -->
     <string name="snackbar_action">Action</string>
     <string name="title_activity_sign_in">Sign in</string>
+    <string name="login_label">Login</string>
+    <string name="register_login">Register</string>
+    <string name="first_time_label">First Time</string>
 </resources>
