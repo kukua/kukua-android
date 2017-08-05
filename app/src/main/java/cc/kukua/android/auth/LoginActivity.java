@@ -32,6 +32,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
+import cc.kukua.android.activity.BaseActivity;
 import cc.kukua.android.activity.FirstTimeActivity;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -39,7 +40,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>,  View.OnClickListener {
+public class LoginActivity extends BaseActivity implements LoaderCallbacks<Cursor>,  View.OnClickListener {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -74,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     Button mEmailSignInButton;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
