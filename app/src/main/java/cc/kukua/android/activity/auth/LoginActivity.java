@@ -1,4 +1,4 @@
-package cc.kukua.android.auth;
+package cc.kukua.android.activity.auth;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
 import android.content.CursorLoader;
@@ -33,7 +32,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
 import cc.kukua.android.activity.BaseActivity;
-import cc.kukua.android.activity.FirstTimeActivity;
+import cc.kukua.android.activity.HomeActivity;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -342,7 +341,7 @@ public class LoginActivity extends BaseActivity implements LoaderCallbacks<Curso
             showProgress(false);
 
             if (success) {
-                Intent i = new Intent(LoginActivity.this, FirstTimeActivity.class);
+                Intent i = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(i);
                 finish();
             } else {

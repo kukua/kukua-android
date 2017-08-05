@@ -75,7 +75,15 @@
     <!-- Snackbars -->
     <string name="snackbar_action">Action</string>
     <string name="title_activity_sign_in">Sign in</string>
-    <string name="login_label">Login</string>
-    <string name="register_login">Register</string>
-    <string name="first_time_label">First Time</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_first_time">First Time</string>
+    <string name="title_activity_use_info">Use</string>
+    <string name="slogan">Valuable weather information for farming</string>
+    <string name="title_activity_firstime">Welcome</string>
+    <string name="title_activity_hourly">Hourly forecast</string>
+    <string name="title_activity_day">Day forecast</string>
+    <string name="title_activity_home">Weather forecast</string>
+    <string name="title_activity_customize">Pimp character</string>
+    <string name="title_activity_character_info">My character</string>
 </resources>

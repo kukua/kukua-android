@@ -1,4 +1,4 @@
-package cc.kukua.android;
+package cc.kukua.android.activity;
 
 import android.content.Intent;
 import android.os.Build;
@@ -9,8 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
-import cc.kukua.android.activity.FirstTimeActivity;
-import cc.kukua.android.auth.LoginActivity;
+import cc.kukua.android.R;
+import cc.kukua.android.activity.auth.LoginActivity;
+import cc.kukua.android.activity.firstime.FirstTimeActivity;
+import cc.kukua.android.activity.firstime.PersonalInfoActivity;
 
 /**
  * Created by mistaguy on 7/28/2017.
