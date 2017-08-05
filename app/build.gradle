@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [HOCKEYAPP_APP_ID: "028a022498be43d9b305d202d40cdf6a"]
     }
     buildTypes {
         release {
@@ -44,9 +45,13 @@ dependencies {
     //azure sdk dependencies
     compile 'com.google.guava:guava:18.0'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
+
     //azure sdk
     compile 'com.microsoft.azure:azure-mobile-android:3.2.0@aar'
     compile 'com.microsoft.azure:azure-notifications-handler:1.0.1@jar'
+
+    //hockey app integration
+    compile 'net.hockeyapp.android:HockeySDK:4.1.4'
 
     // test libgs
     testCompile 'junit:junit:4.12'

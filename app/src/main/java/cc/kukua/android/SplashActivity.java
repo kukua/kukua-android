@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
+import cc.kukua.android.activity.FirstTimeActivity;
 import cc.kukua.android.auth.LoginActivity;
 
 /**
@@ -42,7 +43,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                startActivity(new Intent(SplashActivity.this, FirstTimeActivity.class));
 
                 finish();
             }
