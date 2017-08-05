@@ -17,7 +17,7 @@ import cc.kukua.android.R;
 public class BaseActivity  extends AppCompatActivity {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Your own code to create the view
         // ...
