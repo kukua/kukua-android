@@ -7,4 +7,4 @@
     android:layout_height="wrap_content"
     android:layout_gravity="end|bottom"
     android:layout_margin="@dimen/floating_action_button_spacing"
-    android:src="@drawable/ic_action_settings"/>
+    android:src="@android:drawable/alert_dark_frame"/>
