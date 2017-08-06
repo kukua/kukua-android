@@ -17,9 +17,8 @@ import cc.kukua.android.R;
 import cc.kukua.android.constants.DummyDataProvider;
 import cc.kukua.android.eventbuses.TransactFragment;
 import cc.kukua.android.interfaces.FragmentInterface;
-
 /**
- * A simple {@link Fragment} subclass.
+ * @author Calistus
  */
 public class PersonalInfoFragment extends Fragment {
 

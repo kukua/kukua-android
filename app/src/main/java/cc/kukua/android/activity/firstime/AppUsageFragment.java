@@ -6,43 +6,25 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import org.greenrobot.eventbus.EventBus;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import cc.kukua.android.R;
 import cc.kukua.android.constants.DummyDataProvider;
-import cc.kukua.android.eventbuses.TransactFragment;
 import cc.kukua.android.interfaces.FragmentInterface;
 
 /**
  * @author Calistus
  */
-public class AccountInfoFragment extends Fragment {
+public class AppUsageFragment extends Fragment {
 
     private FragmentInterface fragmentInterface;
 
-    @BindView(R.id.btn_next2)
-    Button btnNext;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView =  inflater.inflate(R.layout.fragment_account_info, container, false);
-
-        ButterKnife.bind(this, rootView);
         setFragmentTitle();
-
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AppUsageFragment appUsageFragment = new AppUsageFragment();
-                EventBus.getDefault().post(new TransactFragment(appUsageFragment));
-            }
-        });
         // Inflate the layout for this fragment
-        return rootView;     }
+        return inflater.inflate(R.layout.fragment_app_usage, container, false);
+    }
 
     private void setFragmentTitle() {
         if (fragmentInterface != null) {
