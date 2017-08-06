@@ -11,7 +11,7 @@
     </style>
 
     <!-- Default App Theme -->
-    <style name="AppTheme" parent="BaseTheme">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- API specific attributes 14+ -->
         <item name="selectableRectDrawable">@drawable/state_list_selectable_rect_green</item>
         <item name="selectableRectDrawableInverse">@drawable/state_list_selectable_rect_white</item>
@@ -43,6 +43,7 @@
         <item name="selectableRoundedRectDrawableColored">
             @drawable/state_list_selectable_rounded_rect_green
         </item>
+        <item name="android:colorForeground">@android:color/white</item>
     </style>
 
     <!-- Default Dialog Theme -->
