@@ -33,6 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
 import cc.kukua.android.activity.HomeActivity;
+import cc.kukua.android.activity.firstime.PersonalInfoActivity;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -85,14 +86,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                //attemptLogin();
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             }
         });
 
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                startActivity(new Intent(LoginActivity.this, PersonalInfoActivity.class));
             }
         });
     }

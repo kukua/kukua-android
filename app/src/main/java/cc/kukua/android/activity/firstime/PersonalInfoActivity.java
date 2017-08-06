@@ -1,6 +1,9 @@
 package cc.kukua.android.activity.firstime;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,10 +31,13 @@ public class PersonalInfoActivity extends AppCompatActivity implements FragmentI
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        checkAndRegEventBus();
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+
+        //Call PersonalInfo Fragment
+        transactFragment(new PersonalInfoFragment());
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +57,35 @@ public class PersonalInfoActivity extends AppCompatActivity implements FragmentI
 
     @Override
     public void setToolBarTitle(String title) {
+
+    }
+    private void checkAndUnRegEventBus() {
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+    }
+    private void checkAndRegEventBus() {
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        checkAndRegEventBus();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        checkAndUnRegEventBus();
+    }
+
+    private void transactFragment(final Fragment fragment) {
+        final String backStateName = fragment.getClass().getSimpleName();
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+        final FragmentTransaction fragmentTransaction =  fragmentManager.beginTransaction().replace(R.id.fragment_content, fragment);
+        fragmentTransaction.commit();
 
     }
 }
