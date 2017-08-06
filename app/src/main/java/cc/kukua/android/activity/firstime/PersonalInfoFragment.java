@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import cc.kukua.android.R;
+import cc.kukua.android.constants.DummyDataProvider;
 import cc.kukua.android.interfaces.FragmentInterface;
 
 public class PersonalInfoFragment extends Fragment {
@@ -23,7 +24,7 @@ public class PersonalInfoFragment extends Fragment {
 
     private void setFragmentTitle() {
         if (fragmentInterface != null) {
-            fragmentInterface.setToolBarTitle(DummyDataProvider.TOPICS);
+            fragmentInterface.setToolBarTitle(DummyDataProvider.PERSONAL_INFO);
         }
     }
     @Override
