@@ -13,12 +13,16 @@ import android.view.View;
 import android.widget.Button;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
 import cc.kukua.android.activity.HomeActivity;
+import cc.kukua.android.eventbuses.TransactFragment;
 import cc.kukua.android.interfaces.FragmentInterface;
+import cc.kukua.android.utils.UiUtils;
 
 public class PersonalInfoActivity extends AppCompatActivity implements FragmentInterface {
     @BindView(R.id.btn_submit)
@@ -87,5 +91,19 @@ public class PersonalInfoActivity extends AppCompatActivity implements FragmentI
         final FragmentTransaction fragmentTransaction =  fragmentManager.beginTransaction().replace(R.id.fragment_content, fragment);
         fragmentTransaction.commit();
 
+    }
+
+    @SuppressWarnings("unused")
+    @Subscribe(sticky = true, threadMode = ThreadMode.ASYNC)
+    public void onEventAsync(final Object o) {
+        UiUtils.runOnMain(new Runnable() {
+            @Override
+            public void run() {
+                if (o instanceof TransactFragment) {
+                    TransactFragment transactFragment = (TransactFragment) o;
+                    transactFragment(transactFragment.getFragment());
+                }
+            }
+        });
     }
 }
