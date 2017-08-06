@@ -34,7 +34,10 @@
             android:label="@string/title_activity_use_info"
             android:theme="@style/AppTheme.Green" />
         <activity android:name=".activity.firstime.CharacterInfoActivity" android:label="@string/title_activity_character_info"  />
-        <activity android:name=".activity.CharacterCustomizationActivity" android:label="@string/title_activity_customize" />
+        <activity android:name=".activity.CharacterCustomizationActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize"
+                  android:screenOrientation="landscape"
+                  android:label="@string/title_activity_customize" />
         <activity android:name=".activity.HomeActivity" android:label="@string/title_activity_home" />
         <activity android:name=".activity.weather.DayActivity" android:label="@string/title_activity_day" />
         <activity android:name=".activity.weather.HourActivity" android:label="@string/title_activity_hourly" />

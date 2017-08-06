@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/andengineLibrary/AndEngine-GLES2-AnchorCenter/AndEngine-GLES2-AnchorCenter.iml" filepath="$PROJECT_DIR$/andengineLibrary/AndEngine-GLES2-AnchorCenter/AndEngine-GLES2-AnchorCenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/Kukua.iml" filepath="$PROJECT_DIR$/Kukua.iml" />
+      <module fileurl="file://$PROJECT_DIR$/andengineLibrary/andengineLibrary.iml" filepath="$PROJECT_DIR$/andengineLibrary/andengineLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/kukua-android.iml" filepath="$PROJECT_DIR$/kukua-android.iml" />
     </modules>
