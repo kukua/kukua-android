@@ -10,10 +10,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
-import cc.kukua.android.activity.BaseActivity;
 import cc.kukua.android.activity.HomeActivity;
-import cc.kukua.android.activity.auth.LoginActivity;
-import cc.kukua.android.activity.auth.RegisterActivity;
 
 public class FirstTimeActivity extends AppCompatActivity {
     @BindView(R.id.btn_submit)
