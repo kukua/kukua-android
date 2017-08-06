@@ -30,7 +30,6 @@
     </string-array>
 
 
-
     <!-- WARNING THE STRINGS BELOW WILL BE REMOVED TOWARDS PROJECT COMPLETION-->
     <!-- Home -->
     <string name="home_tab_xml">XML</string>
@@ -107,4 +106,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="button_next">Next</string>
     <string name="title_activity_demo">DemoActivity</string>
+    <string name="title_activity_location">Pick Your Location</string>
 </resources>
