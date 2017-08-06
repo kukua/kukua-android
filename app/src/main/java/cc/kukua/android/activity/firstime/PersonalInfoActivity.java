@@ -13,8 +13,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
 import cc.kukua.android.activity.HomeActivity;
+import cc.kukua.android.interfaces.FragmentInterface;
 
-public class PersonalInfoActivity extends AppCompatActivity {
+public class PersonalInfoActivity extends AppCompatActivity implements FragmentInterface {
     @BindView(R.id.btn_submit)
     Button nextButton;
     @Override
@@ -44,5 +45,10 @@ public class PersonalInfoActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void setToolBarTitle(String title) {
+
     }
 }

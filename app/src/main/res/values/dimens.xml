@@ -24,4 +24,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <!--Auth Layout Margin-->
+    <dimen name="button_spacing">20dp</dimen>
+
 </resources>

@@ -20,6 +20,7 @@ android {
     }
 }
 
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -53,6 +54,9 @@ dependencies {
 
     //hockey app integration
     compile 'net.hockeyapp.android:HockeySDK:4.1.4'
+
+    //Event Bus
+    compile 'org.greenrobot:eventbus:3.0.0'
 
     // test libgs
     testCompile 'junit:junit:4.12'
