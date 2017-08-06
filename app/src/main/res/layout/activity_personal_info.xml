@@ -16,7 +16,29 @@ tools:context="cc.kukua.android.activity.firstime.PersonalInfoActivity">
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme.Green.PopupOverlay" />
+        app:popupTheme="@style/AppTheme.Green.PopupOverlay" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            style="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:ellipsize="end"
+            android:lineSpacingExtra="1.5dp"
+            android:lineSpacingMultiplier="1.5"
+            android:maxLines="1"
+            android:textColor="@android:color/white"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
 
 </android.support.design.widget.AppBarLayout>
 

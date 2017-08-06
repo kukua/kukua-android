@@ -37,6 +37,7 @@ public class PersonalInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View  rootView = inflater.inflate(R.layout.fragment_personal_info, container, false);
         ButterKnife.bind(this, rootView);
+        setFragmentTitle();
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

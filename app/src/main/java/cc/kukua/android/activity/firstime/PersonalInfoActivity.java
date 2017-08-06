@@ -8,11 +8,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.Locale;
+
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
 import cc.kukua.android.eventbuses.TransactFragment;
@@ -21,6 +25,8 @@ import cc.kukua.android.utils.UiUtils;
 
 public class PersonalInfoActivity extends AppCompatActivity implements FragmentInterface {
     //@BindView(R.id.btn_next) Button nextButton;
+    @BindView(R.id.toolbar_title)
+    TextView tvToolbarTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +61,7 @@ public class PersonalInfoActivity extends AppCompatActivity implements FragmentI
 
     @Override
     public void setToolBarTitle(String title) {
+        tvToolbarTitle.setText(title.toUpperCase(Locale.getDefault()));
 
     }
     private void checkAndUnRegEventBus() {
@@ -100,4 +107,7 @@ public class PersonalInfoActivity extends AppCompatActivity implements FragmentI
             }
         });
     }
+
+
+
 }
