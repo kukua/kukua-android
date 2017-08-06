@@ -13,6 +13,7 @@
     <color name="swipe_color_4">@color/material_green_400</color>
     <color name="backgroundLight">@color/material_green_500</color>
     <color name="transparent">#99FFFFFF</color>
+    <color name="colorWhite">#ffffff</color>
 
     <!-- Material Color Palette -->
     <color name="material_gray_050">#FAFAFA</color>

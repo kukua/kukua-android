@@ -6,4 +6,5 @@ package cc.kukua.android.constants;
 
 public class DummyDataProvider {
     public static String PERSONAL_INFO = "Personal Information";
+    public static String ACCOUNT_INFO = "Account Information";
 }
