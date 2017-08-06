@@ -59,6 +59,9 @@
         <activity
             android:name=".activity.firstime.FirstTimeActivity"
             android:label="@string/title_activity_firstime" />
+
+
+
     </application>
 
 </manifest>
