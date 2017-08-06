@@ -20,6 +20,7 @@ android {
     }
 }
 
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -47,9 +48,18 @@ dependencies {
     compile 'com.microsoft.azure:azure-notifications-handler:1.0.1@jar'
     // hockey app integration
     compile 'net.hockeyapp.android:HockeySDK:4.1.4'
+
+    //Event Bus
+    compile 'org.greenrobot:eventbus:3.0.0'
+
+    //Common Android Functions
+    compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+
     // andengine
-    // compile project(':andengine')
-    // test libgs
+     //compile project(':andengine')
+    // test libs
     testCompile 'junit:junit:4.12'
     compile project(':andengineLibrary:AndEngine-GLES2-AnchorCenter')
 }

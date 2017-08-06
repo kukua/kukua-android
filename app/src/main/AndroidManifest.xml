@@ -6,7 +6,8 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,25 +24,44 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-]        <activity android:name=".activity.auth.LoginActivity" android:label="@string/title_activity_login" >
-        </activity>
-        <activity android:name=".activity.auth.RegisterActivity" android:label="@string/title_activity_register" />
-        <activity android:name=".activity.firstime.PersonalInfoActivity" android:label="Personal info" />
-        <activity android:name=".activity.firstime.AccountInfoActivity" android:label="Account info" />
+        ]
+        <activity
+            android:name=".activity.auth.LoginActivity"
+            android:label="@string/title_activity_login"></activity>
+        <activity
+            android:name=".activity.auth.RegisterActivity"
+            android:label="@string/title_activity_register" />
+        <activity
+            android:name=".activity.firstime.PersonalInfoActivity"
+            android:label="Personal info" />
+        <activity
+            android:name=".activity.firstime.AccountInfoActivity"
+            android:label="Account info" />
         <activity
             android:name=".activity.firstime.UseInfoActivity"
             android:label="@string/title_activity_use_info"
             android:theme="@style/AppTheme.Green" />
-        <activity android:name=".activity.firstime.CharacterInfoActivity" android:label="@string/title_activity_character_info"  />
-        <activity android:name=".activity.CharacterCustomizationActivity"
-                  android:configChanges="keyboardHidden|orientation|screenSize"
-                  android:screenOrientation="landscape"
-                  android:label="@string/title_activity_customize" />
-        <activity android:name=".activity.HomeActivity" android:label="@string/title_activity_home" />
-        <activity android:name=".activity.weather.DayActivity" android:label="@string/title_activity_day" />
-        <activity android:name=".activity.weather.HourActivity" android:label="@string/title_activity_hourly" />
-        <activity android:name=".activity.firstime.FirstTimeActivity" android:label="@string/title_activity_firstime"></activity>
+        <activity
+            android:name=".activity.firstime.CharacterInfoActivity"
+            android:label="@string/title_activity_character_info" />
+        <activity
+            android:name=".activity.CharacterCustomizationActivity"
+            android:label="@string/title_activity_customize" />
+        <activity
+            android:name=".activity.HomeActivity"
+            android:label="@string/title_activity_home" />
+        <activity
+            android:name=".activity.weather.DayActivity"
+            android:label="@string/title_activity_day" />
+        <activity
+            android:name=".activity.weather.HourActivity"
+            android:label="@string/title_activity_hourly" />
+        <activity
+            android:name=".activity.firstime.FirstTimeActivity"
+            android:label="@string/title_activity_firstime" />
+
+
+
     </application>
 
 </manifest>

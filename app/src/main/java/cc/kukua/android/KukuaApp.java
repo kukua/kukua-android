@@ -11,6 +11,13 @@ import net.hockeyapp.android.metrics.MetricsManager;
 
 public class KukuaApp extends Application {
     private MobileServiceClient mClient;
+
+    private static KukuaApp _INSTANCE;
+
+    public static KukuaApp getInstance() {
+        return _INSTANCE;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();

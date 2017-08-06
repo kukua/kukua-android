@@ -13,6 +13,22 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="prompt_person">Choose person</string>
+    <string name="prompt_profession">Choose Profession</string>
+
+
+    <!--Personality Spinnner-->
+    <string-array name="persons_arrays">
+        <item>Myself</item>
+        <item>Family</item>
+        <item>Customers</item>
+    </string-array>
+    <string-array name="persons_profession_array">
+        <item>Business</item>
+        <item>Farming</item>
+        <item>Transport</item>
+    </string-array>
+
 
 
     <!-- WARNING THE STRINGS BELOW WILL BE REMOVED TOWARDS PROJECT COMPLETION-->
@@ -86,4 +102,9 @@
     <string name="title_activity_home">Weather forecast</string>
     <string name="title_activity_customize">Pimp character</string>
     <string name="title_activity_character_info">My character</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="button_next">Next</string>
+    <string name="title_activity_demo">DemoActivity</string>
 </resources>
