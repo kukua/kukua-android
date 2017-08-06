@@ -89,7 +89,13 @@ public class PersonalInfoActivity extends AppCompatActivity implements FragmentI
     private void transactFragment(final Fragment fragment) {
         final String backStateName = fragment.getClass().getSimpleName();
         final FragmentManager fragmentManager = getSupportFragmentManager();
-        final FragmentTransaction fragmentTransaction =  fragmentManager.beginTransaction().replace(R.id.fragment_content, fragment);
+        final FragmentTransaction fragmentTransaction =  fragmentManager.beginTransaction().addToBackStack("NotificationFragmentKey");
+
+        fragmentTransaction.setCustomAnimations(R.anim.enter_animation,
+                R.anim.stay, R.anim.stay, R.anim.exit_animation);
+
+        fragmentTransaction.replace(R.id.fragment_content,
+                fragment, "KEY");
         fragmentTransaction.commit();
 
     }
