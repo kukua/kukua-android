@@ -11,8 +11,6 @@ import android.view.WindowManager;
 
 import cc.kukua.android.R;
 import cc.kukua.android.activity.auth.LoginActivity;
-import cc.kukua.android.activity.firstime.FirstTimeActivity;
-import cc.kukua.android.activity.firstime.PersonalInfoActivity;
 
 /**
  * Created by mistaguy on 7/28/2017.
@@ -45,7 +43,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, FirstTimeActivity.class));
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
 
                 finish();
             }
