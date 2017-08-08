@@ -3,25 +3,31 @@ package cc.kukua.android.activity.firstime;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.location.places.ui.PlaceAutocomplete;
-
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -29,7 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
 
-public class LocationFragment extends AppCompatActivity implements OnMapReadyCallback {
+public class LocationFragment extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,LocationListener {
 
     private GoogleMap mMap;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
@@ -38,6 +44,11 @@ public class LocationFragment extends AppCompatActivity implements OnMapReadyCal
     @BindView(R.id.btn_location)
     Button btnLocation;
     @BindView(R.id.toolbar) Toolbar toolbar;
+
+    protected GoogleApiClient mGoogleApiClient;
+    private double lat =0, lng=0;
+
+    private LocationRequest mLocationRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +77,18 @@ public class LocationFragment extends AppCompatActivity implements OnMapReadyCal
                 }
             }
         });
+
+        buildGoogleApiClient();
     }
 
+    private void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addApi(LocationServices.API)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
 
     /**
      * Manipulates the map once available.
@@ -92,29 +113,83 @@ public class LocationFragment extends AppCompatActivity implements OnMapReadyCal
             return;
         }
         mMap.setMyLocationEnabled(true);
-
-
-
+        animateMarker();
       /*  // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
     }
+
+    private void animateMarker() {
+        LatLng loc = new LatLng(lat, lng);
+        mMap.clear();
+        mMap.addMarker(new MarkerOptions().position(loc).title("My Current Location"));
+        CameraUpdate location = CameraUpdateFactory.newLatLngZoom(
+                loc, 15);
+        mMap.animateCamera(location);
+    }
+
+    @SuppressWarnings("MissingPermission")
+    @Override
+    public void onConnected(Bundle bundle) {
+        mLocationRequest = LocationRequest.create(); // Another way to write a new object
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(10); // Always write in milliseconds
+
+        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (mLastLocation!=null){
+            lat = mLastLocation.getLatitude();
+            lng = mLastLocation.getLongitude();
+            animateMarker();
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(this, data);
-                Log.i(TAG, "Place: " + place.getName());
-                Log.i(TAG, "Place: " + place.getLatLng());
+                if (place!=null){
+                    LatLng latLng = place.getLatLng();
+                    lat = latLng.latitude;
+                    lng = latLng.longitude;
+                    animateMarker();
+                    Log.i(TAG, "Place: " + place.getName());
+                    Log.i(TAG, "Place: " + place.getLatLng());
+                }
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
                 // TODO: Handle the error.
                 Log.i(TAG, status.getStatusMessage());
-
             } else if (resultCode == RESULT_CANCELED) {
                 // The user canceled the operation.
             }
         }
     }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+            lat = location.getLatitude();
+            lng = location.getLongitude();
+            animateMarker();
+
+    }
+
 }
