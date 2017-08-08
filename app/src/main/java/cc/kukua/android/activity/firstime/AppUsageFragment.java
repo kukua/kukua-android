@@ -2,7 +2,6 @@ package cc.kukua.android.activity.firstime;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,7 +11,6 @@ import android.widget.Button;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cc.kukua.android.LocationActivity;
 import cc.kukua.android.R;
 import cc.kukua.android.constants.DummyDataProvider;
 import cc.kukua.android.interfaces.FragmentInterface;
@@ -38,7 +36,7 @@ public class AppUsageFragment extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(getActivity(), LocationActivity.class));
+                startActivity(new Intent(getActivity(), LocationActivity.class));
             }
         });
         // Inflate the layout for this fragment
