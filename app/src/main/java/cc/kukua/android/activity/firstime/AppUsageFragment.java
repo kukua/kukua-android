@@ -36,7 +36,7 @@ public class AppUsageFragment extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), LocationFragment.class));
+                startActivity(new Intent(getActivity(), LocationActivity.class));
             }
         });
         // Inflate the layout for this fragment

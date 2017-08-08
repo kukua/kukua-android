@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -35,15 +36,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
 
-public class LocationFragment extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,LocationListener {
+public class LocationActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,LocationListener {
 
     private GoogleMap mMap;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
-    private String TAG = LocationFragment.class.getSimpleName();
+    private String TAG = LocationActivity.class.getSimpleName();
 
     @BindView(R.id.btn_location)
     Button btnLocation;
     @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.tv_location)
+    TextView tvLocation;
 
     protected GoogleApiClient mGoogleApiClient;
     private double lat =0, lng=0;
@@ -68,7 +71,7 @@ public class LocationFragment extends AppCompatActivity implements OnMapReadyCal
                 try {
                     Intent intent =
                             new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
-                                    .build(LocationFragment.this);
+                                    .build(LocationActivity.this);
                     startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
                 } catch (GooglePlayServicesRepairableException e) {
                     // TODO: Handle the error.
@@ -114,10 +117,7 @@ public class LocationFragment extends AppCompatActivity implements OnMapReadyCal
         }
         mMap.setMyLocationEnabled(true);
         animateMarker();
-      /*  // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
+
     }
 
     private void animateMarker() {
@@ -168,6 +168,7 @@ public class LocationFragment extends AppCompatActivity implements OnMapReadyCal
                     animateMarker();
                     Log.i(TAG, "Place: " + place.getName());
                     Log.i(TAG, "Place: " + place.getLatLng());
+                    tvLocation.setText(place.getAddress());
                 }
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
