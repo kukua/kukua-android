@@ -28,6 +28,12 @@ dependencies {
     })
     // Google Support Libraries
     compile 'com.google.android.gms:play-services-maps:11.0.4'
+    compile 'com.google.android.gms:play-services-location:11.0.4'
+    compile 'com.google.android.gms:play-services-analytics:11.0.4'
+    compile 'com.google.android.gms:play-services-places:11.0.4'
+    //compile 'com.google.android.gms:play-services:11.0.4'
+
+
 
     def supportLibraryVersion = '25.0.0'
     compile "com.android.support:support-v13:${supportLibraryVersion}"
