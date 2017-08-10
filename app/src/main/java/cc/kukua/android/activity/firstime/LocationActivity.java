@@ -35,8 +35,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
+import cc.kukua.android.activity.HomeActivity;
 
-public class LocationActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,LocationListener {
+public class LocationActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, View.OnClickListener {
 
     private GoogleMap mMap;
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
@@ -44,12 +45,15 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
 
     @BindView(R.id.btn_location)
     Button btnLocation;
-    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.btn_proceed)
+    Button btnProceed;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     @BindView(R.id.tv_location)
     TextView tvLocation;
 
     protected GoogleApiClient mGoogleApiClient;
-    private double lat =0, lng=0;
+    private double lat = 0, lng = 0;
 
     private LocationRequest mLocationRequest;
 
@@ -64,23 +68,6 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        btnLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Intent intent =
-                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
-                                    .build(LocationActivity.this);
-                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
-                } catch (GooglePlayServicesRepairableException e) {
-                    // TODO: Handle the error.
-                } catch (GooglePlayServicesNotAvailableException e) {
-                    // TODO: Handle the error.
-                }
-            }
-        });
-
         buildGoogleApiClient();
     }
 
@@ -137,7 +124,7 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
         mLocationRequest.setInterval(10); // Always write in milliseconds
 
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        if (mLastLocation!=null){
+        if (mLastLocation != null) {
             lat = mLastLocation.getLatitude();
             lng = mLastLocation.getLongitude();
             animateMarker();
@@ -161,7 +148,7 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
         if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(this, data);
-                if (place!=null){
+                if (place != null) {
                     LatLng latLng = place.getLatLng();
                     lat = latLng.latitude;
                     lng = latLng.longitude;
@@ -187,10 +174,30 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
 
     @Override
     public void onLocationChanged(Location location) {
-            lat = location.getLatitude();
-            lng = location.getLongitude();
-            animateMarker();
+        lat = location.getLatitude();
+        lng = location.getLongitude();
+        animateMarker();
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_proceed:
+                startActivity(new Intent(LocationActivity.this, HomeActivity.class));
+                break;
+            case R.id.btn_location:
+                try {
+                    Intent intent =
+                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                                    .build(LocationActivity.this);
+                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+                } catch (GooglePlayServicesRepairableException e) {
+                    // TODO: Handle the error.
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    // TODO: Handle the error.
+                }
+                break;
+        }
+    }
 }
