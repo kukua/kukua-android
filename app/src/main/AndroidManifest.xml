@@ -44,9 +44,6 @@
             android:name=".activity.firstime.PersonalInfoActivity"
             android:label="Personal info" />
         <activity
-            android:name=".activity.firstime.AccountInfoActivity"
-            android:label="Account info" />
-        <activity
             android:name=".activity.firstime.UseInfoActivity"
             android:label="@string/title_activity_use_info"
             android:theme="@style/AppTheme.Green" />
@@ -65,9 +62,6 @@
         <activity
             android:name=".activity.weather.HourActivity"
             android:label="@string/title_activity_hourly" />
-        <activity
-            android:name=".activity.firstime.FirstTimeActivity"
-            android:label="@string/title_activity_firstime" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
