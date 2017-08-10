@@ -24,9 +24,10 @@ gen/**
 gdb.setup
 gdbserver
 */build/*
+build/*
 .externalNativeBuild
 app/libs/
-andengineLibrary/AndEngine-GLES2-AnchorCenter/build
+andengineLibrary/AndEngine-GLES2-AnchorCenter/build/*
 /captures
 .project
 
@@ -34,10 +35,7 @@ andengineLibrary/AndEngine-GLES2-AnchorCenter/build
 .settings
 
 # IntelliJ / Android Studio:
-idea/workspace.xml
-idea/tasks.xml
-idea/workspace.xml
-idea/libraries
+.idea/*
 
 # Crashlytics
 res/values/com_crashlytics_export_strings.xml
