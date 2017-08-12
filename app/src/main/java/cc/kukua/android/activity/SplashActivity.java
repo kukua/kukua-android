@@ -37,7 +37,7 @@ public class SplashActivity extends BaseActivity {
 
 // finally change the color
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.setStatusBarColor(ContextCompat.getColor(SplashActivity.this,R.color.material_green_500));
+            window.setStatusBarColor(ContextCompat.getColor(SplashActivity.this,R.color.colorPrimary));
         }
 
         // TODO check for updates every week

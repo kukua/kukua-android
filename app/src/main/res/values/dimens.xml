@@ -17,6 +17,15 @@
     <dimen name="card_corner_radius">3dp</dimen>
     <dimen name="card_elevation">2dp</dimen>
 
+    <!-- Buttons -->
+    <dimen name="button_large_height">70dp</dimen>
+
+    <!-- Texts -->
+    <dimen name="button_large_text">40dp</dimen>
+    <dimen name="edit_text_size">15dp</dimen>
+    <dimen name="edit_text_height">60dp</dimen>
+
+
     <!-- Selectable Items -->
     <dimen name="selectable_rounded_rect_corner_radius">3dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->

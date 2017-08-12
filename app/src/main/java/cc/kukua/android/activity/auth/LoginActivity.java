@@ -69,8 +69,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     EditText mPasswordView;
     @BindView(R.id.et_username)
     EditText mEmailView;
-    @BindView(R.id.txt_signup)
-    TextView tvSignUp;
+    @BindView(R.id.btn_signup)
+    Button btnSignUp;
     @BindView(R.id.btn_submit)
     Button mEmailSignInButton;
 
@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        tvSignUp.setOnClickListener(new View.OnClickListener() {
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, PersonalInfoActivity.class));

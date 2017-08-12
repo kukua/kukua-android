@@ -110,16 +110,13 @@
             </LinearLayout>
                 <Button
                     android:id="@+id/btn_next2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/ButtonStyle.Button.Large"
                     android:layout_gravity="center|bottom"
                     android:layout_marginBottom="@dimen/activity_horizontal_margin"
                     android:layout_marginLeft="@dimen/button_spacing"
                     android:layout_marginRight="@dimen/button_spacing"
                     android:layout_marginTop="50dp"
-                    android:background="@color/colorPrimary"
-                    android:text="Next"
-                    android:textColor="@color/colorWhite" />
+                    android:text="Next" />
         </LinearLayout>
 
 </ScrollView>

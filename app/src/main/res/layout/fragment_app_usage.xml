@@ -1,63 +1,62 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="cc.kukua.android.activity.firstime.AccountInfoFragment">
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="cc.kukua.android.activity.firstime.AccountInfoFragment">
 
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/content_spacing_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Who are you viewing the  weather for:"
+            android:textSize="15sp"/>
+
+        <Spinner
+            android:layout_width="300sp"
+            android:layout_height="wrap_content"
+            android:entries="@array/persons_arrays"
+            android:prompt="@string/prompt_person"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:text="Where does he/she work:"
+            android:textSize="15sp"/>
+
+        <Spinner
+            android:layout_width="300sp"
+            android:layout_height="wrap_content"
+            android:entries="@array/persons_profession_array"
+            android:prompt="@string/prompt_profession"/>
+
+        <Button
+            android:id="@+id/btn_dont"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/content_spacing_horizontal">
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/button_spacing"
+            android:layout_marginRight="@dimen/button_spacing"
+            android:layout_marginTop="50dp"
+            android:background="@color/colorPrimary"
+            android:text="Don't Specify"
+            android:textColor="@color/colorWhite"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:text="Who are you viewing the  weather for:"/>
-                <Spinner
-                    android:layout_width="300sp"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/persons_arrays"
-                    android:prompt="@string/prompt_person"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp"
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
-                android:text="Where does he/she work:"/>
-
-            <Spinner
-                android:layout_width="300sp"
-                android:layout_height="wrap_content"
-                android:entries="@array/persons_profession_array"
-                android:prompt="@string/prompt_profession"/>
-
-            <Button
-                android:id="@+id/btn_dont"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|bottom"
-                android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                android:layout_marginLeft="@dimen/button_spacing"
-                android:layout_marginRight="@dimen/button_spacing"
-                android:layout_marginTop="50dp"
-                android:background="@color/colorPrimary"
-                android:text="Don't Specify"
-                android:textColor="@color/colorWhite" />
-            <Button
-                    android:id="@+id/btn_next3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center|bottom"
-                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                    android:layout_marginLeft="@dimen/button_spacing"
-                    android:layout_marginRight="@dimen/button_spacing"
-                    android:background="@color/colorPrimary"
-                    android:text="Next"
-                    android:textColor="@color/colorWhite" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/btn_next3"
+            style="@style/ButtonStyle.Button.Large"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/button_spacing"
+            android:layout_marginRight="@dimen/button_spacing"
+            android:text="Next"/>
+    </LinearLayout>
 
 </ScrollView>

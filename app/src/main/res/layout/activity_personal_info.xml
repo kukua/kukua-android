@@ -9,14 +9,14 @@ tools:context="cc.kukua.android.activity.firstime.PersonalInfoActivity">
 <android.support.design.widget.AppBarLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:theme="@style/AppTheme.Green.AppBarOverlay">
+    android:theme="@style/AppTheme.Blue.AppBarOverlay">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme.Green.PopupOverlay" >
+        app:popupTheme="@style/AppTheme.Blue.PopupOverlay" >
 
         <RelativeLayout
             android:layout_width="match_parent"
