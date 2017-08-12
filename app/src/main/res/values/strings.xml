@@ -44,12 +44,12 @@
     <string name="material_theme_red">Red</string>
     <string name="material_theme_orange">Orange</string>
     <string name="material_theme_lime">Lime</string>
-    <string name="material_theme_green">Green</string>
+    <string name="material_theme_green">Blue</string>
     <string name="material_theme_teal">Teal</string>
     <string name="material_theme_blue">Blue</string>
     <string name="material_theme_purple">Purple</string>
     <string name="material_theme_current_theme">Current Theme</string>
-    <string name="material_theme_green_theme">Green Theme</string>
+    <string name="material_theme_green_theme">Blue Theme</string>
     <string name="material_theme_blue_theme">Blue Theme</string>
     <string name="material_theme_buttons_raised">Buttons: Raised (Default)</string>
     <string name="material_theme_buttons_no_raise">Buttons: No Raise</string>

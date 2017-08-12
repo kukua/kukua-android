@@ -13,57 +13,51 @@
     <!-- Default App Theme -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- API specific attributes 14+ -->
-        <item name="selectableRectDrawable">@drawable/state_list_selectable_rect_green</item>
+        <item name="selectableRectDrawable">@drawable/state_list_selectable_rect_blue</item>
         <item name="selectableRectDrawableInverse">@drawable/state_list_selectable_rect_white</item>
-        <item name="selectableRectDrawableColored">@drawable/state_list_selectable_rect_green</item>
-        <item name="selectableRoundedRectDrawable">
-            @drawable/state_list_selectable_rounded_rect_green
-        </item>
+        <item name="selectableRectDrawableColored">@drawable/state_list_selectable_rect_blue</item>
+        <item name="selectableRoundedRectDrawable">@drawable/state_list_selectable_rounded_rect_blue</item>
         <item name="selectableRoundedRectDrawableInverse">
             @drawable/state_list_selectable_rounded_rect_white
         </item>
-        <item name="selectableRoundedRectDrawableColored">
-            @drawable/state_list_selectable_rounded_rect_green
-        </item>
+        <item name="selectableRoundedRectDrawableColored">@drawable/state_list_selectable_rounded_rect_blue</item>
     </style>
 
-    <!-- Green App Theme -->
-    <style name="BaseTheme.Green" parent="AppTheme">
+    <!-- Blue App Theme -->
+    <style name="BaseTheme.Blue" parent="AppTheme">
         <!-- Attributes for all APIs -->
-        <item name="colorPrimary">@color/material_green_500</item>
-        <item name="colorPrimaryDark">@color/material_green_700</item>
-        <item name="colorAccent">@color/material_green_a700</item>
-        <item name="dialogTheme">@style/AppTheme.Dialog.Green</item>
-        <item name="alertDialogTheme">@style/AppTheme.Dialog.Alert.Green</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="dialogTheme">@style/AppTheme.Dialog.Blue</item>
+        <item name="alertDialogTheme">@style/AppTheme.Dialog.Alert.Blue</item>
     </style>
 
-    <style name="AppTheme.Green" parent="BaseTheme.Green">
+    <style name="AppTheme.Blue" parent="BaseTheme.Blue">
         <!-- API specific attributes 14+ -->
-        <item name="selectableRectDrawableColored">@drawable/state_list_selectable_rect_green</item>
-        <item name="selectableRoundedRectDrawableColored">
-            @drawable/state_list_selectable_rounded_rect_green
-        </item>
+        <item name="selectableRectDrawableColored">@drawable/state_list_selectable_rect_blue</item>
+        <item name="selectableRoundedRectDrawableColored">@drawable/state_list_selectable_rounded_rect_blue</item>
         <item name="android:colorForeground">@android:color/white</item>
     </style>
 
     <!-- Default Dialog Theme -->
     <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog"></style>
 
-    <!-- Green Dialog Theme -->
-    <style name="AppTheme.Dialog.Green">
-        <item name="colorPrimary">@color/material_green_500</item>
-        <item name="colorPrimaryDark">@color/material_green_700</item>
-        <item name="colorAccent">@color/material_green_a700</item>
+    <!-- Blue Dialog Theme -->
+    <style name="AppTheme.Dialog.Blue">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <!-- Default Alert Dialog Theme -->
     <style name="AppTheme.Dialog.Alert" parent="Theme.AppCompat.Light.Dialog.Alert"></style>
 
-    <!-- Green Alert Dialog Theme -->
-    <style name="AppTheme.Dialog.Alert.Green">
-        <item name="colorPrimary">@color/material_green_500</item>
-        <item name="colorPrimaryDark">@color/material_green_700</item>
-        <item name="colorAccent">@color/material_green_a700</item>
+    <!-- Blue Alert Dialog Theme -->
+    <style name="AppTheme.Dialog.Alert.Blue">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <!-- Action Bar Theme -->
@@ -214,7 +208,7 @@
         <item name="android:layout_gravity">center</item>
     </style>
 
-    <style name="AppTheme.Green.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.Blue.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.Green.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.Blue.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
