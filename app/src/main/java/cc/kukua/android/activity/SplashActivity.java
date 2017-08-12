@@ -16,7 +16,7 @@ import cc.kukua.android.activity.auth.LoginActivity;
  * Created by mistaguy on 7/28/2017.
  */
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
     /**
      * Initialize the splashscreen and show circular progress
      * @param savedInstanceState is called in that instance then a new instance of the activity will
