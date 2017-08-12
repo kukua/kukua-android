@@ -12,9 +12,10 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
+import cc.kukua.android.activity.BaseActivity;
 import cc.kukua.android.activity.CharacterCustomizationActivity;
 
-public class CharacterInfoActivity extends AppCompatActivity {
+public class CharacterInfoActivity extends BaseActivity {
     @BindView(R.id.btn_submit)
     Button nextButton;
     @Override

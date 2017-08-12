@@ -40,6 +40,9 @@ public class SplashActivity extends BaseActivity {
             window.setStatusBarColor(ContextCompat.getColor(SplashActivity.this,R.color.material_green_500));
         }
 
+        // TODO check for updates every week
+        // checkForUpdates();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -49,4 +52,39 @@ public class SplashActivity extends BaseActivity {
             }
         }, 3000);
     }
+
+    //
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        // ... your own onResume implementation
+//        checkForCrashes();
+//    }
+//
+//    private void checkForCrashes() {
+//        CrashManager.register(this);
+//    }
+
+
+//    private void checkForUpdates() {
+//        // Remove this for store builds!
+//        // UpdateManager.register(this);
+//    }
+//
+//    private void unregisterManagers() {
+//        UpdateManager.unregister();
+//    }
+
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        unregisterManagers();
+//    }
+//
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        unregisterManagers();
+//    }
 }
