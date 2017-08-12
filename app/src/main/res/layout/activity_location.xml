@@ -47,16 +47,13 @@ tools:context="cc.kukua.android.activity.firstime.LocationActivity" >
     </LinearLayout>
 <Button
     android:id="@+id/btn_proceed"
-    android:background="@color/colorPrimary"
-    android:textColor="@color/colorWhite"
-    android:layout_width="200dp"
-    android:layout_height="wrap_content"
+    style="@style/ButtonStyle.Button.Large"
     android:layout_gravity="center|bottom"
     android:layout_marginRight="@dimen/button_spacing"
     android:layout_marginBottom="@dimen/activity_horizontal_margin"
     android:layout_marginLeft="@dimen/button_spacing"
     android:onClick="onClick"
-    android:text="Proceed"/>
+    android:text="Next"/>
 
 
 </android.support.design.widget.CoordinatorLayout>

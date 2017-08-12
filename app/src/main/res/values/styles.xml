@@ -108,11 +108,28 @@
         <!-- Pre API 21 has no raise effect by default -->
     </style>
 
-    <style name="ButtonStyle.Colored" parent="Widget.AppCompat.Button.Colored"></style>
-
-    <style name="ButtonStyle.Colored.NoRaise">
-        <!-- Pre API 21 has no raise effect by default -->
+    <style name="ButtonStyle.Button.Back" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/btn_back</item>
     </style>
+    <style name="ButtonStyle.Button.Large" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:background">@drawable/btn_bg_large</item>
+        <item name="android:layout_height">@dimen/button_large_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">@dimen/button_large_text</item>
+    </style>
+    <style name="ButtonStyle.Button.Medium" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/btn_bg_medium</item>
+    </style>
+    <style name="ButtonStyle.Button.Options" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/btn_options</item>
+    </style>
+    <style name="ButtonStyle.Button.Settings.Small" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/btn_settings_small</item>
+    </style>
+    <!--<style name="ButtonStyle.Colored.NoRaise">-->
+        <!--&lt;!&ndash; Pre API 21 has no raise effect by default &ndash;&gt;-->
+    <!--</style>-->
 
     <style name="ButtonStyle.Borderless" parent="Widget.AppCompat.Button.Borderless"></style>
 
@@ -166,7 +183,13 @@
     <style name="TextStyle.Body2" parent="TextAppearance.AppCompat.Body2"></style>
 
     <!-- Edit Text Styles -->
-    <style name="EditTextStyle" parent="Widget.AppCompat.EditText"></style>
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:padding">10dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="android:background">@drawable/input_field</item>
+        <item name="android:layout_height">@dimen/edit_text_height</item>
+    </style>
 
     <style name="TextInputLayoutStyle" parent="Widget.Design.TextInputLayout"></style>
 
