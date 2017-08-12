@@ -21,7 +21,7 @@
     <dimen name="button_large_height">70dp</dimen>
 
     <!-- Texts -->
-    <dimen name="button_large_text">60dp</dimen>
+    <dimen name="button_large_text">40dp</dimen>
     <dimen name="edit_text_size">15dp</dimen>
     <dimen name="edit_text_height">60dp</dimen>
 

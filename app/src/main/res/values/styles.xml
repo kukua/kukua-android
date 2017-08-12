@@ -174,7 +174,14 @@
     </style>
 
     <!-- Text Styles -->
-    <style name="TextStyle" parent="TextAppearance.AppCompat"></style>
+    <style name="TextStyle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+    <style name="TextStyle.Center" parent="TextStyle">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16dp</item>
+    </style>
 
     <style name="TextStyle.Title" parent="TextAppearance.AppCompat.Title"></style>
 
@@ -184,6 +191,7 @@
 
     <!-- Edit Text Styles -->
     <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_marginTop">10dp</item>
         <item name="android:padding">10dp</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textColorHint">@color/colorPrimary</item>
