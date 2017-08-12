@@ -37,8 +37,8 @@ public class PersonalInfoActivity extends AppCompatActivity implements FragmentI
         setSupportActionBar(toolbar);
         checkAndRegEventBus();
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setHomeButtonEnabled(false);
 
         //Call PersonalInfo Fragment
         transactFragment(new PersonalInfoFragment());

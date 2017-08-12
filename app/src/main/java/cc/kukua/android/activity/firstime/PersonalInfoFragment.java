@@ -51,7 +51,7 @@ public class PersonalInfoFragment extends Fragment {
 
     private void setFragmentTitle() {
         if (fragmentInterface != null) {
-            fragmentInterface.setToolBarTitle(DummyDataProvider.PERSONAL_INFO);
+            fragmentInterface.setToolBarTitle(getResources().getString(R.string.title_fragment_personal_info));
         }
     }
 

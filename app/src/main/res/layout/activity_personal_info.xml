@@ -1,60 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="cc.kukua.android.activity.firstime.PersonalInfoActivity">
-
-<android.support.design.widget.AppBarLayout
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:theme="@style/AppTheme.Blue.AppBarOverlay">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context="cc.kukua.android.activity.firstime.PersonalInfoActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme.Blue.PopupOverlay" >
+    <include layout="@layout/toolbar"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp">
-
-        <TextView
-            android:id="@+id/toolbar_title"
-            style="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="12dp"
-            android:ellipsize="end"
-            android:lineSpacingExtra="1.5dp"
-            android:lineSpacingMultiplier="1.5"
-            android:maxLines="1"
-            android:textColor="@android:color/white"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-        </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
-
-</android.support.design.widget.AppBarLayout>
-
-<include layout="@layout/content_register" />
-
-<!--<Button
-    android:id="@+id/btn_next"
-    android:background="@color/colorPrimary"
-    android:textColor="@color/colorWhite"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center|bottom"
-    android:layout_marginRight="@dimen/button_spacing"
-    android:layout_marginBottom="@dimen/activity_horizontal_margin"
-    android:layout_marginLeft="@dimen/button_spacing"
-    android:text="Next"/>-->
-
+    <include layout="@layout/content_register"/>
 
 </android.support.design.widget.CoordinatorLayout>
