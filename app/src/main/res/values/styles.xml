@@ -122,6 +122,14 @@
     </style>
     <style name="ButtonStyle.Button.Medium" parent="Widget.AppCompat.Button.Colored">
         <item name="android:background">@drawable/btn_bg_medium</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginLeft">25dp</item>
+        <item name="android:layout_marginRight">25dp</item>
+        <item name="android:layout_height">@dimen/button_medium_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textSize">@dimen/button_medium_text</item>
     </style>
     <style name="ButtonStyle.Button.Options" parent="Widget.AppCompat.Button.Colored">
         <item name="android:background">@drawable/btn_options</item>

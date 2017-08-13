@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context="cc.kukua.android.activity.SettingActivity">
+    <include layout="@layout/toolbar"
+             android:id="@+id/include2"/>
+    <Button
+        android:id="@+id/btn_personal_information"
+        style="@style/ButtonStyle.Button.Medium"
+        android:text="Personal information"
+        android:layout_below="@+id/include2"/>
+
+    <Button
+        android:id="@+id/btn_account_information"
+        style="@style/ButtonStyle.Button.Medium"
+        android:text="Account information"
+        android:layout_below="@+id/btn_personal_information"/>
+    <Button
+        android:id="@+id/btn_gps_information"
+        style="@style/ButtonStyle.Button.Medium"
+        android:text="GPS information"
+        android:layout_below="@+id/btn_account_information"/>
+
+    <Button
+        android:id="@+id/btn_character_information"
+        style="@style/ButtonStyle.Button.Medium"
+        android:text="My character"
+        android:layout_below="@+id/btn_gps_information"/>
+
+</RelativeLayout>
