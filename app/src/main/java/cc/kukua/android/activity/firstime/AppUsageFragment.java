@@ -25,6 +25,8 @@ public class AppUsageFragment extends Fragment {
 
     @BindView(R.id.btn_next3)
     Button btnNext;
+    @BindView(R.id.btn_dont_specify)
+    Button btnDontSpecify;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,13 +41,19 @@ public class AppUsageFragment extends Fragment {
                 startActivity(new Intent(getActivity(), LocationActivity.class));
             }
         });
-        // Inflate the layout for this fragment
+        btnDontSpecify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), LocationActivity.class));
+
+            }
+        });
         return rootView;
     }
 
     private void setFragmentTitle() {
         if (fragmentInterface != null) {
-            fragmentInterface.setToolBarTitle(DummyDataProvider.ACCOUNT_INFO);
+            fragmentInterface.setToolBarTitle(DummyDataProvider.App_USAGE);
         }
     }
     @Override
