@@ -15,8 +15,9 @@
     </string>
     <string name="prompt_person">Choose person</string>
     <string name="prompt_profession">Choose Profession</string>
-
-
+    <string name="title_location_permission">Location Permission</string>
+    <string name="text_location_permission">Provide app location Permission</string>
+    <string name="ok">ok</string>
     <!--Personality Spinnner-->
     <string-array name="persons_arrays">
         <item>Myself</item>
