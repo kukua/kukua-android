@@ -1,11 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="1080dp"
     android:height="1776dp"
     android:viewportWidth="1080"
     android:viewportHeight="1776">
-
-    <path
-        android:fillColor="#337de5"
-        android:pathData="M 0 0 H 1080 V 1776 H 0 V 0 Z" />
+    <group android:name="group"/>
+    <group android:name="layer_2">
+        <path
+            android:name="bg"
+            android:pathData="M 0 0 L 1080 0 L 1080 1776 L 0 1776 Z"
+            android:fillColor="#337de5"
+            android:strokeWidth="1"/>
+    </group>
 </vector>
