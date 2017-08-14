@@ -33,11 +33,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.andengine.entity.text.Text;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
 import cc.kukua.android.activity.HomeActivity;
 import cc.kukua.android.activity.auth.LoginActivity;
+import cc.kukua.android.constants.DummyDataProvider;
 
 public class LocationActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, View.OnClickListener {
     /* GPS Constant Permission */
@@ -56,7 +59,8 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
     Toolbar toolbar;
     @BindView(R.id.tv_location)
     TextView tvLocation;
-
+    @BindView(R.id.toolbar_title)
+    TextView tvToolbarTitle;
     protected GoogleApiClient mGoogleApiClient;
     private double lat = 0, lng = 0;
 
@@ -69,6 +73,7 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
+        tvToolbarTitle.setText(DummyDataProvider.PICK_LOCATION);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
