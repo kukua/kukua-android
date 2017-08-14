@@ -8,4 +8,5 @@ public class DummyDataProvider {
     public static String PERSONAL_INFO = "Personal Information";
     public static String ACCOUNT_INFO = "Account Information";
     public static String PICK_LOCATION = "Pick your location";
+    public static String App_USAGE = "App Usage";
 }

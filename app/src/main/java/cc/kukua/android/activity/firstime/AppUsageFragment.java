@@ -45,7 +45,7 @@ public class AppUsageFragment extends Fragment {
 
     private void setFragmentTitle() {
         if (fragmentInterface != null) {
-            fragmentInterface.setToolBarTitle(DummyDataProvider.ACCOUNT_INFO);
+            fragmentInterface.setToolBarTitle(DummyDataProvider.App_USAGE);
         }
     }
     @Override
