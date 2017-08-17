@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -34,6 +35,13 @@ import butterknife.ButterKnife;
 import cc.kukua.android.R;
 import cc.kukua.android.activity.HomeActivity;
 import cc.kukua.android.activity.firstime.PersonalInfoActivity;
+import cc.kukua.android.model.LoginResponseModel;
+import cc.kukua.android.retrofit.APIService;
+import cc.kukua.android.retrofit.RetrofitClient;
+import cc.kukua.android.utils.LogUtils;
+import cc.kukua.android.utils.UiUtils;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -73,6 +81,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     Button btnSignUp;
     @BindView(R.id.btn_submit)
     Button mEmailSignInButton;
+
+    String TAG = LoginActivity.class.getSimpleName();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -193,8 +203,35 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
-    }
 
+
+        APIService apiService = RetrofitClient.getClient().create(APIService.class);
+        Call<LoginResponseModel> call = apiService.login(email, password);
+
+        call.enqueue(new Callback<LoginResponseModel>() {
+            @Override
+            public void onResponse(Call<LoginResponseModel> call, retrofit2.Response<LoginResponseModel> response) {
+                UiUtils.dismissAllProgressDialogs();
+                LogUtils.log(TAG, "OnResponse: " + response.body().toString());
+                if (response.isSuccessful()) {
+                    try {
+                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e(TAG, "JSON_ERROR", e);
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponseModel> call, Throwable t) {
+
+            }
+        });
+    }
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
         return email.contains("@");
