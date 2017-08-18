@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
 import cc.kukua.android.constants.DummyDataProvider;
 import cc.kukua.android.interfaces.FragmentInterface;
+import cc.kukua.android.utils.UiUtils;
 
 /**
  * @author Calistus
