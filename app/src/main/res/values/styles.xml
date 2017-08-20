@@ -117,6 +117,8 @@
         <item name="android:layout_marginRight">50dp</item>
         <item name="android:background">@drawable/btn_bg_large</item>
         <item name="android:layout_height">@dimen/button_large_height</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:textSize">@dimen/button_large_text</item>
     </style>
@@ -195,13 +197,14 @@
 
     <style name="TextStyle.Title" parent="TextAppearance.AppCompat.Title">
         <item name="android:textColor">@color/colorWhite</item>
-        <item name="android:layout_marginTop">50dp</item>
-        <item name="android:paddingLeft">20dp</item>
-        <item name="android:paddingRight">20dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:paddingLeft">50dp</item>
+        <item name="android:paddingRight">50dp</item>
         <item name="android:gravity">center</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginBottom">10dp</item>
     </style>
 
     <style name="TextStyle.Body1" parent="TextAppearance.AppCompat.Body1"></style>
