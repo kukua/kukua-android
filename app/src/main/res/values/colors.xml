@@ -14,6 +14,8 @@
     <color name="backgroundLight">@color/material_blue_500</color>
     <color name="transparent">#99FFFFFF</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="listColor">#70A9E0</color>
+    <color name="backgroundColor">#89BEE8</color>
 
     <!-- Material Color Palette -->
     <color name="material_gray_050">#FAFAFA</color>

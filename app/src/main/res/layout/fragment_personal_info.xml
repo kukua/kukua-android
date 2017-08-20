@@ -12,7 +12,6 @@
 
         <TextView
             style="@style/TextStyle.Title"
-            android:layout_gravity="center_horizontal"
             android:text="Great! Create your own account below to get started!"/>
 
         <TextView
@@ -46,8 +45,6 @@
     <Button
         android:id="@+id/btn_next_reg"
         style="@style/ButtonStyle.Button.Large"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="19dp"
         android:text="Next"/>
 </RelativeLayout>
