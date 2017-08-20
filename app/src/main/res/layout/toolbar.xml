@@ -35,6 +35,7 @@
                 android:background="@drawable/kukua_header"
                 android:ellipsize="end"
                 android:gravity="center"
+                android:textAllCaps="true"
                 android:maxLines="2"
                 android:textColor="@android:color/white"
                 android:textSize="34sp"

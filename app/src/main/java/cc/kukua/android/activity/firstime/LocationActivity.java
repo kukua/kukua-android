@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -57,15 +58,13 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
 
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     private String TAG = LocationActivity.class.getSimpleName();
-
-    @BindView(R.id.btn_location)
-    Button btnLocation;
+    
     @BindView(R.id.btn_proceed)
     Button btnProceed;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.tv_location)
-    TextView tvLocation;
+    @BindView(R.id.edit_location)
+    EditText edLocation;
     @BindView(R.id.toolbar_title)
     TextView tvToolbarTitle;
     protected GoogleApiClient mGoogleApiClient;
@@ -222,7 +221,7 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
                     animateMarker();
                     Log.i(TAG, "Place: " + place.getName());
                     Log.i(TAG, "Place: " + place.getLatLng());
-                    tvLocation.setText(place.getAddress());
+                    edLocation.setText(place.getAddress());
                 }
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
@@ -253,7 +252,7 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
             case R.id.btn_proceed:
                 startActivity(new Intent(LocationActivity.this, HomeActivity.class));
                 break;
-            case R.id.btn_location:
+            case R.id.edit_location:
                 try {
                     Intent intent =
                             new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
