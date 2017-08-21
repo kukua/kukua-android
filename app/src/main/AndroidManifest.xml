@@ -77,6 +77,10 @@
         <activity
             android:name=".activity.SettingActivity"
             android:label="Settings"/>
+
+        <activity
+            android:name=".activity.firstime.ChooseCharacterActivity"
+            android:label="Choose character"/>
     </application>
 
 </manifest>

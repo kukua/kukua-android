@@ -250,7 +250,7 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_proceed:
-                startActivity(new Intent(LocationActivity.this, HomeActivity.class));
+                startActivity(new Intent(LocationActivity.this, ChooseCharacterActivity.class));
                 break;
             case R.id.edit_location:
                 try {

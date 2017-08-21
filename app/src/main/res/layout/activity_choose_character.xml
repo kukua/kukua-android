@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context="cc.kukua.android.activity.firstime.PersonalInfoActivity">
+
+    <include layout="@layout/toolbar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/who"
+            style="@style/TextStyle.Title"
+            android:text="Great! In the previous screen you choose this category:"/>
+
+        <LinearLayout
+            android:id="@+id/llAppUseCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/who"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/TextStyle.ChoosenCategory"
+                android:layout_weight="4"
+                android:text="FARMING"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/category_icon"/>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btn_dont_specify"
+            android:layout_below="@+id/llAppUseCategory">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+
+            <ImageView
+                android:id="@+id/left_nav"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_vertical|left"
+                android:src="@drawable/category_select_left"/>
+
+            <ImageView
+                android:id="@+id/right_nav"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_vertical|right"
+                android:src="@drawable/category_select_right"/>
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/btn_dont_specify"
+            style="@style/ButtonStyle.Button.Medium"
+            android:layout_above="@+id/btn_next3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:text="SKIP THIS STEP"/>
+
+        <Button
+            android:id="@+id/btn_next3"
+            style="@style/ButtonStyle.Button.Large"
+            android:layout_marginBottom="10dp"
+            android:text="Next"
+            />
+
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>
