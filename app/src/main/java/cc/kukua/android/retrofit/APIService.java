@@ -7,8 +7,10 @@ import cc.kukua.android.model.RegisterResponseModel;
 import cc.kukua.android.model.RequestForecastResponseModel;
 import cc.kukua.android.model.SendSmsResponseModel;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -28,10 +30,14 @@ public interface APIService {
                                            @Field("location") String location,
                                            @Field("purpose_id") String purposeID);
 
-    @FormUrlEncoded
+    @Headers("Content-Type: application/json")
+    @POST("login")
+    Call<LoginResponseModel> login(@Body String body);
+
+   /* @FormUrlEncoded
     @POST("v1.0/login")
     Call<LoginResponseModel> login(@Field("email") String email, @Field("password") String password);
-
+*/
     @FormUrlEncoded
     @POST("v1.0/sendsms")
     Call<SendSmsResponseModel> sendsms(@Field("phonenumber") String phonenumber, @Field("message") String message);

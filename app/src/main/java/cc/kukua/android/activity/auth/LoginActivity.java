@@ -26,6 +26,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +44,13 @@ import cc.kukua.android.utils.LogUtils;
 import cc.kukua.android.utils.UiUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import static android.Manifest.permission.READ_CONTACTS;
+import static cc.kukua.android.retrofit.RetrofitClient.BASE_URL;
 
 /**
  * A login screen that offers login via email/password.
@@ -203,7 +211,50 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask.execute((Void) null);
         }
 
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
+        APIService apiInterface = retrofit.create(APIService.class);
+
+
+        // prepare call in Retrofit 2.0
+        try {
+            JSONObject paramObject = new JSONObject();
+            paramObject.put("email", email);
+            paramObject.put("password", password);
+
+            Call<LoginResponseModel> userCall = apiInterface.login(paramObject.toString());
+            userCall.enqueue(new Callback<LoginResponseModel>() {
+                @Override
+                public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
+                    UiUtils.dismissAllProgressDialogs();
+                    LogUtils.log(TAG, "OnResponse: " + response.body().toString());
+                    if (response.isSuccessful()) {
+                        try {
+                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.e(TAG, "JSON_ERROR", e);
+                        }
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<LoginResponseModel> call, Throwable t) {
+
+                }
+            });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        //stop
+/*
         APIService apiService = RetrofitClient.getClient().create(APIService.class);
         Call<LoginResponseModel> call = apiService.login(email, password);
 
@@ -229,7 +280,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onFailure(Call<LoginResponseModel> call, Throwable t) {
 
             }
-        });
+        }); */
     }
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
