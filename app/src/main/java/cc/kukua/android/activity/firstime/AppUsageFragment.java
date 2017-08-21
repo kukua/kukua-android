@@ -15,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +24,7 @@ import cc.kukua.android.adapters.AppuseListAdapter;
 import cc.kukua.android.constants.DummyDataProvider;
 import cc.kukua.android.interfaces.FragmentInterface;
 import cc.kukua.android.model.AppuseList;
+import cc.kukua.android.utils.UiUtils;
 
 /**
  * @author Calistus

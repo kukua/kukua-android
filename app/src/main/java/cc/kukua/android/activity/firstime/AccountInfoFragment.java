@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -26,6 +28,12 @@ public class AccountInfoFragment extends Fragment {
 
     @BindView(R.id.btn_next2)
     Button btnNext;
+    @BindView(R.id.et_phone_number)
+    EditText etPhone;
+    @BindView(R.id.et_email)
+    EditText etEmail;
+    @BindView(R.id.et_password)
+    EditText etPassword;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,7 +45,15 @@ public class AccountInfoFragment extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("firstName", getArguments().getString("firstName"));
+                bundle.putString("lastName", getArguments().getString("lastName"));
+                bundle.putString("phone", etPhone.getText().toString());
+                bundle.putString("email", etEmail.getText().toString());
+                bundle.putString("password", etPassword.getText().toString());
+
                 AppUsageFragment appUsageFragment = new AppUsageFragment();
+                appUsageFragment.setArguments(bundle);
                 EventBus.getDefault().post(new TransactFragment(appUsageFragment));
             }
         });

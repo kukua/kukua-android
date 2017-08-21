@@ -25,7 +25,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
 import cc.kukua.android.activity.HomeActivity;
-import cc.kukua.android.activity.firstime.PersonalInfoActivity;
+import cc.kukua.android.activity.firstime.RegisterActivity;
 import cc.kukua.android.model.LoginResponseModel;
 import cc.kukua.android.retrofit.APIService;
 import cc.kukua.android.retrofit.RetrofitClient;
@@ -104,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, PersonalInfoActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
     }
