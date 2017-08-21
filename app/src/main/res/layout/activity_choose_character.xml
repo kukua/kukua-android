@@ -8,16 +8,17 @@
     android:background="@drawable/bg"
     tools:context="cc.kukua.android.activity.firstime.PersonalInfoActivity">
 
-    <include layout="@layout/toolbar"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg"
         android:orientation="vertical">
 
+        <include android:id="@+id/include"
+                 layout="@layout/toolbar"/>
         <TextView
             android:id="@+id/who"
+            android:layout_below="@+id/include"
             style="@style/TextStyle.Title"
             android:text="Great! In the previous screen you choose this category:"/>
 
