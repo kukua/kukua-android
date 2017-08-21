@@ -19,10 +19,14 @@ import retrofit2.http.Query;
 public interface APIService {
     @FormUrlEncoded
     @POST("v1.0/register")
-    Call<RegisterResponseModel> userSignUp(@Field("full_name") String full_name,
-                                           @Field("email") String email,
-                                           @Field("phone") String phone,
-                                           @Field("password") String password);
+    Call<RegisterResponseModel> userSignUp(@Field("first_name") String full_name,
+                                           @Field("last_name") String email,
+                                           @Field("email") String phone,
+                                           @Field("phone_number") String phoneNumber,
+                                           @Field("password") String password,
+                                           @Field("character_id") String characterID,
+                                           @Field("location") String location,
+                                           @Field("purpose_id") String purposeID);
 
     @FormUrlEncoded
     @POST("v1.0/login")

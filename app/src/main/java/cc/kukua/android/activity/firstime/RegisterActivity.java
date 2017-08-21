@@ -23,10 +23,11 @@ import cc.kukua.android.eventbuses.TransactFragment;
 import cc.kukua.android.interfaces.FragmentInterface;
 import cc.kukua.android.utils.UiUtils;
 
-public class PersonalInfoActivity extends AppCompatActivity implements FragmentInterface {
+public class RegisterActivity extends AppCompatActivity implements FragmentInterface {
     //@BindView(R.id.btn_next) Button nextButton;
     @BindView(R.id.toolbar_title)
     TextView tvToolbarTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,13 +44,7 @@ public class PersonalInfoActivity extends AppCompatActivity implements FragmentI
         //Call PersonalInfo Fragment
         transactFragment(new PersonalInfoFragment());
 
-      /*  nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(PersonalInfoActivity.this, AccountInfoActivity.class));
-            }
-        });
-    */}
+  }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home){
