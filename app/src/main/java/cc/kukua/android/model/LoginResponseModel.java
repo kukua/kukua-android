@@ -9,34 +9,34 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginResponseModel {
 
-    @SerializedName("success")
+    @SerializedName("state")
     @Expose
-    private Integer success;
-    @SerializedName("result")
+    private Integer state;
+    @SerializedName("login")
     @Expose
-    private String result;
+    private Boolean login;
 
-    public Integer getSuccess() {
-        return success;
+    public Integer getState() {
+        return state;
     }
 
-    public void setSuccess(Integer success) {
-        this.success = success;
+    public void setState(Integer state) {
+        this.state = state;
     }
 
-    public String getResult() {
-        return result;
+    public Boolean getLogin() {
+        return login;
     }
 
-    public void setResult(String result) {
-        this.result = result;
+    public void setLogin(Boolean login) {
+        this.login = login;
     }
 
     @Override
     public String toString() {
         return "LoginResponseModel{" +
-                "success=" + success +
-                ", result='" + result + '\'' +
+                "state=" + state +
+                ", login='" + login + '\'' +
                 '}';
     }
 

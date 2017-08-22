@@ -31,7 +31,7 @@ public interface APIService {
                                            @Field("purpose_id") String purposeID);
 
     @Headers("Content-Type: application/json")
-    @POST("login")
+    @POST("api/user/login")
     Call<LoginResponseModel> login(@Body String body);
 
    /* @FormUrlEncoded

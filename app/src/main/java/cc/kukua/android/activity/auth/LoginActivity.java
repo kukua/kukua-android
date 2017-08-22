@@ -103,8 +103,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //attemptLogin();
-                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                attemptLogin();
+                //startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             }
         });
 
@@ -206,52 +206,51 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
+        /*    showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
-        }
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+*/
+            LogUtils.log(TAG, "about to start");
 
-        APIService apiInterface = retrofit.create(APIService.class);
+            APIService apiInterface = RetrofitClient.getClient().create(APIService.class);
 
 
-        // prepare call in Retrofit 2.0
-        try {
-            JSONObject paramObject = new JSONObject();
-            paramObject.put("email", email);
-            paramObject.put("password", password);
+            // prepare call in Retrofit 2.0
+            try {
+                JSONObject paramObject = new JSONObject();
+                paramObject.put("email", email);
+                paramObject.put("password", password);
 
-            Call<LoginResponseModel> userCall = apiInterface.login(paramObject.toString());
-            userCall.enqueue(new Callback<LoginResponseModel>() {
-                @Override
-                public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
-                    UiUtils.dismissAllProgressDialogs();
-                    LogUtils.log(TAG, "OnResponse: " + response.body().toString());
-                    if (response.isSuccessful()) {
-                        try {
-                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                Call<LoginResponseModel> userCall = apiInterface.login(paramObject.toString());
+                userCall.enqueue(new Callback<LoginResponseModel>() {
+                    @Override
+                    public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
+                        UiUtils.dismissAllProgressDialogs();
+                        LogUtils.log(TAG, "OnResponse: " + response.body().toString());
+                        LogUtils.log(TAG, "bam");
+                        if (response.isSuccessful()) {
+                            try {
+                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
 
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            Log.e(TAG, "JSON_ERROR", e);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                Log.e(TAG, "JSON_ERROR", e);
+                            }
+
                         }
+                    }
+
+                    @Override
+                    public void onFailure(Call<LoginResponseModel> call, Throwable t) {
 
                     }
-                }
-
-                @Override
-                public void onFailure(Call<LoginResponseModel> call, Throwable t) {
-
-                }
-            });
-        } catch (JSONException e) {
-            e.printStackTrace();
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
+
 
         //stop
 /*
