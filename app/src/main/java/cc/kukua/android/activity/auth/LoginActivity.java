@@ -25,6 +25,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,13 +45,15 @@ import cc.kukua.android.utils.LogUtils;
 import cc.kukua.android.utils.UiUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
+
 
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>,  View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, View.OnClickListener {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -82,6 +88,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     Button mEmailSignInButton;
 
     String TAG = LoginActivity.class.getSimpleName();
+    SessionManager session;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,12 +98,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         ButterKnife.bind(this);
         // Set up the login form.
         populateAutoComplete();
-
+        session = new SessionManager(getApplicationContext());
         mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //attemptLogin();
-                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                attemptLogin();
+                //startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             }
         });
 
@@ -198,12 +205,55 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
+        /*    showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
+
+*/
+            LogUtils.log(TAG, "about to start");
+
+            APIService apiInterface = RetrofitClient.getClient().create(APIService.class);
+
+            UiUtils.showProgressDialog(LoginActivity.this, "Pleas wait...");
+            //showProgress(true);
+            // prepare call in Retrofit 2.0
+            try {
+                JSONObject paramObject = new JSONObject();
+                paramObject.put("email", email);
+                paramObject.put("password", password);
+
+                Call<LoginResponseModel> userCall = apiInterface.login(paramObject.toString());
+                userCall.enqueue(new Callback<LoginResponseModel>() {
+                    @Override
+                    public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
+                        UiUtils.dismissAllProgressDialogs();
+                        LogUtils.log(TAG, "OnResponse: " + response.body().toString());
+
+                        if (response.isSuccessful()) {
+                            if (response.body().getLogin() == true) {
+                                session.createLoginSession("", "","","","","","","","","","");
+                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                            } else if (response.body().getLogin() == false) {
+                                UiUtils.dismissAllProgressDialogs();
+                                //UiUtils.showSafeToast("Oops! Something went wrong!");
+                                Toast.makeText(LoginActivity.this, "Oops! Something went wrong!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<LoginResponseModel> call, Throwable t) {
+                        UiUtils.showSafeToast("Oops! Something went wrong.");
+
+                    }
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
 
+        //stop
+/*
         APIService apiService = RetrofitClient.getClient().create(APIService.class);
         Call<LoginResponseModel> call = apiService.login(email, password);
 
@@ -229,8 +279,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onFailure(Call<LoginResponseModel> call, Throwable t) {
 
             }
-        });
+        }); */
     }
+
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
         return email.contains("@");
@@ -301,9 +352,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         while (!cursor.isAfterLast()) {
             emails.add(cursor.getString(ProfileQuery.ADDRESS));
 
-        addEmailsToAutoComplete(emails);
-        cursor.moveToNext();
-    }
+            addEmailsToAutoComplete(emails);
+            cursor.moveToNext();
+        }
     }
 
     @Override

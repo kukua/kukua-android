@@ -1,6 +1,7 @@
 package cc.kukua.android;
 
 import android.app.Application;
+
 import com.microsoft.windowsazure.mobileservices.*;
 
 import net.hockeyapp.android.metrics.MetricsManager;
@@ -14,24 +15,25 @@ public class KukuaApp extends Application {
 
     private static KukuaApp _INSTANCE;
 
-    public static KukuaApp getInstance() {
-        return _INSTANCE;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
 
+        _INSTANCE = this;
         // Initialize logging first to log all operations
         try {
             mClient = new MobileServiceClient(
                     Constant.azureUrl,
                     this
             );
-        }catch (Exception ex){
+        } catch (Exception ex) {
         }
 
         // add this to your main activity's onCreate()-callback
         MetricsManager.register(this);
+    }
+
+    public static KukuaApp getInstance() {
+        return _INSTANCE;
     }
 }

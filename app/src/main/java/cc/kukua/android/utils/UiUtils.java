@@ -81,7 +81,7 @@ public class UiUtils {
         runOnMain(new Runnable() {
             @Override
             public void run() {
-                    operationsProgressDialog = new ProgressDialog(context);
+                operationsProgressDialog = new ProgressDialog(context);
                 operationsProgressDialog.setMessage(message);
                 operationsProgressDialog.show();
             }
@@ -136,7 +136,7 @@ public class UiUtils {
 
     public static void loadImage(final Activity context, int placeHolder, final Uri photoPath, final ImageView imageView) {
         if (imageView != null) {
-            if (photoPath!=null) {
+            if (photoPath != null) {
                 if (context != null) {
                     if (!context.isDestroyed()) {
                         Glide.with(context).load(photoPath).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(placeHolder).error(placeHolder).crossFade().into(imageView);
