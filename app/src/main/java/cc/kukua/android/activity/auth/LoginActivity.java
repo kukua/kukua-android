@@ -46,12 +46,9 @@ import cc.kukua.android.utils.UiUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
+
 
 import static android.Manifest.permission.READ_CONTACTS;
-import static cc.kukua.android.retrofit.RetrofitClient.BASE_URL;
 
 /**
  * A login screen that offers login via email/password.
@@ -91,6 +88,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     Button mEmailSignInButton;
 
     String TAG = LoginActivity.class.getSimpleName();
+    SessionManager session;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         ButterKnife.bind(this);
         // Set up the login form.
         populateAutoComplete();
-
+        session = new SessionManager(getApplicationContext());
         mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -233,6 +231,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                         if (response.isSuccessful()) {
                             if (response.body().getLogin() == true) {
+                                session.createLoginSession("", "","","","","","","","","","");
                                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                             } else if (response.body().getLogin() == false) {
                                 UiUtils.dismissAllProgressDialogs();
