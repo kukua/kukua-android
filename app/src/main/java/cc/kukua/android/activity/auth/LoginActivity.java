@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,7 +56,7 @@ import static cc.kukua.android.retrofit.RetrofitClient.BASE_URL;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>,  View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, View.OnClickListener {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -215,7 +216,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             APIService apiInterface = RetrofitClient.getClient().create(APIService.class);
 
-
+            UiUtils.showProgressDialog(LoginActivity.this, "Pleas wait...");
+            //showProgress(true);
             // prepare call in Retrofit 2.0
             try {
                 JSONObject paramObject = new JSONObject();
@@ -228,21 +230,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
                         UiUtils.dismissAllProgressDialogs();
                         LogUtils.log(TAG, "OnResponse: " + response.body().toString());
-                        LogUtils.log(TAG, "bam");
+
                         if (response.isSuccessful()) {
-                            try {
+                            if (response.body().getLogin() == true) {
                                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                Log.e(TAG, "JSON_ERROR", e);
+                            } else if (response.body().getLogin() == false) {
+                                UiUtils.dismissAllProgressDialogs();
+                                //UiUtils.showSafeToast("Oops! Something went wrong!");
+                                Toast.makeText(LoginActivity.this, "Oops! Something went wrong!", Toast.LENGTH_SHORT).show();
                             }
-
                         }
                     }
-
                     @Override
                     public void onFailure(Call<LoginResponseModel> call, Throwable t) {
+                        UiUtils.showSafeToast("Oops! Something went wrong.");
 
                     }
                 });
@@ -281,6 +282,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         }); */
     }
+
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
         return email.contains("@");
@@ -351,9 +353,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         while (!cursor.isAfterLast()) {
             emails.add(cursor.getString(ProfileQuery.ADDRESS));
 
-        addEmailsToAutoComplete(emails);
-        cursor.moveToNext();
-    }
+            addEmailsToAutoComplete(emails);
+            cursor.moveToNext();
+        }
     }
 
     @Override
