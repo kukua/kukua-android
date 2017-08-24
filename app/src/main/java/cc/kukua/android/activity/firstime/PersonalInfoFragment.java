@@ -12,6 +12,8 @@ import android.widget.EditText;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
@@ -40,6 +42,7 @@ public class PersonalInfoFragment extends Fragment {
     }
 
 
+    //public static HashMap<String, String> userDetail = new HashMap<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,12 +53,12 @@ public class PersonalInfoFragment extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("firstName", etFirstName.getText().toString());
-                bundle.putString("lastName", etLastName.getText().toString());
-                AccountInfoFragment accountInfoFragment = new AccountInfoFragment();
-                accountInfoFragment.setArguments(bundle);
 
+                //Save Data
+                DummyDataProvider.userDetail.put("firstName",etFirstName.getText().toString());
+                DummyDataProvider.userDetail.put("lastName",etLastName.getText().toString());
+
+                AccountInfoFragment accountInfoFragment = new AccountInfoFragment();
                 EventBus.getDefault().post(new TransactFragment(accountInfoFragment));
             }
         });

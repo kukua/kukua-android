@@ -69,7 +69,7 @@ public class AppUsageFragment extends Fragment {
             }
         });
 
-
+        Toast.makeText(getActivity(), DummyDataProvider.userDetail.get("latLong"), Toast.LENGTH_SHORT).show();
         expandableListDetail = AppuseList.getData();
         expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
         expandableListAdapter = new AppuseListAdapter(getContext(), expandableListTitle, expandableListDetail);

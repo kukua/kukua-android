@@ -1,6 +1,7 @@
 package cc.kukua.android.activity.firstime;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import cc.kukua.android.R;
 import cc.kukua.android.constants.DummyDataProvider;
 import cc.kukua.android.eventbuses.TransactFragment;
 import cc.kukua.android.interfaces.FragmentInterface;
+import cc.kukua.android.utils.UiUtils;
 
 /**
  * @author Calistus
@@ -45,16 +47,13 @@ public class AccountInfoFragment extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("firstName", getArguments().getString("firstName"));
-                bundle.putString("lastName", getArguments().getString("lastName"));
-                bundle.putString("phone", etPhone.getText().toString());
-                bundle.putString("email", etEmail.getText().toString());
-                bundle.putString("password", etPassword.getText().toString());
+                DummyDataProvider.userDetail.put("phone",etPhone.getText().toString());
+                DummyDataProvider.userDetail.put("email",etEmail.getText().toString());
+                DummyDataProvider.userDetail.put("password",etPassword.getText().toString());
 
-                AppUsageFragment appUsageFragment = new AppUsageFragment();
-                appUsageFragment.setArguments(bundle);
-                EventBus.getDefault().post(new TransactFragment(appUsageFragment));
+                //startActivity(new Intent(getActivity(), LocationActivity.class));
+                LocationActivity locationActivity = new LocationActivity();
+                EventBus.getDefault().post(new TransactFragment(locationActivity));
             }
         });
         // Inflate the layout for this fragment
