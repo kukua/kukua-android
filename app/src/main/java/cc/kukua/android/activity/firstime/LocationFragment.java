@@ -68,12 +68,8 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
 
     @BindView(R.id.btn_proceed)
     Button btnProceed;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.edit_location)
     EditText edLocation;
-    @BindView(R.id.toolbar_title)
-    TextView tvToolbarTitle;
     protected GoogleApiClient mGoogleApiClient;
     private double lat = 0, lng = 0;
 
@@ -87,7 +83,6 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_location, container, false);
         ButterKnife.bind(this, rootView);
-        //setSupportActionBar(toolbar);
         setFragmentTitle();
         btnProceed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +92,6 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
                 EventBus.getDefault().post(new TransactFragment(appUsageFragment));
             }
         });
-        tvToolbarTitle.setText(DummyDataProvider.PICK_LOCATION);
         mapView = (MapView) rootView.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
@@ -355,7 +349,7 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
 
     private void setFragmentTitle() {
         if (fragmentInterface != null) {
-            fragmentInterface.setToolBarTitle(DummyDataProvider.App_USAGE);
+            fragmentInterface.setToolBarTitle(DummyDataProvider.PICK_LOCATION);
         }
     }
 
