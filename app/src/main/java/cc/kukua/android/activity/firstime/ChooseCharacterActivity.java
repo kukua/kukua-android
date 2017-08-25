@@ -36,7 +36,7 @@ public class ChooseCharacterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose_character);
         ButterKnife.bind(this);
         
-        tvToolbarTitle.setText("choose your character");
+        tvToolbarTitle.setText(getString(R.string.choose_your_character));
 
         pager.setAdapter(new ChooseCharacterPagerAdapter(getSupportFragmentManager()));
 

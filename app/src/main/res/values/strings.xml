@@ -30,6 +30,8 @@
         <item>Transport</item>
     </string-array>
 
+    <!--Auth Strings-->
+    <string name="choose_your_character">choose your character</string>
 
     <!-- WARNING THE STRINGS BELOW WILL BE REMOVED TOWARDS PROJECT COMPLETION-->
     <!-- Home -->
