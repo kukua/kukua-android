@@ -92,6 +92,29 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
                 EventBus.getDefault().post(new TransactFragment(appUsageFragment));
             }
         });
+        edLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent =
+                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                                    .build(getActivity());
+                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+                } catch (GooglePlayServicesRepairableException e) {
+                    // TODO: Handle the error.
+                    final Snackbar snackbar = Snackbar.make(v,
+                            "Google play services repair problem",
+                            Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    // TODO: Handle the error. Prompt user to install play services
+                    final Snackbar snackbar = Snackbar.make(v,
+                            "Make sure that you have installed google place services",
+                            Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+            }
+        });
         mapView = (MapView) rootView.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
@@ -260,9 +283,11 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
             if (resultCode == RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(getActivity(), data);
                 if (place != null) {
+
                     LatLng latLng = place.getLatLng();
                     lat = latLng.latitude;
                     lng = latLng.longitude;
+                    DummyDataProvider.userDetail.put("latLong", lat + "," + lng);
                     animateMarker();
                     Log.i(TAG, "Place: " + place.getName());
                     Log.i(TAG, "Place: " + place.getLatLng());
@@ -298,7 +323,7 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
                 DummyDataProvider.userDetail.put("latLong", lat + "," + lng);
                 AppUsageFragment appUsageFragment = new AppUsageFragment();
                 EventBus.getDefault().post(new TransactFragment(appUsageFragment));
-                break;*/
+                break;
             case R.id.edit_location:
                 try {
                     Intent intent =
@@ -319,7 +344,7 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
                     snackbar.show();
                 }
                 break;
-        }
+       */ }
     }
 
     @Override

@@ -57,13 +57,15 @@ public class AppUsageFragment extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), LocationFragment.class));
+                //TODO:Remove hardcoded character
+                DummyDataProvider.userDetail.put("characterID", "1");
+                startActivity(new Intent(getActivity(), ChooseCharacterActivity.class));
             }
         });
         btnDontSpecify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), LocationFragment.class));
+                startActivity(new Intent(getActivity(), ChooseCharacterActivity.class));
             }
         });
 
