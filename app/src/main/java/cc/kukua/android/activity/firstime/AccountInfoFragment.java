@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -45,16 +44,13 @@ public class AccountInfoFragment extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("firstName", getArguments().getString("firstName"));
-                bundle.putString("lastName", getArguments().getString("lastName"));
-                bundle.putString("phone", etPhone.getText().toString());
-                bundle.putString("email", etEmail.getText().toString());
-                bundle.putString("password", etPassword.getText().toString());
+                DummyDataProvider.userDetail.put("phone",etPhone.getText().toString());
+                DummyDataProvider.userDetail.put("email",etEmail.getText().toString());
+                DummyDataProvider.userDetail.put("password",etPassword.getText().toString());
 
-                AppUsageFragment appUsageFragment = new AppUsageFragment();
-                appUsageFragment.setArguments(bundle);
-                EventBus.getDefault().post(new TransactFragment(appUsageFragment));
+                //startActivity(new Intent(getActivity(), LocationFragment.class));
+                LocationFragment locationFragment = new LocationFragment();
+                EventBus.getDefault().post(new TransactFragment(locationFragment));
             }
         });
         // Inflate the layout for this fragment

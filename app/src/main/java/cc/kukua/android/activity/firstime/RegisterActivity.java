@@ -19,6 +19,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
+import cc.kukua.android.constants.DummyDataProvider;
 import cc.kukua.android.eventbuses.TransactFragment;
 import cc.kukua.android.interfaces.FragmentInterface;
 import cc.kukua.android.utils.UiUtils;
@@ -41,9 +42,8 @@ public class RegisterActivity extends AppCompatActivity implements FragmentInter
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setHomeButtonEnabled(false);
 
-        //Call PersonalInfo Fragment
+        //Inflate a Fragment
         transactFragment(new PersonalInfoFragment());
-
   }
 
     public boolean onOptionsItemSelected(MenuItem item) {

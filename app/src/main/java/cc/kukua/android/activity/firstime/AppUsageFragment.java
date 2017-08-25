@@ -15,7 +15,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +23,6 @@ import cc.kukua.android.adapters.AppuseListAdapter;
 import cc.kukua.android.constants.DummyDataProvider;
 import cc.kukua.android.interfaces.FragmentInterface;
 import cc.kukua.android.model.AppuseList;
-import cc.kukua.android.utils.UiUtils;
 
 /**
  * @author Calistus
@@ -59,17 +57,19 @@ public class AppUsageFragment extends Fragment {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), LocationActivity.class));
+                //TODO:Remove hardcoded character
+                DummyDataProvider.userDetail.put("characterID", "1");
+                startActivity(new Intent(getActivity(), ChooseCharacterActivity.class));
             }
         });
         btnDontSpecify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), LocationActivity.class));
+                startActivity(new Intent(getActivity(), ChooseCharacterActivity.class));
             }
         });
 
-
+        Toast.makeText(getActivity(), DummyDataProvider.userDetail.get("latLong"), Toast.LENGTH_SHORT).show();
         expandableListDetail = AppuseList.getData();
         expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
         expandableListAdapter = new AppuseListAdapter(getContext(), expandableListTitle, expandableListDetail);
