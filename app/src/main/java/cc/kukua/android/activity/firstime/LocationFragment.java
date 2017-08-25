@@ -57,14 +57,14 @@ import cc.kukua.android.interfaces.FragmentInterface;
 
 import static android.app.Activity.RESULT_OK;
 
-public class LocationActivity extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, View.OnClickListener {
+public class LocationFragment extends Fragment implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener, View.OnClickListener {
     /* GPS Constant Permission */
     private static final int MY_PERMISSION_ACCESS_COARSE_LOCATION = 11;
     private static final int MY_PERMISSION_ACCESS_FINE_LOCATION = 12;
     private GoogleMap mMap;
 
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
-    private String TAG = LocationActivity.class.getSimpleName();
+    private String TAG = LocationFragment.class.getSimpleName();
 
     @BindView(R.id.btn_proceed)
     Button btnProceed;
@@ -85,7 +85,7 @@ public class LocationActivity extends Fragment implements OnMapReadyCallback, Go
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_location, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_location, container, false);
         ButterKnife.bind(this, rootView);
         //setSupportActionBar(toolbar);
         setFragmentTitle();

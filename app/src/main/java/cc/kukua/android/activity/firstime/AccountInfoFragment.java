@@ -1,7 +1,6 @@
 package cc.kukua.android.activity.firstime;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -19,7 +17,6 @@ import cc.kukua.android.R;
 import cc.kukua.android.constants.DummyDataProvider;
 import cc.kukua.android.eventbuses.TransactFragment;
 import cc.kukua.android.interfaces.FragmentInterface;
-import cc.kukua.android.utils.UiUtils;
 
 /**
  * @author Calistus
@@ -51,9 +48,9 @@ public class AccountInfoFragment extends Fragment {
                 DummyDataProvider.userDetail.put("email",etEmail.getText().toString());
                 DummyDataProvider.userDetail.put("password",etPassword.getText().toString());
 
-                //startActivity(new Intent(getActivity(), LocationActivity.class));
-                LocationActivity locationActivity = new LocationActivity();
-                EventBus.getDefault().post(new TransactFragment(locationActivity));
+                //startActivity(new Intent(getActivity(), LocationFragment.class));
+                LocationFragment locationFragment = new LocationFragment();
+                EventBus.getDefault().post(new TransactFragment(locationFragment));
             }
         });
         // Inflate the layout for this fragment

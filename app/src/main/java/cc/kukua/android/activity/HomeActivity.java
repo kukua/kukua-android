@@ -2,6 +2,7 @@ package cc.kukua.android.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import cc.kukua.android.R;
 import cc.kukua.android.activity.auth.SessionManager;
