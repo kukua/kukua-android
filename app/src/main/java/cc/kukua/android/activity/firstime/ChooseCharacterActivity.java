@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.TimeZone;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
@@ -73,6 +75,8 @@ public class ChooseCharacterActivity extends AppCompatActivity {
         btnNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DummyDataProvider.userDetail.put("timezone", TimeZone.getDefault().getID());
+                LogUtils.log(TAG,"TimeZone: "+TimeZone.getDefault().getID());
                 LogUtils.log(TAG,DummyDataProvider.userDetail.toString());
             }
         });
