@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context="cc.kukua.android.activity.firstime.PersonalInfoActivity">
+    tools:context="cc.kukua.android.activity.firstime.RegisterActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -79,14 +79,13 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:text="SKIP THIS STEP"/>
+            android:text="@string/skip_this_step"/>
 
         <Button
             android:id="@+id/btn_next3"
             style="@style/ButtonStyle.Button.Large"
             android:layout_marginBottom="10dp"
-            android:text="Next"
-            />
+            android:text="Next" />
 
 
     </RelativeLayout>
