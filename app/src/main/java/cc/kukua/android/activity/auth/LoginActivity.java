@@ -205,81 +205,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-        /*    showProgress(true);
+
+            //showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
 
-*/
-            LogUtils.log(TAG, "about to start");
-
-            APIService apiInterface = RetrofitClient.getClient().create(APIService.class);
-
-            UiUtils.showProgressDialog(LoginActivity.this, "Pleas wait...");
-            //showProgress(true);
-            // prepare call in Retrofit 2.0
-            try {
-                JSONObject paramObject = new JSONObject();
-                paramObject.put("email", email);
-                paramObject.put("password", password);
-
-                Call<LoginResponseModel> userCall = apiInterface.login(paramObject.toString());
-                userCall.enqueue(new Callback<LoginResponseModel>() {
-                    @Override
-                    public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
-                        UiUtils.dismissAllProgressDialogs();
-                        LogUtils.log(TAG, "OnResponse: " + response.body().toString());
-
-                        if (response.isSuccessful()) {
-                            if (response.body().getLogin() == true) {
-                                session.createLoginSession("", "","","","","","","","","","");
-                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                            } else if (response.body().getLogin() == false) {
-                                UiUtils.dismissAllProgressDialogs();
-                                //UiUtils.showSafeToast("Oops! Something went wrong!");
-                                Toast.makeText(LoginActivity.this, "Oops! Something went wrong!", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<LoginResponseModel> call, Throwable t) {
-                        UiUtils.showSafeToast("Oops! Something went wrong.");
-
-                    }
-                });
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
         }
-
-
-        //stop
-/*
-        APIService apiService = RetrofitClient.getClient().create(APIService.class);
-        Call<LoginResponseModel> call = apiService.login(email, password);
-
-        call.enqueue(new Callback<LoginResponseModel>() {
-            @Override
-            public void onResponse(Call<LoginResponseModel> call, retrofit2.Response<LoginResponseModel> response) {
-                UiUtils.dismissAllProgressDialogs();
-                LogUtils.log(TAG, "OnResponse: " + response.body().toString());
-                if (response.isSuccessful()) {
-                    try {
-                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        Log.e(TAG, "JSON_ERROR", e);
-                    }
-
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<LoginResponseModel> call, Throwable t) {
-
-            }
-        }); */
     }
 
     private boolean isEmailValid(String email) {
@@ -289,7 +220,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 3;
     }
 
     /**
@@ -395,6 +326,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private final String mPassword;
+        Boolean callStatus = false;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -402,42 +334,77 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            // TODO: register the new account here.
-            return true;
+        protected void onPreExecute() {
+            UiUtils.showProgressDialog(LoginActivity.this, getString(R.string.please_wait));
         }
 
         @Override
+        protected Boolean doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+            APIService apiInterface = RetrofitClient.getClient().create(APIService.class);
+
+            // prepare call in Retrofit 2.0
+            try {
+                JSONObject paramObject = new JSONObject();
+                paramObject.put("email", mEmail);
+                paramObject.put("password", mPassword);
+
+                Call<LoginResponseModel> userCall = apiInterface.login(paramObject.toString());
+                userCall.enqueue(new Callback<LoginResponseModel>() {
+                    @Override
+                    public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
+                        LogUtils.log(TAG, "Enter res");
+
+                        UiUtils.dismissAllProgressDialogs();
+                        LogUtils.log(TAG, "OnResponse: " + response.body().toString());
+
+                        if (response.isSuccessful()) {
+                            if (response.body().getLogin() == true) {
+                                callStatus = true;
+                                session.createLoginSession("", "", "", "", "", "", "", "", "", "", "");
+                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                finish();
+                            } else if (response.body().getLogin() == false) {
+                                callStatus = false;
+                                Toast.makeText(LoginActivity.this, getString(R.string.network_error), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<LoginResponseModel> call, Throwable t) {
+                        callStatus = false;
+                        Toast.makeText(LoginActivity.this, getString(R.string.network_error), Toast.LENGTH_SHORT).show();
+                        UiUtils.dismissAllProgressDialogs();
+                    }
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return callStatus;
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            UiUtils.showProgressDialog(LoginActivity.this, getString(R.string.please_wait));
+        }
+
+        /*@Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
-            showProgress(false);
 
-            if (success) {
+            UiUtils.dismissAllProgressDialogs();
+            if (success == true) {
                 Intent i = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(i);
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                Toast.makeText(LoginActivity.this, getString(R.string.network_error), Toast.LENGTH_SHORT).show();
                 mPasswordView.requestFocus();
             }
-        }
+        }*/
 
         @Override
         protected void onCancelled() {

@@ -3,51 +3,39 @@ package cc.kukua.android.model;
 /**
  * Created by calistus on 26/07/2017.
  */
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 public class RegisterResponseModel {
 
-    @SerializedName("success")
+    @SerializedName("state")
     @Expose
-    private Integer success;
-    @SerializedName("result")
+    private Integer state;
+    @SerializedName("id")
     @Expose
-    private String result;
-    @SerializedName("token")
-    @Expose
-    private String token;
+    private String id;
 
-    public Integer getSuccess() {
-        return success;
+    public Integer getState() {
+        return state;
     }
 
-    public void setSuccess(Integer success) {
-        this.success = success;
+    public void setState(Integer state) {
+        this.state = state;
     }
 
-    public String getResult() {
-        return result;
+    public String getId() {
+        return id;
     }
 
-    public void setResult(String result) {
-        this.result = result;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
         return "RegisterResponseModel{" +
-                "success=" + success +
-                ", result='" + result + '\'' +
-                ", token='" + token + '\'' +
+                "state=" + state +
+                ", id='" + id + '\'' +
                 '}';
     }
 }

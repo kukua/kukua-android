@@ -43,6 +43,7 @@ public class AppUsageFragment extends Fragment {
     HashMap<String, List<String>> expandableListDetail;
     private int lastExpandedPosition = -1;
     private int lastExpandedItemPosition = -1;
+    private static String purpose;
 
 
 
@@ -58,7 +59,7 @@ public class AppUsageFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //TODO:Remove hardcoded character
-                DummyDataProvider.userDetail.put("characterID", "1");
+                DummyDataProvider.userDetail.put("purpose", purpose);
                 startActivity(new Intent(getActivity(), ChooseCharacterActivity.class));
             }
         });
@@ -106,13 +107,14 @@ public class AppUsageFragment extends Fragment {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
+                purpose = expandableListTitle.get(groupPosition)
+                        + " -> "
+                        + expandableListDetail.get(
+                        expandableListTitle.get(groupPosition)).get(
+                        childPosition);
+
                 Toast.makeText(
-                        getContext(),
-                        expandableListTitle.get(groupPosition)
-                                + " -> "
-                                + expandableListDetail.get(
-                                expandableListTitle.get(groupPosition)).get(
-                                childPosition), Toast.LENGTH_SHORT
+                        getContext(), purpose, Toast.LENGTH_SHORT
                 ).show();
 
                 if (lastExpandedItemPosition != -1

@@ -30,6 +30,12 @@
         <item>Transport</item>
     </string-array>
 
+    <!--UI String-->
+    <string name="please_wait">Please wait...</string>
+    <string name="network_error">Oops! Something went wrong.</string>
+
+    <!--Auth Strings-->
+    <string name="choose_your_character">choose your character</string>
 
     <!-- WARNING THE STRINGS BELOW WILL BE REMOVED TOWARDS PROJECT COMPLETION-->
     <!-- Home -->
@@ -108,4 +114,5 @@
     <string name="button_next">Next</string>
     <string name="title_activity_demo">DemoActivity</string>
     <string name="title_activity_location">Pick Your Location</string>
+    <string name="skip_this_step">SKIP THIS STEP</string>
 </resources>
