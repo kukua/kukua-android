@@ -18,6 +18,8 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TimeZone;
 
 import butterknife.BindView;
@@ -25,10 +27,12 @@ import butterknife.ButterKnife;
 import cc.kukua.android.R;
 import cc.kukua.android.activity.HomeActivity;
 import cc.kukua.android.activity.auth.LoginActivity;
+import cc.kukua.android.activity.auth.SessionManager;
 import cc.kukua.android.adapters.ChooseCharacterPagerAdapter;
 import cc.kukua.android.constants.DummyDataProvider;
 import cc.kukua.android.model.LoginResponseModel;
 import cc.kukua.android.model.RegisterResponseModel;
+import cc.kukua.android.model.query_model.RegisterQueryModel;
 import cc.kukua.android.retrofit.APIService;
 import cc.kukua.android.retrofit.RetrofitClient;
 import cc.kukua.android.utils.LogUtils;
@@ -51,12 +55,14 @@ public class ChooseCharacterActivity extends AppCompatActivity {
     @BindView(R.id.btn_next3)
     Button btnNextButton;
 
+    SessionManager session;
     private String TAG = ChooseCharacterActivity.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_character);
         ButterKnife.bind(this);
+        session = new SessionManager(getApplicationContext());
         
         tvToolbarTitle.setText(getString(R.string.choose_your_character));
 
@@ -90,60 +96,80 @@ public class ChooseCharacterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DummyDataProvider.userDetail.put("timezone", TimeZone.getDefault().getID());
-                LogUtils.log(TAG,"TimeZone: "+TimeZone.getDefault().getID());
                 LogUtils.log(TAG,DummyDataProvider.userDetail.toString());
+                registerUser();
             }
         });
     }
 
-    private void registerUser{
+    private void registerUser(){
         APIService apiInterface = RetrofitClient.getClient().create(APIService.class);
 
         UiUtils.showProgressDialog(ChooseCharacterActivity.this, "Pleas wait...");
         //showProgress(true);
         // prepare call in Retrofit 2.0
         try {
-            String[] location = DummyDataProvider.userDetail.get("latLong").split(",");
+   /*         String[] location = DummyDataProvider.userDetail.get("latLong").split(",");
+            LogUtils.log(TAG,location[0]+" "+location[1]);
             JSONObject paramObject = new JSONObject();
-            paramObject.put("email", DummyDataProvider.userDetail.get("email"));
-            paramObject.put("password", DummyDataProvider.userDetail.get("password"));
+
+
+
             paramObject.put("first_name",DummyDataProvider.userDetail.get("firstName"));
             paramObject.put("last_name", DummyDataProvider.userDetail.get("last_name"));
+            paramObject.put("email", DummyDataProvider.userDetail.get("email"));
             paramObject.put("phone_number", DummyDataProvider.userDetail.get("phone"));
             paramObject.put("password", DummyDataProvider.userDetail.get("password"));
             paramObject.put("character_id", DummyDataProvider.userDetail.get("character"));
             paramObject.put("timezone", DummyDataProvider.userDetail.get("timezone"));
             paramObject.put("location", location);
             paramObject.put("purpose", DummyDataProvider.userDetail.get("purpose"));
+*/
 
-            Call<RegisterResponseModel> userCall = apiInterface.userSignUp(paramObject.toString());
-            userCall.enqueue(new Callback<LoginResponseModel>() {
+            List<Double> locationList = new ArrayList<>();
+            locationList.add(60.32);
+            locationList.add(24.97);
+
+            RegisterQueryModel registerQueryModel = new RegisterQueryModel();
+            registerQueryModel.setFirstName(DummyDataProvider.userDetail.get("firstName"));
+            registerQueryModel.setLastName(DummyDataProvider.userDetail.get("last_name"));
+            registerQueryModel.setEmail(DummyDataProvider.userDetail.get("email"));
+            registerQueryModel.setPassword(DummyDataProvider.userDetail.get("password"));
+            registerQueryModel.setPhoneNumber(DummyDataProvider.userDetail.get("phone"));
+            registerQueryModel.setCharacterId(DummyDataProvider.userDetail.get("character"));
+            registerQueryModel.setTimezone(DummyDataProvider.userDetail.get("timezone"));
+            registerQueryModel.setLocation(locationList);
+            registerQueryModel.setPurpose(DummyDataProvider.userDetail.get("purpose"));
+
+            Call<RegisterResponseModel> userCall = apiInterface.register(registerQueryModel);
+            userCall.enqueue(new Callback<RegisterResponseModel>() {
                 @Override
-                public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
+                public void onResponse(Call<RegisterResponseModel> call, Response<RegisterResponseModel> response) {
                     UiUtils.dismissAllProgressDialogs();
+
                     LogUtils.log(TAG, "OnResponse: " + response.body().toString());
 
                     if (response.isSuccessful()) {
-                        if (response.body().getLogin() == true) {
+                        if (response.body().getState() == 200) {
                             session.createLoginSession("", "","","","","","","","","","");
-                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                        } else if (response.body().getLogin() == false) {
+                            startActivity(new Intent(ChooseCharacterActivity.this, HomeActivity.class));
+                        } else if (response.body().getState() != 200) {
                             UiUtils.dismissAllProgressDialogs();
                             //UiUtils.showSafeToast("Oops! Something went wrong!");
-                            Toast.makeText(LoginActivity.this, "Oops! Something went wrong!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ChooseCharacterActivity.this, "Oops! Something went wrong!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
                 @Override
-                public void onFailure(Call<LoginResponseModel> call, Throwable t) {
+                public void onFailure(Call<RegisterResponseModel> call, Throwable t) {
                     UiUtils.showSafeToast("Oops! Something went wrong.");
 
                 }
             });
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+
 
 }
 }

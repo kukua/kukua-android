@@ -6,6 +6,7 @@ import cc.kukua.android.model.LoginResponseModel;
 import cc.kukua.android.model.RegisterResponseModel;
 import cc.kukua.android.model.RequestForecastResponseModel;
 import cc.kukua.android.model.SendSmsResponseModel;
+import cc.kukua.android.model.query_model.RegisterQueryModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -19,7 +20,7 @@ import retrofit2.http.Query;
  */
 
 public interface APIService {
-    @FormUrlEncoded
+   /* @FormUrlEncoded
     @POST("v1.0/register")
     Call<RegisterResponseModel> userSignUp(@Field("first_name") String full_name,
                                            @Field("last_name") String email,
@@ -29,14 +30,14 @@ public interface APIService {
                                            @Field("character_id") String characterID,
                                            @Field("location") String location,
                                            @Field("purpose_id") String purposeID);
-
+*/
     @Headers("Content-Type: application/json")
     @POST("api/user/login")
     Call<LoginResponseModel> login(@Body String body);
 
     @Headers("Content-Type: application/json")
     @POST("/api/user/create")
-    Call<RegisterResponseModel> register(@Body String body);
+    Call<RegisterResponseModel> register(@Body RegisterQueryModel body);
 
    /* @FormUrlEncoded
     @POST("v1.0/login")

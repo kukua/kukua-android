@@ -30,6 +30,10 @@
         <item>Transport</item>
     </string-array>
 
+    <!--UI String-->
+    <string name="please_wait">Please wait...</string>
+    <string name="network_error">Oops! Something went wrong.</string>
+
     <!--Auth Strings-->
     <string name="choose_your_character">choose your character</string>
 
