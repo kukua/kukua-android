@@ -34,6 +34,10 @@ public interface APIService {
     @POST("api/user/login")
     Call<LoginResponseModel> login(@Body String body);
 
+    @Headers("Content-Type: application/json")
+    @POST("/api/user/create")
+    Call<RegisterResponseModel> register(@Body String body);
+
    /* @FormUrlEncoded
     @POST("v1.0/login")
     Call<LoginResponseModel> login(@Field("email") String email, @Field("password") String password);

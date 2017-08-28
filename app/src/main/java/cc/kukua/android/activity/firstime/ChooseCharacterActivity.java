@@ -1,5 +1,6 @@
 package cc.kukua.android.activity.firstime;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -12,16 +13,29 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
+import cc.kukua.android.activity.HomeActivity;
+import cc.kukua.android.activity.auth.LoginActivity;
 import cc.kukua.android.adapters.ChooseCharacterPagerAdapter;
 import cc.kukua.android.constants.DummyDataProvider;
+import cc.kukua.android.model.LoginResponseModel;
+import cc.kukua.android.model.RegisterResponseModel;
+import cc.kukua.android.retrofit.APIService;
+import cc.kukua.android.retrofit.RetrofitClient;
 import cc.kukua.android.utils.LogUtils;
 import cc.kukua.android.utils.UiUtils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class ChooseCharacterActivity extends AppCompatActivity {
@@ -82,5 +96,55 @@ public class ChooseCharacterActivity extends AppCompatActivity {
         });
     }
 
+    private void registerUser{
+        APIService apiInterface = RetrofitClient.getClient().create(APIService.class);
+
+        UiUtils.showProgressDialog(ChooseCharacterActivity.this, "Pleas wait...");
+        //showProgress(true);
+        // prepare call in Retrofit 2.0
+        try {
+            String[] location = DummyDataProvider.userDetail.get("latLong").split(",");
+            JSONObject paramObject = new JSONObject();
+            paramObject.put("email", DummyDataProvider.userDetail.get("email"));
+            paramObject.put("password", DummyDataProvider.userDetail.get("password"));
+            paramObject.put("first_name",DummyDataProvider.userDetail.get("firstName"));
+            paramObject.put("last_name", DummyDataProvider.userDetail.get("last_name"));
+            paramObject.put("phone_number", DummyDataProvider.userDetail.get("phone"));
+            paramObject.put("password", DummyDataProvider.userDetail.get("password"));
+            paramObject.put("character_id", DummyDataProvider.userDetail.get("character"));
+            paramObject.put("timezone", DummyDataProvider.userDetail.get("timezone"));
+            paramObject.put("location", location);
+            paramObject.put("purpose", DummyDataProvider.userDetail.get("purpose"));
+
+            Call<RegisterResponseModel> userCall = apiInterface.userSignUp(paramObject.toString());
+            userCall.enqueue(new Callback<LoginResponseModel>() {
+                @Override
+                public void onResponse(Call<LoginResponseModel> call, Response<LoginResponseModel> response) {
+                    UiUtils.dismissAllProgressDialogs();
+                    LogUtils.log(TAG, "OnResponse: " + response.body().toString());
+
+                    if (response.isSuccessful()) {
+                        if (response.body().getLogin() == true) {
+                            session.createLoginSession("", "","","","","","","","","","");
+                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                        } else if (response.body().getLogin() == false) {
+                            UiUtils.dismissAllProgressDialogs();
+                            //UiUtils.showSafeToast("Oops! Something went wrong!");
+                            Toast.makeText(LoginActivity.this, "Oops! Something went wrong!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+                @Override
+                public void onFailure(Call<LoginResponseModel> call, Throwable t) {
+                    UiUtils.showSafeToast("Oops! Something went wrong.");
+
+                }
+            });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
 }
 
