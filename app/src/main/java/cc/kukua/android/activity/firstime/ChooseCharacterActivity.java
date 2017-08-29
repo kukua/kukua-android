@@ -25,6 +25,7 @@ import java.util.TimeZone;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
+import cc.kukua.android.activity.CharacterCustomizationActivity;
 import cc.kukua.android.activity.HomeActivity;
 import cc.kukua.android.activity.auth.LoginActivity;
 import cc.kukua.android.activity.auth.SessionManager;
@@ -72,7 +73,7 @@ public class ChooseCharacterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int tab = pager.getCurrentItem();
-                if (tab > 0) {
+                if (tab ==1) {
                     tab--;
                     DummyDataProvider.userDetail.put("character",String.valueOf(tab));
                     pager.setCurrentItem(tab);
@@ -130,9 +131,9 @@ public class ChooseCharacterActivity extends AppCompatActivity {
             locationList.add(60.32);
             locationList.add(24.97);
 
-            RegisterQueryModel registerQueryModel = new RegisterQueryModel();
+            final RegisterQueryModel registerQueryModel = new RegisterQueryModel();
             registerQueryModel.setFirstName(DummyDataProvider.userDetail.get("firstName"));
-            registerQueryModel.setLastName(DummyDataProvider.userDetail.get("last_name"));
+            registerQueryModel.setLastName(DummyDataProvider.userDetail.get("lastName"));
             registerQueryModel.setEmail(DummyDataProvider.userDetail.get("email"));
             registerQueryModel.setPassword(DummyDataProvider.userDetail.get("password"));
             registerQueryModel.setPhoneNumber(DummyDataProvider.userDetail.get("phone"));
@@ -146,13 +147,30 @@ public class ChooseCharacterActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<RegisterResponseModel> call, Response<RegisterResponseModel> response) {
                     UiUtils.dismissAllProgressDialogs();
+                    final RegisterQueryModel regQueryModel = registerQueryModel;
 
                     LogUtils.log(TAG, "OnResponse: " + response.body().toString());
 
                     if (response.isSuccessful()) {
-                        if (response.body().getState() == 200) {
-                            session.createLoginSession("", "","","","","","","","","","");
-                            startActivity(new Intent(ChooseCharacterActivity.this, HomeActivity.class));
+                        if (response.body().getState() == 200 && response.body().getId()!=null) {
+
+                            session.createLoginSession("",
+                                    regQueryModel.getFirstName(),
+                                    regQueryModel.getLastName(),
+                                    regQueryModel.getEmail(),
+                                    regQueryModel.getPhoneNumber(),
+                                    "",
+                                    "",
+                                    regQueryModel.getPassword(),
+                                    regQueryModel.getCharacterId(),
+                                    "",
+                                    "",
+                                    regQueryModel.getPurpose(),
+                                    regQueryModel.getLocation().get(0),
+                                    regQueryModel.getLocation().get(1),
+                                    response.body().getId()
+                            );
+                            startActivity(new Intent(ChooseCharacterActivity.this, CharacterCustomizationActivity.class));
                         } else if (response.body().getState() != 200) {
                             UiUtils.dismissAllProgressDialogs();
                             //UiUtils.showSafeToast("Oops! Something went wrong!");
@@ -163,7 +181,6 @@ public class ChooseCharacterActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<RegisterResponseModel> call, Throwable t) {
                     UiUtils.showSafeToast("Oops! Something went wrong.");
-
                 }
             });
         } catch (Exception e) {

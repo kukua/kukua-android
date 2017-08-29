@@ -39,7 +39,10 @@ public class SessionManager {
     public static final String KEY_PHONE_NUMBER = "phone";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_CHARACTER_URL = "user_photo_url";
-
+    public static final String KEY_USER_ID= "user_id";
+    public static final String KEY_LATITUDE = "latitude";
+    public static final String KEY_LONGITUDE= "longitude";
+    public static final String KEY_PURPOSE = "purpose";
 
     // Constructor
     public SessionManager(Context context) {
@@ -48,7 +51,21 @@ public class SessionManager {
         editor = pref.edit();
     }
 
-    public void createLoginSession(String id, String firstName, String lastName, String email, String phone, String token, String characterURL, String password, String characterID, String location, String purposeID ) {
+    public void createLoginSession(String id,
+                                   String firstName,
+                                   String lastName,
+                                   String email,
+                                   String phone,
+                                   String token,
+                                   String characterURL,
+                                   String password,
+                                   String characterID,
+                                   String location,
+                                   String purposeID,
+                                   String purpose,
+                                   double latitude,
+                                   double longitude,
+                                   String userID) {
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
@@ -64,6 +81,11 @@ public class SessionManager {
         editor.putString(KEY_LOCATION, location);
         editor.putString(KEY_CHARACTER_URL, characterURL);
         editor.putString(KEY_PASSWORD, password + "".trim());
+        editor.putString(KEY_PURPOSE, purpose);
+        editor.putString(KEY_LATITUDE, String.valueOf(latitude));
+        editor.putString(KEY_LONGITUDE, String.valueOf(longitude));
+        editor.putString(KEY_USER_ID, userID);
+
 
         // commit changes
         editor.commit();
@@ -147,6 +169,38 @@ public class SessionManager {
     public void refreshAuthenticatedUserToken(String refreshedToken) {
         editor.putString(SessionManager.KEY_TOKEN, refreshedToken);
         editor.commit();
+    }
+
+    public String getCharacterID() {
+        return pref.getString(KEY_CHARACTER_ID,"");
+    }
+    public Integer getUserID() {
+        return pref.getInt(KEY_USER_ID,0);
+    }
+    public String getFirstName() {
+        return pref.getString(KEY_FIRST_NAME,"");
+    }
+    public String getLastName() {
+        return pref.getString(KEY_LAST_NAME,"");
+    }
+    public String getEmail() {
+        return pref.getString(KEY_EMAIL,"");
+    }
+    public String getKeyPhoneNumber() {
+        return pref.getString(KEY_PHONE_NUMBER,"");
+    }
+    public String getPassword() {
+        return pref.getString(KEY_PASSWORD,"");
+    }
+    public float getLatitude() {
+        return pref.getFloat(KEY_LATITUDE,0);
+    }
+    public float getLongitude() {
+        return pref.getFloat(KEY_LONGITUDE,0);
+    }
+
+    public String getPurpose() {
+        return pref.getString(KEY_PURPOSE,"");
     }
 
 }
