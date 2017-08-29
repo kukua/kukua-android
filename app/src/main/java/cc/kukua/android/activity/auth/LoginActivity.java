@@ -361,7 +361,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         if (response.isSuccessful()) {
                             if (response.body().getLogin() == true) {
                                 callStatus = true;
-                                session.createLoginSession("", "", "", "", "", "", "", "", "", "", "");
+                                session.createLoginSession("", "", "", "", "", "", "", "", "", "", "","",0,0,"");
                                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                 finish();
                             } else if (response.body().getLogin() == false) {
