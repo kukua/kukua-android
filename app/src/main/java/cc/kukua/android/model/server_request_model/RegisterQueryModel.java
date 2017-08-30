@@ -1,4 +1,4 @@
-package cc.kukua.android.model.query_model;
+package cc.kukua.android.model.server_request_model;
 
 /**
  * Created by calistus on 28/08/2017.
