@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -23,6 +24,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -41,11 +43,13 @@ import butterknife.ButterKnife;
 import cc.kukua.android.R;
 import cc.kukua.android.activity.HomeActivity;
 import cc.kukua.android.activity.firstime.RegisterActivity;
+import cc.kukua.android.model.server_response_model.ForgotPasswordResponseModel;
 import cc.kukua.android.model.server_response_model.LoginResponseModel;
 import cc.kukua.android.retrofit.APIService;
 import cc.kukua.android.retrofit.RetrofitClient;
 import cc.kukua.android.utils.LogUtils;
 import cc.kukua.android.utils.UiUtils;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -95,6 +99,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     String TAG = LoginActivity.class.getSimpleName();
     SessionManager session;
 
+    Boolean serverResponseResult;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,8 +146,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //TODO: Get the email here
-                //m_Text = input.getText().toString();
+                String email = input.getText().toString();
+                //TODO: Remove comment when Endpoint is updated
+                //requestPassword(email);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -152,6 +159,49 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         builder.show();
+    }
+
+    private Boolean requestPassword(String email) {
+        APIService apiService = RetrofitClient.getClient().create(APIService.class);
+
+        try {
+            final JSONObject requestObject = new JSONObject();
+            requestObject.put("email", email);
+
+            final SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+            pDialog.getProgressHelper().setBarColor(R.color.backgroundColor);
+            pDialog.setTitleText(getString(R.string.please_wait));
+            pDialog.setCancelable(false);
+            pDialog.show();
+
+            Call<ForgotPasswordResponseModel> callForgotPassword = apiService.forgotPassword(requestObject.toString());
+            callForgotPassword.enqueue(new Callback<ForgotPasswordResponseModel>() {
+                @Override
+                public void onResponse(Call<ForgotPasswordResponseModel> call, Response<ForgotPasswordResponseModel> response) {
+                    pDialog.dismiss();
+                    LogUtils.log(TAG, response.toString());
+                    if(response.body().getState() == 200){
+                        new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                                .setContentText(response.body().getMessage())
+                                .show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ForgotPasswordResponseModel> call, Throwable t) {
+                    pDialog.dismiss();
+                    new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText(getString(R.string.oops))
+                            .setContentText(getString(R.string.network_error))
+                            .show();
+                }
+            });
+
+        } catch (JSONException e) {
+            Log.e(TAG, "JSON_ERROR", e);
+        }
+
+        return serverResponseResult;
     }
 
     private void populateAutoComplete() {

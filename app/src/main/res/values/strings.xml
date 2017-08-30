@@ -34,6 +34,7 @@
     <string name="please_wait">Please wait...</string>
     <string name="network_error">Oops! Something went wrong.</string>
     <string name="enter_email">Enter your Email</string>
+    <string name="oops">Oops!</string>
 
     <!--Auth Strings-->
     <string name="choose_your_character">choose your character</string>
