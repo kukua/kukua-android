@@ -1,19 +1,20 @@
-package cc.kukua.android.model;
+package cc.kukua.android.model.server_response_model;
 
 /**
- * Created by calistus on 26/07/2017.
+ * Created by calistus on 30/08/2017.
  */
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-public class RegisterResponseModel {
+
+public class ForgotPasswordResponseModel {
 
     @SerializedName("state")
     @Expose
     private Integer state;
-    @SerializedName("id")
+    @SerializedName("message")
     @Expose
-    private String id;
+    private String message;
 
     public Integer getState() {
         return state;
@@ -23,19 +24,19 @@ public class RegisterResponseModel {
         this.state = state;
     }
 
-    public String getId() {
-        return id;
+    public String getMessage() {
+        return message;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override
     public String toString() {
-        return "RegisterResponseModel{" +
+        return "ForgotPasswordResponse{" +
                 "state=" + state +
-                ", id='" + id + '\'' +
+                ", message='" + message + '\'' +
                 '}';
     }
 }

@@ -1,4 +1,4 @@
-package cc.kukua.android.model;
+package cc.kukua.android.model.server_response_model;
 
 /**
  * Created by acellam guy
@@ -7,7 +7,7 @@ package cc.kukua.android.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class DailyWeatherResponseModel {
+public class HourlyWeatherResponseModel {
 
     @SerializedName("success")
     @Expose
@@ -34,7 +34,7 @@ public class DailyWeatherResponseModel {
 
     @Override
     public String toString() {
-        return "DailyWeatherResponseModel{" +
+        return "HourlyWeatherResponseModel{" +
                 "success=" + success +
                 ", result='" + result + '\'' +
                 '}';

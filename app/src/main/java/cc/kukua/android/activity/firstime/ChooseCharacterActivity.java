@@ -2,21 +2,13 @@ package cc.kukua.android.activity.firstime;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,14 +18,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
 import cc.kukua.android.activity.CharacterCustomizationActivity;
-import cc.kukua.android.activity.HomeActivity;
-import cc.kukua.android.activity.auth.LoginActivity;
 import cc.kukua.android.activity.auth.SessionManager;
 import cc.kukua.android.adapters.ChooseCharacterPagerAdapter;
 import cc.kukua.android.constants.DummyDataProvider;
-import cc.kukua.android.model.LoginResponseModel;
-import cc.kukua.android.model.RegisterResponseModel;
-import cc.kukua.android.model.query_model.RegisterQueryModel;
+import cc.kukua.android.model.server_response_model.RegisterResponseModel;
+import cc.kukua.android.model.server_request_model.RegisterQueryModel;
 import cc.kukua.android.retrofit.APIService;
 import cc.kukua.android.retrofit.RetrofitClient;
 import cc.kukua.android.utils.LogUtils;

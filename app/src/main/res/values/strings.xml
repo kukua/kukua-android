@@ -33,6 +33,8 @@
     <!--UI String-->
     <string name="please_wait">Please wait...</string>
     <string name="network_error">Oops! Something went wrong.</string>
+    <string name="enter_email">Enter your Email</string>
+    <string name="oops">Oops!</string>
 
     <!--Auth Strings-->
     <string name="choose_your_character">choose your character</string>
@@ -115,4 +117,5 @@
     <string name="title_activity_demo">DemoActivity</string>
     <string name="title_activity_location">Pick Your Location</string>
     <string name="skip_this_step">SKIP THIS STEP</string>
+    <string name="forgot_password"><u>Forgot Password?</u></string>
 </resources>
