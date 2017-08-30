@@ -1,4 +1,4 @@
-package cc.kukua.android.model;
+package cc.kukua.android.model.server_response_model;
 
 /**
  * Created by acellam guy
@@ -7,7 +7,7 @@ package cc.kukua.android.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SendSmsResponseModel {
+public class RequestForecastResponseModel {
 
     @SerializedName("success")
     @Expose
@@ -34,7 +34,7 @@ public class SendSmsResponseModel {
 
     @Override
     public String toString() {
-        return "SendSmsResponseModel{" +
+        return "RequestForecastResponseModel{" +
                 "success=" + success +
                 ", result='" + result + '\'' +
                 '}';

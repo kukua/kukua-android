@@ -3,8 +3,10 @@ package cc.kukua.android.activity.auth;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -18,13 +20,16 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -38,11 +43,13 @@ import butterknife.ButterKnife;
 import cc.kukua.android.R;
 import cc.kukua.android.activity.HomeActivity;
 import cc.kukua.android.activity.firstime.RegisterActivity;
-import cc.kukua.android.model.LoginResponseModel;
+import cc.kukua.android.model.server_response_model.ForgotPasswordResponseModel;
+import cc.kukua.android.model.server_response_model.LoginResponseModel;
 import cc.kukua.android.retrofit.APIService;
 import cc.kukua.android.retrofit.RetrofitClient;
 import cc.kukua.android.utils.LogUtils;
 import cc.kukua.android.utils.UiUtils;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -86,9 +93,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     Button btnSignUp;
     @BindView(R.id.btn_submit)
     Button mEmailSignInButton;
+    @BindView(R.id.txt_forgot_password)
+    TextView tvForgotPassword;
 
     String TAG = LoginActivity.class.getSimpleName();
     SessionManager session;
+
+    Boolean serverResponseResult;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -113,6 +124,84 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callInputDialog();
+            }
+        });
+    }
+
+    private void callInputDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.enter_email));
+
+        // Set up the input
+        final EditText input = new EditText(this);
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String email = input.getText().toString();
+                //TODO: Remove comment when Endpoint is updated
+                //requestPassword(email);
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+    }
+
+    private Boolean requestPassword(String email) {
+        APIService apiService = RetrofitClient.getClient().create(APIService.class);
+
+        try {
+            final JSONObject requestObject = new JSONObject();
+            requestObject.put("email", email);
+
+            final SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+            pDialog.getProgressHelper().setBarColor(R.color.backgroundColor);
+            pDialog.setTitleText(getString(R.string.please_wait));
+            pDialog.setCancelable(false);
+            pDialog.show();
+
+            Call<ForgotPasswordResponseModel> callForgotPassword = apiService.forgotPassword(requestObject.toString());
+            callForgotPassword.enqueue(new Callback<ForgotPasswordResponseModel>() {
+                @Override
+                public void onResponse(Call<ForgotPasswordResponseModel> call, Response<ForgotPasswordResponseModel> response) {
+                    pDialog.dismiss();
+                    LogUtils.log(TAG, response.toString());
+                    if(response.body().getState() == 200){
+                        new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.SUCCESS_TYPE)
+                                .setContentText(response.body().getMessage())
+                                .show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ForgotPasswordResponseModel> call, Throwable t) {
+                    pDialog.dismiss();
+                    new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText(getString(R.string.oops))
+                            .setContentText(getString(R.string.network_error))
+                            .show();
+                }
+            });
+
+        } catch (JSONException e) {
+            Log.e(TAG, "JSON_ERROR", e);
+        }
+
+        return serverResponseResult;
     }
 
     private void populateAutoComplete() {
@@ -361,7 +450,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         if (response.isSuccessful()) {
                             if (response.body().getLogin() == true) {
                                 callStatus = true;
-                                session.createLoginSession("", "", "", "", "", "", "", "", "", "", "","",0,0,"");
+                                session.createLoginSession("", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "");
                                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                 finish();
                             } else if (response.body().getLogin() == false) {
