@@ -28,6 +28,8 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.texture.region.TextureRegionFactory;
 import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
+import org.andengine.ui.IGameInterface;
+import org.andengine.ui.activity.LayoutGameActivity;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
 import java.io.IOException;
@@ -36,7 +38,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
 
-public class CharacterCustomizationActivity extends SimpleBaseGameActivity {
+public class CharacterCustomizationActivity extends LayoutGameActivity {
     // ===========================================================
     // Constants
     // ===========================================================
@@ -77,11 +79,12 @@ public class CharacterCustomizationActivity extends SimpleBaseGameActivity {
     public EngineOptions onCreateEngineOptions() {
         final Camera camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 
-        return new EngineOptions(true, ScreenOrientation.LANDSCAPE_SENSOR, new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), camera);
+        return new EngineOptions(true, ScreenOrientation.PORTRAIT_FIXED,
+                new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), camera);
     }
 
     @Override
-    public void onCreateResources() throws IOException {
+    public void onCreateResources(OnCreateResourcesCallback pOnCreateResourcesCallback) throws IOException {
         this.mPlayerTexture = new AssetBitmapTexture(this.getTextureManager(), this.getAssets(), "gfx/player.png", TextureOptions.BILINEAR);
         this.mPlayerTextureRegion = TextureRegionFactory.extractTiledFromTexture(this.mPlayerTexture, 3, 4);
         this.mPlayerTexture.load();
@@ -101,10 +104,13 @@ public class CharacterCustomizationActivity extends SimpleBaseGameActivity {
         this.mParallaxLayerFrontTexture = new AssetBitmapTexture(this.getTextureManager(), this.getAssets(), "gfx/parallax_background_layer_front.png");
         this.mParallaxLayerFrontTextureRegion = TextureRegionFactory.extractFromTexture(this.mParallaxLayerFrontTexture);
         this.mParallaxLayerFrontTexture.load();
+
+        pOnCreateResourcesCallback.onCreateResourcesFinished();
+
     }
 
     @Override
-    public Scene onCreateScene() {
+    public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws IOException {
         this.mEngine.registerUpdateHandler(new FPSLogger());
 
         final VertexBufferObjectManager vertexBufferObjectManager = this.getVertexBufferObjectManager();
@@ -144,6 +150,21 @@ public class CharacterCustomizationActivity extends SimpleBaseGameActivity {
         scene.attachChild(player);
         scene.attachChild(enemy);
 
-        return scene;
+        pOnCreateSceneCallback.onCreateSceneFinished(scene);
+    }
+
+    @Override
+    public void onPopulateScene(Scene pScene, OnPopulateSceneCallback pOnPopulateSceneCallback) throws IOException {
+        pOnPopulateSceneCallback.onPopulateSceneFinished();
+    }
+    @Override
+    protected int getLayoutID() {
+        return R.layout.activity_character_customization;
+    }
+
+    @Override
+    protected int getRenderSurfaceViewID() {
+        return R.id.xml_rendersurfaceview;
+
     }
 }
