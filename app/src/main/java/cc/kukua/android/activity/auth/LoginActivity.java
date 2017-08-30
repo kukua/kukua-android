@@ -3,6 +3,7 @@ package cc.kukua.android.activity.auth;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -18,12 +19,15 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -85,6 +89,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     Button btnSignUp;
     @BindView(R.id.btn_submit)
     Button mEmailSignInButton;
+    @BindView(R.id.txt_forgot_password)
+    TextView tvForgotPassword;
 
     String TAG = LoginActivity.class.getSimpleName();
     SessionManager session;
@@ -112,6 +118,40 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callInputDialog();
+            }
+        });
+    }
+
+    private void callInputDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.enter_email));
+
+        // Set up the input
+        final EditText input = new EditText(this);
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //TODO: Get the email here
+                //m_Text = input.getText().toString();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
     private void populateAutoComplete() {
@@ -360,7 +400,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         if (response.isSuccessful()) {
                             if (response.body().getLogin() == true) {
                                 callStatus = true;
-                                session.createLoginSession("", "", "", "", "", "", "", "", "", "", "","",0,0,"");
+                                session.createLoginSession("", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "");
                                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                                 finish();
                             } else if (response.body().getLogin() == false) {
