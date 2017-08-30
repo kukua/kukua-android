@@ -1,11 +1,11 @@
 package cc.kukua.android.retrofit;
 
-import cc.kukua.android.model.DailyWeatherResponseModel;
-import cc.kukua.android.model.HourlyWeatherResponseModel;
-import cc.kukua.android.model.LoginResponseModel;
-import cc.kukua.android.model.RegisterResponseModel;
-import cc.kukua.android.model.RequestForecastResponseModel;
-import cc.kukua.android.model.SendSmsResponseModel;
+import cc.kukua.android.model.server_response_model.DailyWeatherResponseModel;
+import cc.kukua.android.model.server_response_model.HourlyWeatherResponseModel;
+import cc.kukua.android.model.server_response_model.LoginResponseModel;
+import cc.kukua.android.model.server_response_model.RegisterResponseModel;
+import cc.kukua.android.model.server_response_model.RequestForecastResponseModel;
+import cc.kukua.android.model.server_response_model.SendSmsResponseModel;
 import cc.kukua.android.model.server_request_model.RegisterQueryModel;
 import cc.kukua.android.model.server_response_model.ForgotPasswordResponseModel;
 import retrofit2.Call;

@@ -1,4 +1,4 @@
-package cc.kukua.android.model;
+package cc.kukua.android.model.server_response_model;
 
 /**
  * Created by calistus on 30/07/2017.

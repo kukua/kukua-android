@@ -21,7 +21,7 @@ import cc.kukua.android.activity.CharacterCustomizationActivity;
 import cc.kukua.android.activity.auth.SessionManager;
 import cc.kukua.android.adapters.ChooseCharacterPagerAdapter;
 import cc.kukua.android.constants.DummyDataProvider;
-import cc.kukua.android.model.RegisterResponseModel;
+import cc.kukua.android.model.server_response_model.RegisterResponseModel;
 import cc.kukua.android.model.server_request_model.RegisterQueryModel;
 import cc.kukua.android.retrofit.APIService;
 import cc.kukua.android.retrofit.RetrofitClient;
