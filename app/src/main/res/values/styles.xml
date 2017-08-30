@@ -219,6 +219,17 @@
         <item name="android:layout_width">match_parent</item>
     </style>
 
+    <style name="TextStyle.Hour.Title" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
     <style name="TextStyle.Home.Calendar" parent="TextAppearance.AppCompat.Title">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:layout_marginTop">5dp</item>

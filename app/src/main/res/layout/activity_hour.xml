@@ -1,9 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cc.kukua.android.activity.weather.HourActivity">
+    android:background="@drawable/bg">
+    <LinearLayout
+        android:id="@+id/llAppUseCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5">
 
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/toolbar_title"
+            android:layout_gravity="left"
+            android:layout_marginTop="9dp"
+            android:src="@drawable/btn_back"/>
+
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="50dp"
+            android:weightSum="8"
+            android:id="@+id/menu_date"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_weight="3"
+                android:background="@drawable/left_white_round_rect"
+                android:layout_width="2dp"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+                <TextView
+                    android:textColor="@color/colorAccent"
+                    android:text="26"
+                    android:layout_marginTop="3dp"
+                    android:textSize="40sp"
+                    style="@style/TextStyle.Hour.Title"
+                    />
+                <TextView
+                    android:textColor="@color/colorAccent"
+                    android:text="SEPTEMBER"
+                    android:textSize="9sp"
+                    style="@style/TextStyle.Hour.Title"
+                    />
+
+            </LinearLayout>
+            <ImageView
+                android:layout_weight="0.5"
+                android:background="@color/colorPrimary"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"/>
+            <LinearLayout
+                android:background="@drawable/right_blue_round_rect"
+                android:layout_weight="4"
+                android:layout_width="100dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:textColor="@color/colorWhite"
+                    android:text="WEDNESDAY"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:textSize="28sp"
+                    style="@style/TextStyle.Hour.Title"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/advert_lowersection"
+        android:layout_below="@+id/llAppUseCategory">
+
+        <ListView
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:id="@+id/viewpager"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:id="@+id/left_nav"
+            android:layout_width="41dp"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical|left"
+            android:background="@drawable/menu_prev">
+
+            <TextView
+                android:id="@+id/menu_prev_day"
+                android:text="25"
+                style="@style/TextStyle.Home.Navigation"
+                />
+            <TextView
+                android:id="@+id/menu_prev_month"
+                android:text="08"
+                style="@style/TextStyle.Home.Navigation"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/right_nav"
+            android:layout_width="41dp"
+            android:layout_height="100dp"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical|right"
+            android:background="@drawable/menu_next">
+
+            <TextView
+                android:id="@+id/menu_next_day"
+                android:text="26"
+                style="@style/TextStyle.Home.Navigation"
+                />
+            <TextView
+                android:id="@+id/menu_next_month"
+                android:text="08"
+                style="@style/TextStyle.Home.Navigation"
+                />
+        </LinearLayout>
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:weightSum="8"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:id="@+id/advert_lowersection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+        <ImageView
+            android:src="@drawable/advertisement_bar"
+            android:layout_width="274dp"
+            android:layout_marginRight="3dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6.86"/>
+        <ImageView
+            android:src="@drawable/btn_options"
+            android:layout_width="72dp"
+            android:layout_height="74dp"/>
+
+    </LinearLayout>
+</RelativeLayout>
