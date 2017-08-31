@@ -37,7 +37,7 @@ public interface APIService {
 
     @Headers("Content-Type: application/json")
     @POST("api/forecast/create")
-    Call<RequestForecastResponseModel> requestweatherforecast(@Body String body);
+    Call<RequestForecastResponseModel> requestWeatherForecast(@Body String body);
 
     @FormUrlEncoded
     @POST("v1.0/dailyweatherforecast")
