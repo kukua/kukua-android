@@ -1,8 +1,10 @@
 package cc.kukua.android.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import cc.kukua.android.R;
 import cc.kukua.android.activity.auth.SessionManager;
@@ -16,5 +18,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
+    }
+
+    public void openSettings(View view){
+        startActivity(new Intent(HomeActivity.this, SettingActivity.class));
     }
 }
