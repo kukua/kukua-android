@@ -36,6 +36,9 @@
     <string name="enter_email">Enter your Email</string>
     <string name="oops">Oops!</string>
 
+    <!--Activity and Fragment title-->
+    <string name="settings">Settings</string>
+
     <!--Auth Strings-->
     <string name="choose_your_character">choose your character</string>
 
