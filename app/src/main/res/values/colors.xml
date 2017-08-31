@@ -5,6 +5,7 @@
     <color name="colorPrimary">#337DE5</color>
     <color name="colorPrimaryDark">@color/material_blue_700</color>
     <color name="colorAccent">#86BFEF</color>
+    <color name="colorHourBack">#73A9DB</color>
     <color name="textColor">@color/material_gray_100</color>
     <color name="colorAccent2">@color/material_blue_200</color>
     <color name="swipe_color_1">@color/material_blue_100</color>
