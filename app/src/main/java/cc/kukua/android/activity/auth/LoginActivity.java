@@ -68,13 +68,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final int REQUEST_READ_CONTACTS = 0;
 
     /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-    /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
@@ -148,7 +141,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             public void onClick(DialogInterface dialog, int which) {
                 String email = input.getText().toString();
                 //TODO: Remove comment when Endpoint is updated
-                //requestPassword(email);
+                requestPassword(email);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -182,7 +175,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     LogUtils.log(TAG, response.toString());
                     if(response.body().getState() == 200){
                         new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.SUCCESS_TYPE)
-                                .setContentText(response.body().getMessage())
+                                .setContentText("Here is your password "+response.body().getPassword())
                                 .show();
                     }
                 }
