@@ -175,7 +175,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     LogUtils.log(TAG, response.toString());
                     if(response.body().getState() == 200){
                         new SweetAlertDialog(LoginActivity.this, SweetAlertDialog.SUCCESS_TYPE)
-                                .setContentText("Here is your password "+response.body().getPassword())
+                                .setContentText("Use this password "+response.body().getPassword())
+                                .setTitleText(getString(R.string.great))
                                 .show();
                     }
                 }
