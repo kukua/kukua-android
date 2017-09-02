@@ -35,6 +35,7 @@
     <string name="network_error">Oops! Something went wrong.</string>
     <string name="enter_email">Enter your Email</string>
     <string name="oops">Oops!</string>
+    <string name="great">Great!</string>
 
     <!--Activity and Fragment title-->
     <string name="settings">Settings</string>
