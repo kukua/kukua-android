@@ -12,9 +12,9 @@ public class ForgotPasswordResponseModel {
     @SerializedName("state")
     @Expose
     private Integer state;
-    @SerializedName("message")
+    @SerializedName("password")
     @Expose
-    private String message;
+    private String password;
 
     public Integer getState() {
         return state;
@@ -24,19 +24,19 @@ public class ForgotPasswordResponseModel {
         this.state = state;
     }
 
-    public String getMessage() {
-        return message;
+    public String getPassword() {
+        return password;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public String toString() {
-        return "ForgotPasswordResponse{" +
+        return "ForgotPasswordResponseModel{" +
                 "state=" + state +
-                ", message='" + message + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }
