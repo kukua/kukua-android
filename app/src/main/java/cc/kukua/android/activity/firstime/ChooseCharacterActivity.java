@@ -87,7 +87,8 @@ public class ChooseCharacterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DummyDataProvider.userDetail.put("timezone", TimeZone.getDefault().getID());
                 LogUtils.log(TAG,DummyDataProvider.userDetail.toString());
-                registerUser();
+                //registerUser();
+                startActivity(new Intent(ChooseCharacterActivity.this, CharacterCustomizationActivity.class));
             }
         });
     }
