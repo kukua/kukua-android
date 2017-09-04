@@ -81,4 +81,5 @@ dependencies {
     // test libs
     testCompile 'junit:junit:4.12'
     compile project(':andengineLibrary:AndEngine-GLES2-AnchorCenter')
+    compile project(path: ':andengineSVGLibrary:AndEngineSVGTextureRegionExtension-GLES2')
 }

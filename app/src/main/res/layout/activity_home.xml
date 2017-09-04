@@ -121,6 +121,8 @@
         android:layout_below="@+id/llAppUseCategory">
 
         <android.support.v4.view.ViewPager
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
             android:id="@+id/viewpager"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
@@ -144,6 +146,13 @@
                 style="@style/TextStyle.Home.Navigation"
                 />
         </LinearLayout>
+        <org.andengine.opengl.view.RenderSurfaceView
+            android:layout_weight="3"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:id="@+id/xml_rendersurfaceview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
         <LinearLayout
             android:id="@+id/right_nav"

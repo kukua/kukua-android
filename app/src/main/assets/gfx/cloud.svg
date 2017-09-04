@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="32"
+   width="32"
+   version="1.1"
+   id="svg2"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="cloud.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview58"
+     showgrid="false"
+     inkscape:zoom="14.75"
+     inkscape:cx="6.2274969"
+     inkscape:cy="7.159874"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2"
+     showguides="false" />
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient3707">
+      <stop
+         stop-color="#b8b8b8"
+         offset="0"
+         id="stop7" />
+      <stop
+         stop-color="#000"
+         offset="1"
+         id="stop9" />
+    </linearGradient>
+    <radialGradient
+       id="radialGradient3329"
+       xlink:href="#linearGradient3707"
+       gradientUnits="userSpaceOnUse"
+       cy="7.6818"
+       cx="45.594"
+       gradientTransform="matrix(1,0,0,1.3883883,0,-3.4105348)"
+       r="2.5747" />
+    <radialGradient
+       id="radialGradient3331"
+       xlink:href="#linearGradient3707"
+       gradientUnits="userSpaceOnUse"
+       cy="7.4676"
+       cx="45.594"
+       gradientTransform="matrix(1,0,0,1.3883883,0,-3.4105348)"
+       r="2.5747" />
+    <radialGradient
+       id="radialGradient3333"
+       gradientUnits="userSpaceOnUse"
+       cy="11.949"
+       cx="49.469"
+       gradientTransform="matrix(1,0,0,1.4267738,0,-5.6547523)"
+       r="2.5628">
+      <stop
+         stop-color="#eea6a6"
+         offset="0"
+         id="stop14" />
+      <stop
+         stop-color="#b22222"
+         offset="1"
+         id="stop16" />
+    </radialGradient>
+    <linearGradient
+       id="linearGradient3111"
+       y2="60.504"
+       gradientUnits="userSpaceOnUse"
+       x2="16.614"
+       gradientTransform="matrix(0.93490996,0,0,0.97700366,0.42899952,1.7809899)"
+       y1="32.062"
+       x1="16.614">
+      <stop
+         stop-color="#fffe72"
+         offset="0"
+         id="stop19" />
+      <stop
+         stop-color="#fdfc95"
+         offset="0.21206"
+         id="stop21" />
+      <stop
+         stop-color="#f8e471"
+         offset="0.5"
+         id="stop23" />
+      <stop
+         stop-color="#fad165"
+         offset="0.85397"
+         id="stop25" />
+      <stop
+         stop-color="#e5a83d"
+         offset="1"
+         id="stop27" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3113"
+       y2="60.504"
+       gradientUnits="userSpaceOnUse"
+       x2="16.164"
+       gradientTransform="matrix(0.97674611,0,0,0.97700366,0.17318387,1.7809899)"
+       y1="32.062"
+       x1="16.164">
+      <stop
+         stop-color="#fde857"
+         offset="0"
+         id="stop30" />
+      <stop
+         stop-color="#f9dd3b"
+         offset="0.29244"
+         id="stop32" />
+      <stop
+         stop-color="#f8bc3a"
+         offset="0.75"
+         id="stop34" />
+      <stop
+         stop-color="#cf971c"
+         offset="1"
+         id="stop36" />
+    </linearGradient>
+  </defs>
+  <metadata
+     id="metadata38">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="matrix(0.0241063,0,0,0.03596551,0.64635458,7.6471573)"
+     id="Layer_2"
+     data-name="Layer 2"
+     style="fill:#f2f2f2">
+    <g
+       id="UI"
+       style="fill:#f2f2f2">
+      <path
+         inkscape:connector-curvature="0"
+         class="cls-1"
+         d="m 294.06,223.21 490.41,0 c 0,0 -1.08,-37.72 -30.18,-38.8 0,0 34.49,-183.43 -144.43,-184.41 -178.92,-0.98 -141.19,159.62 -141.19,159.62 0,0 -15.09,-49.62 -84.07,-34.49 -68.98,15.13 -42,81.91 -42,81.91 z"
+         id="path12"
+         style="fill:#f2f2f2" />
+      <path
+         inkscape:connector-curvature="0"
+         class="cls-1"
+         d="m 0,157.5 324.15,0 c 0,0 -0.71,-24.93 -19.95,-25.65 0,0 22.8,-121.24 -95.46,-121.89 -118.26,-0.65 -93.33,105.5 -93.33,105.5 0,0 -10,-32.77 -55.57,-22.8 -45.57,9.97 -27.78,54.14 -27.78,54.14 z"
+         id="path14"
+         style="fill:#f2f2f2" />
+    </g>
+  </g>
+</svg>

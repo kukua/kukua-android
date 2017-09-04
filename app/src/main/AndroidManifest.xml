@@ -50,6 +50,7 @@
             android:name=".activity.CharacterCustomizationActivity"
             android:label="@string/title_activity_customize"/>
         <activity
+            android:screenOrientation="portrait"
             android:name=".activity.HomeActivity"
             android:label="@string/title_activity_home"/>
         <activity android:name=".activity.BaseActivity"/>

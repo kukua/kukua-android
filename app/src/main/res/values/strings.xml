@@ -42,6 +42,8 @@
 
     <!--Auth Strings-->
     <string name="choose_your_character">choose your character</string>
+    <string name="customize_your_character">Customize character</string>
+
 
     <!-- WARNING THE STRINGS BELOW WILL BE REMOVED TOWARDS PROJECT COMPLETION-->
     <!-- Home -->
