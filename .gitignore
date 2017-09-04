@@ -28,6 +28,7 @@ build/*
 .externalNativeBuild
 app/libs/
 andengineLibrary/AndEngine-GLES2-AnchorCenter/build/*
+andengineLibrary/AndEngineSVGTextureRegionExtension-GLES2/build/*
 /captures
 .project
 
