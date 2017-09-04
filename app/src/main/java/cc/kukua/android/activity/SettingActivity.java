@@ -26,11 +26,10 @@ public class SettingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
         setContentView(R.layout.activity_setting);
-
-        //TODO: Fix bug with setToolbarTitle
-        //setToolBarTitle(getString(R.string.settings));
+        ButterKnife.bind(this);
+        
+        setToolBarTitle(getString(R.string.settings));
     }
 
 
