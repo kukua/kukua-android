@@ -6,4 +6,7 @@ package cc.kukua.android.utils;
 
 @SuppressWarnings({"ConstantConditions", "Convert2Lambda", "unchecked"})
 public class APIUtils {
+
 }
+
+

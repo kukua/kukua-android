@@ -423,7 +423,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
             APIService apiInterface = RetrofitClient.getClient().create(APIService.class);
 
             // prepare call in Retrofit 2.0
