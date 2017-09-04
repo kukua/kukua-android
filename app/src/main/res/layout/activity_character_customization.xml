@@ -1,17 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-                android:background="@drawable/bg"
+    android:background="@drawable/bg"
     tools:context="cc.kukua.android.activity.CharacterCustomizationActivity">
 
-    <org.anddev.andengine.opengl.view.RenderSurfaceView
-        android:layout_weight="2"
-        android:id="@+id/xml_rendersurfaceview"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/btn_submit"/>
+        android:background="@drawable/bg"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <include android:id="@+id/include"
+            layout="@layout/toolbar"/>
+
+        <LinearLayout
+            android:id="@+id/llAppUseCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/include"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/TextStyle.ChoosenCategory"
+                android:layout_weight="4"
+                android:text="FARMING"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/category_icon"
+                tools:ignore="VectorDrawableCompat" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:weightSum="6"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btn_next3"
+            android:layout_below="@+id/llAppUseCategory">
+
+            <ExpandableListView
+                android:layout_weight="2"
+                android:choiceMode = "singleChoice"
+                android:background="@drawable/left_blue_round_rect"
+                android:layout_below="@+id/who"
+                android:id="@+id/expandableListView"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:dividerHeight="5dp"
+                android:divider="@color/backgroundColor"
+                android:groupIndicator="@null"
+                android:indicatorLeft="@null"/>
+
+
+            <org.andengine.opengl.view.RenderSurfaceView
+                android:layout_weight="3"
+                android:id="@+id/xml_rendersurfaceview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btn_next3"
+            style="@style/ButtonStyle.Button.Large"
+            android:layout_marginBottom="10dp"
+            android:text="Next" />
+
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

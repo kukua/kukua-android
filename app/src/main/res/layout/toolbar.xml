@@ -16,14 +16,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
-                app:srcCompat="@drawable/btn_back"
+                android:src="@drawable/btn_back"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:id="@+id/imageView"
                 android:layout_alignTop="@+id/toolbar_title"
                 android:layout_alignParentStart="true"
                 android:onClick="goBack"
-                android:layout_marginTop="9dp"/>
+                android:layout_marginTop="9dp"
+                tools:ignore="VectorDrawableCompat" />
 
             <TextView
                 android:id="@+id/toolbar_title"
