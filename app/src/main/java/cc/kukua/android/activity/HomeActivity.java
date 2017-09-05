@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
@@ -33,12 +34,14 @@ import org.andengine.opengl.texture.region.TextureRegionFactory;
 import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.LayoutGameActivity;
+import org.andengine.util.HashUtils;
 import org.andengine.util.debug.Debug;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +53,8 @@ import cc.kukua.android.model.CustomizeList;
 import cc.kukua.android.model.server_response_model.forecast.RequestForecastResponseModel;
 import cc.kukua.android.retrofit.APIService;
 import cc.kukua.android.retrofit.RetrofitClient;
+import cc.kukua.android.utils.APIUtils;
+import cc.kukua.android.utils.DoneCallback;
 import cc.kukua.android.utils.LogUtils;
 import cc.kukua.android.utils.UiUtils;
 import retrofit2.Call;
@@ -167,7 +172,7 @@ public class HomeActivity extends LayoutGameActivity {
             @Override
             public void run() {
                 session = new SessionManager(getApplicationContext());
-                //session.checkLogin();
+                session.checkLogin(HomeActivity.this);
 
                 /**
                  * Get's weather from server and populate View with data
@@ -175,7 +180,20 @@ public class HomeActivity extends LayoutGameActivity {
                  * @param lat the latitude
                  * @param timezone user location timezone
                  */
-                getDayWeather(24.97,60.32,"Europe/Helsinki");
+                //getDayWeather(24.97,60.32,"Europe/Helsinki");
+                Log.d(TAG, "Lat: "+session.getLatitude());
+                getDayWeather(
+                        Float.parseFloat(session.getLatitude()),
+                        Float.parseFloat(session.getLongitude()),
+                        session.getTimezone());
+
+               /* APIUtils.getDayWeather(HomeActivity.this, Double.valueOf(session.getUserDetails().get(session.KEY_LONGITUDE)), Double.valueOf(session.getUserDetails().get(session.KEY_LATITUDE)), session.getTimezone(), new DoneCallback<HashMap>() {
+                            @Override
+                            public void done(HashMap result, Exception e) {
+                                tvTemperature.setText(result.get("temp").toString());
+                            }
+                        }
+                );*/
                 leftNav.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -235,7 +253,7 @@ public class HomeActivity extends LayoutGameActivity {
 
     }
 
-    public void getDayWeather(double lon, double lat, String timezone ){
+    public void getDayWeather(float lat, float lon, String timezone ){
         UiUtils.showProgressDialog(HomeActivity.this, getString(R.string.please_wait));
 
         APIService apiService = RetrofitClient.getClient().create(APIService.class);

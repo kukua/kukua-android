@@ -36,7 +36,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +49,8 @@ import cc.kukua.android.model.server_response_model.ForgotPasswordResponseModel;
 import cc.kukua.android.model.server_response_model.LoginResponseModel;
 import cc.kukua.android.retrofit.APIService;
 import cc.kukua.android.retrofit.RetrofitClient;
+import cc.kukua.android.utils.APIUtils;
+import cc.kukua.android.utils.DoneCallback;
 import cc.kukua.android.utils.LogUtils;
 import cc.kukua.android.utils.UiUtils;
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -443,9 +447,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         if (response.isSuccessful()) {
                             if (response.body().getLogin() == true) {
                                 callStatus = true;
-                                session.createLoginSession("", "", "", "", "", "", "", "", "", "", "", "", 0, 0, "");
-                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                                finish();
+                                APIUtils.getUserDetail(getApplicationContext(), response.body().getUserId(), new DoneCallback<HashMap>() {
+                                    @Override
+                                    public void done(HashMap result, Exception e) {
+                                        if(e==null){
+                                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }
+                                });
+
                             } else if (response.body().getLogin() == false) {
                                 callStatus = false;
                                 Toast.makeText(LoginActivity.this, getString(R.string.network_error), Toast.LENGTH_SHORT).show();
@@ -494,5 +506,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
+
 }
 

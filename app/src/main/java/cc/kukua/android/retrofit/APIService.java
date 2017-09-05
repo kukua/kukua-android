@@ -4,6 +4,7 @@ import cc.kukua.android.model.server_response_model.DailyWeatherResponseModel;
 import cc.kukua.android.model.server_response_model.HourlyWeatherResponseModel;
 import cc.kukua.android.model.server_response_model.LoginResponseModel;
 import cc.kukua.android.model.server_response_model.RegisterResponseModel;
+import cc.kukua.android.model.server_response_model.UserDetailResponseModel;
 import cc.kukua.android.model.server_response_model.forecast.RequestForecastResponseModel;
 import cc.kukua.android.model.server_response_model.SendSmsResponseModel;
 import cc.kukua.android.model.server_request_model.RegisterQueryModel;
@@ -37,6 +38,10 @@ public interface APIService {
     @Headers("Content-Type: application/json")
     @POST("api/forecast/create")
     Call<RequestForecastResponseModel> requestWeatherForecast(@Body String body);
+
+    @Headers("Content-Type: application/json")
+    @POST("api/user/details")
+    Call<UserDetailResponseModel> getUserDetail(@Body String body);
 
     @FormUrlEncoded
     @POST("v1.0/dailyweatherforecast")
