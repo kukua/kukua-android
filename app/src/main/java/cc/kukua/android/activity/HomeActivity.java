@@ -40,8 +40,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,6 +73,12 @@ public class HomeActivity extends LayoutGameActivity {
     LinearLayout rightNav;
     @BindView(R.id.menu_temperature_text)
     TextView tvTemperature;
+    @BindView(R.id.menu_calendar_day_word)
+    TextView tvDayWord;
+    @BindView(R.id.menu_calendar_day)
+    TextView tvDayNumber;
+    @BindView(R.id.menu_calendar_month)
+    TextView tvMonth;
 
     SessionManager session;
     private String TAG = HomeActivity.class.getSimpleName();
@@ -128,7 +139,7 @@ public class HomeActivity extends LayoutGameActivity {
 //        });
 //    }
 
-    public void openSettings(View view){
+    public void openSettings(View view) {
         startActivity(new Intent(HomeActivity.this, SettingActivity.class));
     }
 
@@ -144,7 +155,7 @@ public class HomeActivity extends LayoutGameActivity {
     @Override
     public void onCreateResources(OnCreateResourcesCallback pOnCreateResourcesCallback) throws IOException {
 
-        this.mBuildableBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(),  1024, 1024, TextureOptions.NEAREST);
+        this.mBuildableBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(), 1024, 1024, TextureOptions.NEAREST);
         SVGBitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 
         this.mSVGTestTextureRegion = SVGBitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mBuildableBitmapTextureAtlas, this, "cloud.svg", 200, 200);
@@ -180,20 +191,12 @@ public class HomeActivity extends LayoutGameActivity {
                  * @param lat the latitude
                  * @param timezone user location timezone
                  */
-                //getDayWeather(24.97,60.32,"Europe/Helsinki");
-                Log.d(TAG, "Lat: "+session.getLatitude());
+                Log.d(TAG, "Lat: " + session.getLatitude());
                 getDayWeather(
                         Float.parseFloat(session.getLatitude()),
                         Float.parseFloat(session.getLongitude()),
                         session.getTimezone());
 
-               /* APIUtils.getDayWeather(HomeActivity.this, Double.valueOf(session.getUserDetails().get(session.KEY_LONGITUDE)), Double.valueOf(session.getUserDetails().get(session.KEY_LATITUDE)), session.getTimezone(), new DoneCallback<HashMap>() {
-                            @Override
-                            public void done(HashMap result, Exception e) {
-                                tvTemperature.setText(result.get("temp").toString());
-                            }
-                        }
-                );*/
                 leftNav.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -201,7 +204,7 @@ public class HomeActivity extends LayoutGameActivity {
                     }
                 });
 
-                // Images right navigatin
+                // Images right navigation
                 rightNav.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -213,6 +216,7 @@ public class HomeActivity extends LayoutGameActivity {
 
 
     }
+
     @Override
     public void onCreateScene(OnCreateSceneCallback pOnCreateSceneCallback) throws IOException {
         this.mEngine.registerUpdateHandler(new FPSLogger());
@@ -242,6 +246,7 @@ public class HomeActivity extends LayoutGameActivity {
     public void onPopulateScene(Scene pScene, OnPopulateSceneCallback pOnPopulateSceneCallback) throws IOException {
         pOnPopulateSceneCallback.onPopulateSceneFinished();
     }
+
     @Override
     protected int getLayoutID() {
         return R.layout.activity_home;
@@ -253,15 +258,15 @@ public class HomeActivity extends LayoutGameActivity {
 
     }
 
-    public void getDayWeather(float lat, float lon, String timezone ){
+    public void getDayWeather(float lat, float lon, String timezone) {
         UiUtils.showProgressDialog(HomeActivity.this, getString(R.string.please_wait));
 
         APIService apiService = RetrofitClient.getClient().create(APIService.class);
-        try{
+        try {
             JSONObject parameterObject = new JSONObject();
-            parameterObject.put("lat",lat);
+            parameterObject.put("lat", lat);
             parameterObject.put("lon", lon);
-            parameterObject.put("timezone",timezone);
+            parameterObject.put("timezone", timezone);
 
             Call<RequestForecastResponseModel> call = apiService.requestWeatherForecast(parameterObject.toString());
             call.enqueue(new Callback<RequestForecastResponseModel>() {
@@ -269,9 +274,18 @@ public class HomeActivity extends LayoutGameActivity {
                 public void onResponse(Call<RequestForecastResponseModel> call, Response<RequestForecastResponseModel> response) {
                     UiUtils.dismissAllProgressDialogs();
                     LogUtils.log(TAG, "OnResponse: " + response.body().toString());
-                    if(response.isSuccessful()){
-                        if(response.body().getType().equalsIgnoreCase("ForecastData")){
+                    if (response.isSuccessful()) {
+                        if (response.body().getType().equalsIgnoreCase("ForecastData")) {
                             tvTemperature.setText(response.body().getForecast().getWeather().getLoc().getObs().getT());
+
+                            /**
+                             * Display Calendar information from mobile phone
+                             * You change ot to Date sent by the server based on user's/client recommnedation
+                             */
+                            tvDayWord.setText(getCalenderDay());
+                            tvDayNumber.setText(getCalendarDayNumber()+"");
+                            tvMonth.setText(getMonth());
+
                             LogUtils.log(TAG, "Temperature: " + response.body().getForecast().getWeather().getLoc().getObs().getT());
                         }
                     }
@@ -283,9 +297,26 @@ public class HomeActivity extends LayoutGameActivity {
                     UiUtils.dismissAllProgressDialogs();
                 }
             });
-        }catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
+    }
+
+    private String getCalenderDay() {
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+        // full name form of the day
+        return new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date.getTime());
+    }
+
+    private int getCalendarDayNumber() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.DAY_OF_MONTH);
+    }
+
+    private String getMonth() {
+        Calendar calendar = Calendar.getInstance();
+        return new SimpleDateFormat("MMMM").format(calendar.getTime());
     }
 }
