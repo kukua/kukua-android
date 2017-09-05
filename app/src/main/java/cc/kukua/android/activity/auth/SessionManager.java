@@ -35,7 +35,7 @@ public class SessionManager {
     public static final String KEY_TOKEN = "token";
     public static final String KEY_CHARACTER_ID= "character_id";
     public static final String KEY_LOCATION= "location";
-    public static final String KEY_PURPOSE_ID = "id";
+    public static final String KEY_TIMEZONE = "timezone";
     public static final String KEY_PHONE_NUMBER = "phone";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_CHARACTER_URL = "user_photo_url";
@@ -51,7 +51,7 @@ public class SessionManager {
         editor = pref.edit();
     }
 
-    public void createLoginSession(String id,
+    public void createLoginSession(
                                    String firstName,
                                    String lastName,
                                    String email,
@@ -61,10 +61,10 @@ public class SessionManager {
                                    String password,
                                    String characterID,
                                    String location,
-                                   String purposeID,
+                                   String timezone,
                                    String purpose,
-                                   double latitude,
-                                   double longitude,
+                                   float latitude,
+                                   float longitude,
                                    String userID) {
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
@@ -76,7 +76,7 @@ public class SessionManager {
         editor.putString(KEY_TOKEN, token);
         editor.putString(KEY_CHARACTER_ID, characterID);
         editor.putString(KEY_PHONE_NUMBER, phone);
-        editor.putString(KEY_PURPOSE_ID, purposeID);
+        editor.putString(KEY_TIMEZONE, timezone);
         editor.putString(KEY_TOKEN,token);
         editor.putString(KEY_LOCATION, location);
         editor.putString(KEY_CHARACTER_URL, characterURL);
@@ -85,7 +85,6 @@ public class SessionManager {
         editor.putString(KEY_LATITUDE, String.valueOf(latitude));
         editor.putString(KEY_LONGITUDE, String.valueOf(longitude));
         editor.putString(KEY_USER_ID, userID);
-
 
         // commit changes
         editor.commit();
@@ -101,6 +100,9 @@ public class SessionManager {
         user.put(KEY_EMAIL, pref.getString(KEY_EMAIL, null));
         user.put(KEY_TOKEN, pref.getString(KEY_TOKEN, null));
         user.put(KEY_PHONE_NUMBER, pref.getString(KEY_PHONE_NUMBER, null));
+        user.put(KEY_LATITUDE, pref.getString(KEY_LATITUDE,null));
+        user.put(KEY_LONGITUDE, pref.getString(KEY_LONGITUDE,null));
+        user.put(KEY_TIMEZONE, pref.getString(KEY_TIMEZONE, null));
 
         return user;
     }
@@ -110,7 +112,7 @@ public class SessionManager {
      * If false it will redirect user to login page
      * Else won't do anything
      */
-    public void checkLogin() {
+    public void checkLogin(Context context) {
         // Check login status
         if (!this.isLoggedIn()) {
             // user is not logged in redirect him to Login Activity
@@ -152,13 +154,13 @@ public class SessionManager {
         return pref.getBoolean(IS_LOGIN, false);
     }
 
-    public void updateUserDetails(String firstName, String lastName, String phone, String email, String characterID, String KEY_CHARACTER_URL, String purposeID, String location, String password) {
+    public void updateUserDetails(String firstName, String lastName, String phone, String email, String characterID, String KEY_CHARACTER_URL, String timezone, String location, String password) {
         editor.putString(KEY_FIRST_NAME, firstName);
         editor.putString(KEY_LAST_NAME, lastName);
         editor.putString(KEY_EMAIL, email);
         editor.putString(KEY_CHARACTER_ID, characterID);
         editor.putString(KEY_PHONE_NUMBER, phone);
-        editor.putString(KEY_PURPOSE_ID, purposeID);
+        editor.putString(KEY_TIMEZONE, timezone);
         editor.putString(KEY_LOCATION, location);
         editor.putString(KEY_PASSWORD, password + "".trim());
 
@@ -192,11 +194,13 @@ public class SessionManager {
     public String getPassword() {
         return pref.getString(KEY_PASSWORD,"");
     }
-    public float getLatitude() {
-        return pref.getFloat(KEY_LATITUDE,0);
+    public String getTimezone(){return pref.getString(KEY_TIMEZONE,"");}
+
+    public String getLatitude() {
+        return pref.getString(KEY_LATITUDE,null);
     }
-    public float getLongitude() {
-        return pref.getFloat(KEY_LONGITUDE,0);
+    public String  getLongitude() {
+        return pref.getString(KEY_LONGITUDE,null);
     }
 
     public String getPurpose() {
