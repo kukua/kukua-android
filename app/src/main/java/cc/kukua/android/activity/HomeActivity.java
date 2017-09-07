@@ -1,15 +1,13 @@
 package cc.kukua.android.activity;
 
 import android.content.Intent;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
-import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.options.EngineOptions;
@@ -31,35 +29,25 @@ import org.andengine.opengl.texture.atlas.buildable.builder.ITextureAtlasBuilder
 import org.andengine.opengl.texture.bitmap.AssetBitmapTexture;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.texture.region.TextureRegionFactory;
-import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.LayoutGameActivity;
-import org.andengine.util.HashUtils;
 import org.andengine.util.debug.Debug;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
-import cc.kukua.android.activity.auth.LoginActivity;
 import cc.kukua.android.activity.auth.SessionManager;
-import cc.kukua.android.adapters.CustomizeListAdapter;
-import cc.kukua.android.model.CustomizeList;
 import cc.kukua.android.model.server_response_model.forecast.RequestForecastResponseModel;
 import cc.kukua.android.retrofit.APIService;
 import cc.kukua.android.retrofit.RetrofitClient;
-import cc.kukua.android.utils.APIUtils;
-import cc.kukua.android.utils.DoneCallback;
 import cc.kukua.android.utils.LogUtils;
 import cc.kukua.android.utils.UiUtils;
 import retrofit2.Call;
@@ -79,8 +67,27 @@ public class HomeActivity extends LayoutGameActivity {
     TextView tvDayNumber;
     @BindView(R.id.menu_calendar_month)
     TextView tvMonth;
+    @BindView(R.id.menu_share)
+    ImageView menuShare;
+    @BindView(R.id.menu_sms)
+    ImageView menuSms;
+    @BindView(R.id.viewpager)
+    ViewPager viewpager;
+    @BindView(R.id.menu_prev_day)
+    TextView menuPrevDay;
+    @BindView(R.id.menu_prev_month)
+    TextView menuPrevMonth;
+    @BindView(R.id.menu_next_day)
+    TextView menuNextDay;
+    @BindView(R.id.menu_next_month)
+    TextView menuNextMonth;
+    @BindView(R.id.weather_details)
+    TextView weatherDetails;
+    @BindView(R.id.iv_settings)
+    ImageView ivSettings;
 
     SessionManager session;
+
     private String TAG = HomeActivity.class.getSimpleName();
     // ===========================================================
     // Constants
@@ -283,8 +290,13 @@ public class HomeActivity extends LayoutGameActivity {
                              * You change ot to Date sent by the server based on user's/client recommnedation
                              */
                             tvDayWord.setText(getCalenderDay());
-                            tvDayNumber.setText(getCalendarDayNumber()+"");
+                            tvDayNumber.setText(getCalendarDayNumber() + "");
                             tvMonth.setText(getMonth());
+                            menuNextMonth.setText(getMonthWord() + "");
+                            menuNextDay.setText(getCalendarDayNumber()+1 + "");
+                            menuPrevDay.setText(getCalendarDayNumber()-1 +"");
+                            menuPrevMonth.setText(getMonthWord() +"");
+
 
                             LogUtils.log(TAG, "Temperature: " + response.body().getForecast().getWeather().getLoc().getObs().getT());
                         }
@@ -318,5 +330,22 @@ public class HomeActivity extends LayoutGameActivity {
     private String getMonth() {
         Calendar calendar = Calendar.getInstance();
         return new SimpleDateFormat("MMMM").format(calendar.getTime());
+    }
+
+    private String getMonthWord() {
+        Calendar calendar = Calendar.getInstance();
+        return new SimpleDateFormat("MMM").format(calendar.getTime());
+    }
+
+    private int getMonthNumber() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.MONTH);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
