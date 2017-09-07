@@ -1,56 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
     tools:context="cc.kukua.android.activity.SendMessageActivity">
-        <include layout="@layout/toolbar"
-            android:id="@+id/include2"/>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
+        <include
+            android:id="@+id/include2"
+            layout="@layout/toolbar" />
         <TextView
-            android:layout_marginTop="120dp"
             style="@style/TextStyle.Title"
-            android:text="Send Weather Condition to someone!"/>
+            android:text="Send Weather Condition to someone!" />
 
         <TextView
             style="@style/TextStyle.Center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:text="Phone Number"
-            />
+            android:text="Phone Number" />
 
         <EditText
             android:id="@+id/et_phone"
             style="@style/EditTextStyle"
             android:layout_width="match_parent"
             android:inputType="text"
-            android:maxLines="1"/>
+            android:maxLines="1" />
 
         <TextView
             style="@style/TextStyle.Center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Message"
-            />
+            android:text="Message" />
 
         <EditText
             android:id="@+id/et_message"
             style="@style/EditTextStyleLarge"
             android:layout_width="match_parent"
-            android:inputType="text"/>
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:lines="8"
+            android:maxLines="10"
+            android:minLines="5"
+            android:scrollbars="vertical" />
+        <Button
+            android:id="@+id/btn_send"
+            style="@style/ButtonStyle.Button.Large"
+            android:layout_marginBottom="19dp"
+            android:text="Send" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_send"
-        style="@style/ButtonStyle.Button.Large"
-        android:layout_marginBottom="19dp"
-        android:text="Send"/>
-    </RelativeLayout>
+
+</ScrollView>
