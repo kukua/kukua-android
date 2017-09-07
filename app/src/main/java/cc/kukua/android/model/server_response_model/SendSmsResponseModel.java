@@ -1,7 +1,7 @@
 package cc.kukua.android.model.server_response_model;
 
 /**
- * Created by acellam guy
+ * Created by Ilo Calistus
  */
 
 import com.google.gson.annotations.Expose;
@@ -9,35 +9,34 @@ import com.google.gson.annotations.SerializedName;
 
 public class SendSmsResponseModel {
 
-    @SerializedName("success")
+    @SerializedName("state")
     @Expose
-    private Integer success;
-    @SerializedName("result")
+    private Integer state;
+    @SerializedName("id")
     @Expose
-    private String result;
+    private String id;
 
-    public Integer getSuccess() {
-        return success;
+    public Integer getState() {
+        return state;
     }
 
-    public void setSuccess(Integer success) {
-        this.success = success;
+    public void setState(Integer state) {
+        this.state = state;
     }
 
-    public String getResult() {
-        return result;
+    public String getId() {
+        return id;
     }
 
-    public void setResult(String result) {
-        this.result = result;
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
-        return "SendSmsResponseModel{" +
-                "success=" + success +
-                ", result='" + result + '\'' +
+        return "SendSMSResponseModel{" +
+                "state=" + state +
+                ", id='" + id + '\'' +
                 '}';
     }
-
 }
