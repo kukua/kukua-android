@@ -124,4 +124,5 @@
     <string name="title_activity_location">Pick Your Location</string>
     <string name="skip_this_step">SKIP THIS STEP</string>
     <string name="forgot_password"><u>Forgot Password?</u></string>
+    <string name="send_sms">Send SMS</string>
 </resources>

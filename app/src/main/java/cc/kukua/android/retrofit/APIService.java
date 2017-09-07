@@ -31,9 +31,9 @@ public interface APIService {
     @POST("/api/user/create")
     Call<RegisterResponseModel> register(@Body RegisterQueryModel body);
 
-    @FormUrlEncoded
-    @POST("v1.0/sendsms")
-    Call<SendSmsResponseModel> sendsms(@Field("phonenumber") String phonenumber, @Field("message") String message);
+    @Headers("Content-Type: application/json")
+    @POST("/api/sms/send")
+    Call<SendSmsResponseModel> sendSMS(@Body String body);
 
     @Headers("Content-Type: application/json")
     @POST("api/forecast/create")

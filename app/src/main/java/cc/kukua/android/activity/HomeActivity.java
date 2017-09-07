@@ -204,6 +204,12 @@ public class HomeActivity extends LayoutGameActivity {
                         Float.parseFloat(session.getLongitude()),
                         session.getTimezone());
 
+                menuSms.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(HomeActivity.this, SendMessageActivity.class));
+                    }
+                });
                 leftNav.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -293,9 +299,9 @@ public class HomeActivity extends LayoutGameActivity {
                             tvDayNumber.setText(getCalendarDayNumber() + "");
                             tvMonth.setText(getMonth());
                             menuNextMonth.setText(getMonthWord() + "");
-                            menuNextDay.setText(getCalendarDayNumber()+1 + "");
-                            menuPrevDay.setText(getCalendarDayNumber()-1 +"");
-                            menuPrevMonth.setText(getMonthWord() +"");
+                            menuNextDay.setText(getCalendarDayNumber() + 1 + "");
+                            menuPrevDay.setText(getCalendarDayNumber() - 1 + "");
+                            menuPrevMonth.setText(getMonthWord() + "");
 
 
                             LogUtils.log(TAG, "Temperature: " + response.body().getForecast().getWeather().getLoc().getObs().getT());
