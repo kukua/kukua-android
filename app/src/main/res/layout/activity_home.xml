@@ -56,7 +56,7 @@
                 <TextView
                     android:background="@color/backgroundColor"
                     android:id="@+id/menu_temperature_text"
-                    android:text="27"
+                    android:text="--"
                     style="@style/TextStyle.Home.Temperature"
                     />
                    <TextView

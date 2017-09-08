@@ -9,6 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import cc.kukua.android.R;
+import cc.kukua.android.activity.auth.LoginActivity;
+import cc.kukua.android.activity.auth.SessionManager;
 
 /**
  * Created by mistaguy on 7/28/2017.
@@ -21,12 +23,14 @@ public class SplashActivity extends BaseActivity {
      *                           be created, with whatever savedInstanceState the previous instance
      *                           had generated from onSaveInstanceState
      */
+
+    SessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         Window window = getWindow();
-
+        session = new SessionManager(getApplicationContext());
 // clear FLAG_TRANSLUCENT_STATUS flag:
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
@@ -44,7 +48,11 @@ public class SplashActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, HomeCharacterActivity.class));
+                if(session.isLoggedIn()){
+                    startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+                }else {
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                }
 
                 finish();
             }

@@ -13,9 +13,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
+import cc.kukua.android.model.server_response_model.SendSmsResponseModel;
+import cc.kukua.android.retrofit.APIService;
+import cc.kukua.android.retrofit.RetrofitClient;
+import cc.kukua.android.utils.LogUtils;
+import cc.kukua.android.utils.UiUtils;
+import cn.pedant.SweetAlert.SweetAlertDialog;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SendMessageActivity extends AppCompatActivity {
 
@@ -30,7 +41,8 @@ public class SendMessageActivity extends AppCompatActivity {
 
     String phoneNo;
     String message;
-    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0 ;
+    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
+    private String TAG = SendMessageActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +78,7 @@ public class SendMessageActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_SEND_SMS: {
                 if (grantResults.length > 0
@@ -74,13 +86,14 @@ public class SendMessageActivity extends AppCompatActivity {
                     try {
                         SmsManager smsManager = SmsManager.getDefault();
                         smsManager.sendTextMessage(phoneNo, null, message, null, null);
+                        hitSendMessageEndpoint(phoneNo, message);
                         Toast.makeText(getApplicationContext(), "SMS sent.",
                                 Toast.LENGTH_LONG).show();
 
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         Toast.makeText(this, getString(R.string.network_error), Toast.LENGTH_SHORT).show();
                     }
-                    } else {
+                } else {
                     Toast.makeText(getApplicationContext(),
                             "SMS faild, please try again.", Toast.LENGTH_LONG).show();
                     return;
@@ -88,5 +101,41 @@ public class SendMessageActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    private void hitSendMessageEndpoint(String recipientPhone, String messageBody) {
+        APIService apiService = RetrofitClient.getClient().create(APIService.class);
+        try {
+            JSONObject paramObject = new JSONObject();
+            paramObject.put("recipient", recipientPhone);
+            paramObject.put("sms_text", messageBody);
+
+            UiUtils.showProgressDialog(SendMessageActivity.this, getString(R.string.please_wait));
+            Call<SendSmsResponseModel> call = apiService.sendSMS(paramObject.toString());
+            call.enqueue(new Callback<SendSmsResponseModel>() {
+                @Override
+                public void onResponse(Call<SendSmsResponseModel> call, Response<SendSmsResponseModel> response) {
+                    UiUtils.dismissAllProgressDialogs();
+                    LogUtils.log(TAG, "ServerResponse: " + response.body().toString());
+                    if (response.body().getState() == 200) {
+                        clearInputFields();
+                        Toast.makeText(SendMessageActivity.this, "Message Sent Successfully", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<SendSmsResponseModel> call, Throwable t) {
+                    UiUtils.dismissAllProgressDialogs();
+                    Toast.makeText(SendMessageActivity.this, getString(R.string.network_error), Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void clearInputFields() {
+        etMessage.setText("");
+        etPhone.setText("");
     }
 }
