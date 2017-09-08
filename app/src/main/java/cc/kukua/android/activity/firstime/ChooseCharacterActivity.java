@@ -17,7 +17,7 @@ import java.util.TimeZone;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
-import cc.kukua.android.activity.CharacterCustomizationActivity;
+import cc.kukua.android.activity.CharacterCustomizationCharacterActivity;
 import cc.kukua.android.activity.auth.SessionManager;
 import cc.kukua.android.adapters.ChooseCharacterPagerAdapter;
 import cc.kukua.android.constants.DummyDataProvider;
@@ -53,6 +53,8 @@ public class ChooseCharacterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose_character);
         ButterKnife.bind(this);
         session = new SessionManager(getApplicationContext());
+
+        initCharacter2Session();
         
         tvToolbarTitle.setText(getString(R.string.choose_your_character));
 
@@ -65,9 +67,14 @@ public class ChooseCharacterActivity extends AppCompatActivity {
                 if (tab ==1) {
                     tab--;
                     DummyDataProvider.userDetail.put("character",String.valueOf(tab));
+                    initCharacter2Session();
+
                     pager.setCurrentItem(tab);
                 } else if (tab == 0) {
                     pager.setCurrentItem(tab);
+                    initCharacter1Session();
+
+
                     DummyDataProvider.userDetail.put("character",String.valueOf(tab));
                 }
             }
@@ -88,9 +95,29 @@ public class ChooseCharacterActivity extends AppCompatActivity {
                 DummyDataProvider.userDetail.put("timezone", TimeZone.getDefault().getID());
                 LogUtils.log(TAG,DummyDataProvider.userDetail.toString());
                 //registerUser();
-                startActivity(new Intent(ChooseCharacterActivity.this, CharacterCustomizationActivity.class));
+                startActivity(new Intent(ChooseCharacterActivity.this, CharacterCustomizationCharacterActivity.class));
             }
         });
+    }
+
+    public void initCharacter1Session() {
+        session.saveHat(R.drawable.item_hat1);
+        session.saveHead(R.drawable.item_face1);
+        session.saveShirt(R.drawable.item_torso1);
+        session.saveShoes(R.drawable.item_lower_leg1);
+        session.savePants(R.drawable.item_upper_leg1);
+        session.saveHand(R.drawable.item_lower_arm1);
+        session.savePants(R.drawable.item_upper_arm1);
+    }
+
+    private void initCharacter2Session() {
+        session.saveHat(R.drawable.item_hat2);
+        session.saveHead(R.drawable.item_face2);
+        session.saveShirt(R.drawable.item_torso2);
+        session.saveShoes(R.drawable.item_lower_leg2);
+        session.savePants(R.drawable.item_upper_leg2);
+        session.saveHand(R.drawable.item_lower_arm2);
+        session.savePants(R.drawable.item_upper_arm2);
     }
 
     private void registerUser(){
@@ -162,7 +189,7 @@ public class ChooseCharacterActivity extends AppCompatActivity {
                                     response.body().getId()
                             );
                             */
-                            startActivity(new Intent(ChooseCharacterActivity.this, CharacterCustomizationActivity.class));
+                            startActivity(new Intent(ChooseCharacterActivity.this, CharacterCustomizationCharacterActivity.class));
                         } else if (response.body().getState() != 200) {
                             UiUtils.dismissAllProgressDialogs();
                             //UiUtils.showSafeToast("Oops! Something went wrong!");
