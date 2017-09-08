@@ -41,7 +41,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
-import cc.kukua.android.activity.HomeCharacterActivity;
+import cc.kukua.android.activity.HomeActivity;
 import cc.kukua.android.activity.firstime.RegisterActivity;
 import cc.kukua.android.model.server_response_model.ForgotPasswordResponseModel;
 import cc.kukua.android.model.server_response_model.LoginResponseModel;
@@ -102,6 +102,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
 
         ButterKnife.bind(this);
+
         // Set up the login form.
         populateAutoComplete();
         session = new SessionManager(getApplicationContext());
@@ -109,7 +110,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
-                //startActivity(new Intent(LoginActivity.this, HomeCharacterActivity.class));
+                //startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             }
         });
 
@@ -449,7 +450,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                     @Override
                                     public void done(HashMap result, Exception e) {
                                         if(e==null){
-                                            Intent intent = new Intent(LoginActivity.this, HomeCharacterActivity.class);
+                                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                             startActivity(intent);
                                             finish();
                                         }
@@ -489,7 +490,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             UiUtils.dismissAllProgressDialogs();
             if (success == true) {
-                Intent i = new Intent(LoginActivity.this, HomeCharacterActivity.class);
+                Intent i = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(i);
                 finish();
             } else {

@@ -30,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeCharacterActivity extends BaseCharacterActivity {
+public class HomeActivity extends BaseCharacterActivity {
     @BindView(R.id.left_nav)
     LinearLayout leftNav;
     @BindView(R.id.right_nav)
@@ -63,11 +63,11 @@ public class HomeCharacterActivity extends BaseCharacterActivity {
     ImageView ivSettings;
 
 
-    private String TAG = HomeCharacterActivity.class.getSimpleName();
+    private String TAG = HomeActivity.class.getSimpleName();
 
 
     public void openSettings(View view) {
-        startActivity(new Intent(HomeCharacterActivity.this, SettingActivity.class));
+        startActivity(new Intent(HomeActivity.this, SettingActivity.class));
     }
 
     @Override
@@ -81,7 +81,7 @@ public class HomeCharacterActivity extends BaseCharacterActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                session.checkLogin(HomeCharacterActivity.this);
+                //session.checkLogin(HomeActivity.this);
 
                 /**
                  * Get's weather from server and populate View with data
@@ -98,7 +98,7 @@ public class HomeCharacterActivity extends BaseCharacterActivity {
                 menuSms.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(HomeCharacterActivity.this, SendMessageActivity.class));
+                        startActivity(new Intent(HomeActivity.this, SendMessageActivity.class));
                     }
                 });
                 leftNav.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +122,7 @@ public class HomeCharacterActivity extends BaseCharacterActivity {
     }
 
     public void getDayWeather(float lat, float lon, String timezone) {
-        UiUtils.showProgressDialog(HomeCharacterActivity.this, getString(R.string.please_wait));
+        UiUtils.showProgressDialog(HomeActivity.this, getString(R.string.please_wait));
 
         APIService apiService = RetrofitClient.getClient().create(APIService.class);
         try {
