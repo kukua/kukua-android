@@ -30,6 +30,7 @@
         android:id="@+id/btn_character_information"
         style="@style/ButtonStyle.Button.Medium"
         android:text="My character"
+        android:onClick="openCharacterCustomization"
         android:layout_below="@+id/btn_gps_information"/>
 
 </RelativeLayout>

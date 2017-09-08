@@ -1,11 +1,7 @@
 package cc.kukua.android.activity;
 
 import android.view.View;
-import android.widget.Button;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.options.EngineOptions;
@@ -33,39 +29,31 @@ import org.andengine.util.debug.Debug;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
+import cc.kukua.android.activity.auth.SessionManager;
 import cc.kukua.android.adapters.CustomizeListAdapter;
 import cc.kukua.android.constants.DummyDataProvider;
 import cc.kukua.android.model.CustomizeList;
 
-public class CharacterCustomizationActivity extends LayoutGameActivity {
-    @BindView(R.id.toolbar_title)
-    TextView tvToolbarTitle;
-    @BindView(R.id.btn_next3)
-    Button btnNextButton;
-    @BindView(R.id.expandableListView)
-    ExpandableListView expandableListView;
-    ExpandableListAdapter expandableListAdapter;
-    List<String> expandableListTitle;
-    HashMap<String, List<Integer>> expandableListDetail;
-    private int lastExpandedPosition = -1;
+/**
+ * Created by mistaguy on 9/8/2017.
+ */
+
+public class BaseCharacterActivity extends LayoutGameActivity {
+
     // ===========================================================
     // Constants
     // ===========================================================
 
-    private static final int CAMERA_WIDTH = 480;
+    public static final int CAMERA_WIDTH = 480;
     private static final int CAMERA_HEIGHT = 640; //480
 
     // ===========================================================
     // Fields
     // ===========================================================
     private BuildableBitmapTextureAtlas mBuildableBitmapTextureAtlas;
-    private BuildableBitmapTextureAtlas mBuildableBitmapTextureAtlas2;
 
     private ITexture mParallaxLayerBackTexture;
     private ITexture mParallaxLayerMidTexture;
@@ -103,38 +91,38 @@ public class CharacterCustomizationActivity extends LayoutGameActivity {
     private ITextureRegion shirtRegion1;
     private ITextureRegion shirtRegion2;
 
-    Integer characterOption = 2;
-    Scene scene;
+    public Scene scene;
 
-    Sprite faceSprite1;
-    Sprite faceSprite2;
+    public Sprite faceSprite1;
+    public Sprite faceSprite2;
 
-    Sprite hatSprite1;
-    Sprite hatSprite2;
+    public Sprite hatSprite1;
+    public Sprite hatSprite2;
 
-    Sprite armSpriteLeft1;
-    Sprite handSpriteLeft1;
-    Sprite armSpriteRight1;
-    Sprite handSpriteRight1;
+    public Sprite armSpriteLeft1;
+    public Sprite handSpriteLeft1;
+    public Sprite armSpriteRight1;
+    public Sprite handSpriteRight1;
 
-    Sprite armSpriteLeft2;
-    Sprite handSpriteLeft2;
-    Sprite armSpriteRight2;
-    Sprite handSpriteRight2;
+    public Sprite armSpriteLeft2;
+    public Sprite handSpriteLeft2;
+    public Sprite armSpriteRight2;
+    public Sprite handSpriteRight2;
 
-    Sprite legSpriteLeft1;
-    Sprite shoesSpriteLeft1;
-    Sprite legSpriteRight1;
-    Sprite shoesSpriteRight1;
+    public Sprite legSpriteLeft1;
+    public Sprite shoesSpriteLeft1;
+    public Sprite legSpriteRight1;
+    public Sprite shoesSpriteRight1;
 
-    Sprite legSpriteLeft2;
-    Sprite shoesSpriteLeft2;
-    Sprite legSpriteRight2;
-    Sprite shoesSpriteRight2;
+    public Sprite legSpriteLeft2;
+    public Sprite shoesSpriteLeft2;
+    public Sprite legSpriteRight2;
+    public Sprite shoesSpriteRight2;
 
-    Sprite shirtSprite1;
-    Sprite shirtSprite2;
+    public Sprite shirtSprite1;
+    public Sprite shirtSprite2;
 
+    public SessionManager session;
 
     @Override
     public EngineOptions onCreateEngineOptions() {
@@ -198,139 +186,6 @@ public class CharacterCustomizationActivity extends LayoutGameActivity {
 
         pOnCreateResourcesCallback.onCreateResourcesFinished();
 
-        ButterKnife.bind(this);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                tvToolbarTitle.setText(getString(R.string.customize_your_character));
-
-                expandableListDetail = CustomizeList.getData();
-                expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
-                expandableListAdapter = new CustomizeListAdapter(getApplicationContext(), expandableListTitle, expandableListDetail);
-                expandableListView.setAdapter(expandableListAdapter);
-                expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
-                    @Override
-                    public void onGroupExpand(int groupPosition) {
-                        if (lastExpandedPosition != -1
-                                && groupPosition != lastExpandedPosition) {
-                            expandableListView.collapseGroup(lastExpandedPosition);
-                        }
-                        lastExpandedPosition = groupPosition;
-
-
-                    }
-                });
-
-                expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-
-                    @Override
-                    public void onGroupCollapse(int groupPosition) {
-
-
-                    }
-                });
-
-                expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-                    @Override
-                    public boolean onChildClick(ExpandableListView parent, View v,
-                                                int groupPosition, int childPosition, long id) {
-                        String purpose = expandableListTitle.get(groupPosition)
-                                + " -> "
-                                + expandableListDetail.get(
-                                expandableListTitle.get(groupPosition)).get(
-                                childPosition);
-
-                        int index = parent.getFlatListPosition(ExpandableListView.getPackedPositionForChild(groupPosition, childPosition));
-                        parent.setItemChecked(index, true);
-
-                        Integer drawableId = expandableListDetail.get(
-                                expandableListTitle.get(groupPosition)).get(
-                                childPosition);
-
-                        String purposeTitle = expandableListTitle.get(groupPosition);
-
-                        if (purposeTitle.equals("FACE")) {
-                            try {
-                                if (drawableId == R.drawable.item_face1) {
-                                    faceSprite2.setVisible(false);
-                                    faceSprite1.setVisible(true);
-                                } else {
-                                    faceSprite2.setVisible(true);
-                                    faceSprite1.setVisible(false);
-                                }
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
-                            }
-                        }
-                        if (purposeTitle.equals("HAT")) {
-                            try {
-                                if (drawableId == R.drawable.item_hat1) {
-                                    hatSprite2.setVisible(false);
-                                    hatSprite1.setVisible(true);
-                                } else {
-                                    hatSprite2.setVisible(true);
-                                    hatSprite1.setVisible(false);
-                                }
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
-                            }
-                        }
-                        if (purposeTitle.equals("SHIRT")) {
-                            try {
-                                if (drawableId == R.drawable.item_torso1) {
-                                    shirtSprite2.setVisible(false);
-                                    shirtSprite1.setVisible(true);
-                                } else {
-                                    shirtSprite2.setVisible(true);
-                                    shirtSprite1.setVisible(false);
-                                }
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
-                            }
-                        }
-
-                        if (purposeTitle.equals("SHOES")) {
-                            try {
-                                if (drawableId == R.drawable.item_lower_leg1) {
-                                    shoesSpriteLeft2.setVisible(false);
-                                    shoesSpriteLeft1.setVisible(true);
-                                    shoesSpriteRight2.setVisible(false);
-                                    shoesSpriteRight1.setVisible(true);
-                                } else {
-                                    shoesSpriteLeft2.setVisible(true);
-                                    shoesSpriteLeft1.setVisible(false);
-                                    shoesSpriteRight2.setVisible(true);
-                                    shoesSpriteRight1.setVisible(false);
-                                }
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
-                            }
-                        }
-
-                        if (purposeTitle.equals("PANTS")) {
-                            try {
-                                if (drawableId == R.drawable.item_upper_leg1) {
-                                    legSpriteLeft2.setVisible(false);
-                                    legSpriteLeft1.setVisible(true);
-                                    legSpriteRight2.setVisible(false);
-                                    legSpriteRight1.setVisible(true);
-                                } else {
-                                    legSpriteLeft2.setVisible(true);
-                                    legSpriteLeft1.setVisible(false);
-                                    legSpriteRight2.setVisible(true);
-                                    legSpriteRight1.setVisible(false);
-                                }
-                            } catch (Exception ex) {
-                                ex.printStackTrace();
-                            }
-                        }
-
-                        return true;
-                    }
-                });
-            }
-        });
 
 
     }
@@ -358,111 +213,134 @@ public class CharacterCustomizationActivity extends LayoutGameActivity {
                         CAMERA_WIDTH / 2),
                 CAMERA_HEIGHT - this.mFace1Region.getHeight() - 50,
                 this.mFace1Region, vertexBufferObjectManager);
+        faceSprite1.setVisible(false);
 
         faceSprite2 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2),
                 CAMERA_HEIGHT - this.mFace2Region.getHeight() - 50,
                 this.mFace2Region, vertexBufferObjectManager);
+        faceSprite2.setVisible(false);
 
         hatSprite1 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2),
                 CAMERA_HEIGHT - 110,
                 this.hatSprite1Region, vertexBufferObjectManager);
+        hatSprite1.setVisible(false);
+
         hatSprite2 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2)+20,
                 CAMERA_HEIGHT - 125,
                 this.hatSprite2Region, vertexBufferObjectManager);
+        hatSprite2.setVisible(false);
 
         armSpriteLeft1 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2) + this.armRegionLeft1.getWidth()+10,
                 CAMERA_HEIGHT - this.armRegionLeft1.getHeight() - 130,
                 this.armRegionLeft1, vertexBufferObjectManager);
+        armSpriteLeft1.setVisible(false);
 
         armSpriteLeft2 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2)+ this.armRegionLeft2.getWidth()+10,
                 CAMERA_HEIGHT - this.armRegionLeft2.getHeight() - 130,
                 this.armRegionLeft2, vertexBufferObjectManager);
+        armSpriteLeft2.setVisible(false);
 
         handSpriteLeft1 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2)+ this.armRegionLeft1.getWidth()+ 9,
                 CAMERA_HEIGHT - this.handRegionLeft1.getHeight() - 65,
                 this.handRegionLeft1, vertexBufferObjectManager);
+        handSpriteLeft1.setVisible(false);
 
         handSpriteLeft2 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2)+ this.armRegionLeft2.getWidth()+ 20,
                 CAMERA_HEIGHT - this.handRegionLeft2.getHeight() - 70,
                 this.handRegionLeft2, vertexBufferObjectManager);
+        handSpriteLeft2.setVisible(false);
 
         armSpriteRight1 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2)-100,
                 CAMERA_HEIGHT - this.armRegionRight1.getHeight() - 218,
                 this.armRegionRight1, vertexBufferObjectManager);
+        armSpriteRight1.setVisible(false);
 
         armSpriteRight2 = new Sprite(
                 (CAMERA_WIDTH / 2)-100,
                 CAMERA_HEIGHT - this.armRegionRight2.getHeight() - 218,
                 this.armRegionRight2, vertexBufferObjectManager);
+        armSpriteRight2.setVisible(false);
 
         handSpriteRight1 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2)-114,
                 CAMERA_HEIGHT - this.handRegionRight1.getHeight() - 287,
                 this.handRegionRight1, vertexBufferObjectManager);
+        handSpriteRight1.setVisible(false);
 
         handSpriteRight2 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2)-105,
                 CAMERA_HEIGHT - this.handRegionRight2.getHeight() - 287,
                 this.handRegionRight2, vertexBufferObjectManager);
+        handSpriteRight2.setVisible(false);
 
         legSpriteLeft1 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2) + 45,
                 CAMERA_HEIGHT - this.legRegionLeft1.getHeight() - 371,
                 this.legRegionLeft1, vertexBufferObjectManager);
+        legSpriteLeft1.setVisible(false);
 
         legSpriteLeft2 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2)+45,
                 CAMERA_HEIGHT - this.legRegionLeft2.getHeight() - 371,
                 this.legRegionLeft2, vertexBufferObjectManager);
+        legSpriteLeft2.setVisible(false);
 
         shoesSpriteLeft1 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2)+ 85,
                 CAMERA_HEIGHT - this.shoesRegionLeft1.getHeight() - 500,
                 this.shoesRegionLeft1, vertexBufferObjectManager);
+        shoesSpriteLeft1.setVisible(false);
 
         shoesSpriteLeft2 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2)+78,
                 CAMERA_HEIGHT - this.shoesRegionLeft2.getHeight() - 495,
                 this.shoesRegionLeft2, vertexBufferObjectManager);
+        shoesSpriteLeft2.setVisible(false);
 
 
         legSpriteRight1 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2)-45,
                 CAMERA_HEIGHT - this.legRegionRight1.getHeight() - 371,
                 this.legRegionRight1, vertexBufferObjectManager);
+        legSpriteRight1.setVisible(false);
 
         legSpriteRight2 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2)-45,
                 CAMERA_HEIGHT - this.legRegionRight2.getHeight() - 371,
                 this.legRegionRight2, vertexBufferObjectManager);
+        legSpriteRight2.setVisible(false);
 
         shoesSpriteRight1 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2)-85,
                 CAMERA_HEIGHT - this.shoesRegionRight1.getHeight() - 500,
                 this.shoesRegionRight1, vertexBufferObjectManager);
+        shoesSpriteRight1.setVisible(false);
 
         shoesSpriteRight2 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH /2)-74,
                 CAMERA_HEIGHT - this.shoesRegionRight2.getHeight() - 495,
                 this.shoesRegionRight2, vertexBufferObjectManager);
+        shoesSpriteRight2.setVisible(false);
 
         shirtSprite1 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2),
                 CAMERA_HEIGHT - this.shirtRegion1.getHeight() - this.faceSprite1.getHeight() - 30,
                 this.shirtRegion1, vertexBufferObjectManager);
+        shirtSprite1.setVisible(false);
 
         shirtSprite2 = new Sprite(
                 CAMERA_WIDTH - (CAMERA_WIDTH / 2),
                 CAMERA_HEIGHT - this.shirtRegion2.getHeight() - this.faceSprite2.getHeight() - 30,
                 this.shirtRegion2, vertexBufferObjectManager);
+        shirtSprite2.setVisible(false);
 
 
         scene.attachChild(faceSprite1);
@@ -498,58 +376,85 @@ public class CharacterCustomizationActivity extends LayoutGameActivity {
         scene.attachChild(shoesSpriteRight1);
         scene.attachChild(shoesSpriteRight2);
 
-
-        if (DummyDataProvider.userDetail.get("character") == "0") {
-            faceSprite1.setVisible(true);
-            faceSprite2.setVisible(false);
-            hatSprite1.setVisible(true);
-            hatSprite2.setVisible(false);
-            shirtSprite1.setVisible(true);
-            shirtSprite2.setVisible(false);
-            armSpriteLeft1.setVisible(true);
-            armSpriteLeft2.setVisible(false);
-            handSpriteLeft1.setVisible(true);
-            handSpriteLeft2.setVisible(false);
-            armSpriteRight1.setVisible(true);
-            armSpriteRight2.setVisible(false);
-            handSpriteRight1.setVisible(true);
-            handSpriteRight2.setVisible(false);
-            legSpriteLeft1.setVisible(true);
-            legSpriteLeft2.setVisible(false);
-            shoesSpriteLeft1.setVisible(true);
-            shoesSpriteLeft2.setVisible(false);
-            legSpriteRight1.setVisible(true);
-            legSpriteRight2.setVisible(false);
-            shoesSpriteRight1.setVisible(true);
-            shoesSpriteRight2.setVisible(false);
-
-        } else {
-            faceSprite1.setVisible(false);
-            faceSprite2.setVisible(true);
-            hatSprite1.setVisible(false);
-            hatSprite2.setVisible(true);
-            shirtSprite1.setVisible(false);
-            shirtSprite2.setVisible(true);
-            armSpriteLeft1.setVisible(false);
-            armSpriteLeft2.setVisible(true);
-            handSpriteLeft1.setVisible(false);
-            handSpriteLeft2.setVisible(true);
-            armSpriteRight1.setVisible(false);
-            armSpriteRight2.setVisible(true);
-            handSpriteRight1.setVisible(false);
-            handSpriteRight2.setVisible(true);
-            legSpriteLeft1.setVisible(false);
-            legSpriteLeft2.setVisible(true);
-            shoesSpriteLeft1.setVisible(false);
-            shoesSpriteLeft2.setVisible(true);
-            legSpriteRight1.setVisible(false);
-            legSpriteRight2.setVisible(true);
-            shoesSpriteRight1.setVisible(false);
-            shoesSpriteRight2.setVisible(true);
-        }
+        renderCharacter();
 
 
         pOnCreateSceneCallback.onCreateSceneFinished(scene);
+    }
+
+    public void renderCharacter() {
+        session = new SessionManager(getApplicationContext());
+
+        if (session.getHead() == R.drawable.item_face1) {
+            faceSprite1.setVisible(true);
+            faceSprite2.setVisible(false);
+        } else {
+            faceSprite2.setVisible(true);
+            faceSprite1.setVisible(false);
+        }
+        if (session.getHat() == R.drawable.item_hat1) {
+            hatSprite1.setVisible(true);
+            hatSprite2.setVisible(false);
+        } else {
+            hatSprite2.setVisible(true);
+            hatSprite1.setVisible(false);
+        }
+        if (session.getArm() == R.drawable.item_upper_arm1) {
+            armSpriteLeft1.setVisible(true);
+            armSpriteRight1.setVisible(true);
+            armSpriteLeft2.setVisible(false);
+            armSpriteRight2.setVisible(false);
+        } else {
+            armSpriteLeft1.setVisible(false);
+            armSpriteRight1.setVisible(false);
+            armSpriteLeft2.setVisible(true);
+            armSpriteRight2.setVisible(true);
+        }
+
+        if (session.getHand() == R.drawable.item_lower_arm1) {
+            handSpriteLeft1.setVisible(true);
+            handSpriteRight1.setVisible(true);
+            handSpriteLeft2.setVisible(false);
+            handSpriteRight2.setVisible(false);
+
+        } else {
+            handSpriteLeft1.setVisible(false);
+            handSpriteRight1.setVisible(false);
+            handSpriteLeft2.setVisible(true);
+            handSpriteRight2.setVisible(true);
+        }
+
+        if (session.getShirt() == R.drawable.item_torso1) {
+            shirtSprite1.setVisible(true);
+            shirtSprite2.setVisible(false);
+        } else {
+            shirtSprite1.setVisible(false);
+            shirtSprite2.setVisible(true);
+        }
+
+        if (session.getPants() == R.drawable.item_upper_leg1) {
+            legSpriteLeft1.setVisible(true);
+            legSpriteRight1.setVisible(true);
+            legSpriteLeft2.setVisible(false);
+            legSpriteRight2.setVisible(false);
+        } else {
+            legSpriteLeft1.setVisible(false);
+            legSpriteRight1.setVisible(false);
+            legSpriteLeft2.setVisible(true);
+            legSpriteRight2.setVisible(true);
+        }
+
+        if (session.getShoes() == R.drawable.item_lower_leg1) {
+            shoesSpriteLeft1.setVisible(true);
+            shoesSpriteRight1.setVisible(true);
+            shoesSpriteLeft2.setVisible(false);
+            shoesSpriteRight2.setVisible(false);
+        } else {
+            shoesSpriteLeft2.setVisible(true);
+            shoesSpriteRight2.setVisible(true);
+            shoesSpriteLeft1.setVisible(false);
+            shoesSpriteRight1.setVisible(false);
+        }
     }
 
     @Override

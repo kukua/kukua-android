@@ -2,7 +2,6 @@ package cc.kukua.android.activity.firstime;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -13,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
 import cc.kukua.android.activity.BaseActivity;
-import cc.kukua.android.activity.CharacterCustomizationActivity;
+import cc.kukua.android.activity.CharacterCustomizationCharacterActivity;
 
 public class CharacterInfoActivity extends BaseActivity {
     @BindView(R.id.btn_submit)
@@ -34,7 +33,7 @@ public class CharacterInfoActivity extends BaseActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CharacterInfoActivity.this, CharacterCustomizationActivity.class));
+                startActivity(new Intent(CharacterInfoActivity.this, CharacterCustomizationCharacterActivity.class));
             }
         });
     }

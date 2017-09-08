@@ -18,6 +18,10 @@ public class CustomizeList {
         hats.add(R.drawable.item_hat1);
         hats.add(R.drawable.item_hat2);
 
+        List<Integer> gloves = new ArrayList<Integer>();
+        gloves.add(R.drawable.item_lower_arm1);
+        gloves.add(R.drawable.item_lower_arm2);
+
         List<Integer> shirts = new ArrayList<Integer>();
         shirts.add(R.drawable.item_torso1);
         shirts.add(R.drawable.item_torso2);
@@ -38,6 +42,7 @@ public class CustomizeList {
         expandableListDetail.put("HAT", hats);
         expandableListDetail.put("FACE", faces);
         expandableListDetail.put("SHIRT", shirts);
+        expandableListDetail.put("GlOVES", gloves);
         expandableListDetail.put("PANTS", pants);
         expandableListDetail.put("SHOES", shoes);
         return expandableListDetail;

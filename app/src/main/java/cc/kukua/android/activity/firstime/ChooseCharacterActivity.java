@@ -17,7 +17,7 @@ import java.util.TimeZone;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
-import cc.kukua.android.activity.CharacterCustomizationActivity;
+import cc.kukua.android.activity.CharacterCustomizationCharacterActivity;
 import cc.kukua.android.activity.auth.SessionManager;
 import cc.kukua.android.adapters.ChooseCharacterPagerAdapter;
 import cc.kukua.android.constants.DummyDataProvider;
@@ -65,9 +65,29 @@ public class ChooseCharacterActivity extends AppCompatActivity {
                 if (tab ==1) {
                     tab--;
                     DummyDataProvider.userDetail.put("character",String.valueOf(tab));
+                    session.saveHat(R.drawable.item_hat2);
+                    session.saveHead(R.drawable.item_face2);
+                    session.saveShirt(R.drawable.item_torso2);
+                    session.saveShoes(R.drawable.item_lower_leg2);
+                    session.savePants(R.drawable.item_upper_leg2);
+                    session.saveShoes(R.drawable.item_lower_arm2);
+                    session.savePants(R.drawable.item_upper_arm2);
+
+
+
+
                     pager.setCurrentItem(tab);
                 } else if (tab == 0) {
                     pager.setCurrentItem(tab);
+                    session.saveHat(R.drawable.item_hat1);
+                    session.saveHead(R.drawable.item_face1);
+                    session.saveShirt(R.drawable.item_torso1);
+                    session.saveShoes(R.drawable.item_lower_leg1);
+                    session.savePants(R.drawable.item_upper_leg1);
+                    session.saveShoes(R.drawable.item_lower_arm1);
+                    session.savePants(R.drawable.item_upper_arm1);
+
+
                     DummyDataProvider.userDetail.put("character",String.valueOf(tab));
                 }
             }
@@ -88,7 +108,7 @@ public class ChooseCharacterActivity extends AppCompatActivity {
                 DummyDataProvider.userDetail.put("timezone", TimeZone.getDefault().getID());
                 LogUtils.log(TAG,DummyDataProvider.userDetail.toString());
                 //registerUser();
-                startActivity(new Intent(ChooseCharacterActivity.this, CharacterCustomizationActivity.class));
+                startActivity(new Intent(ChooseCharacterActivity.this, CharacterCustomizationCharacterActivity.class));
             }
         });
     }
@@ -162,7 +182,7 @@ public class ChooseCharacterActivity extends AppCompatActivity {
                                     response.body().getId()
                             );
                             */
-                            startActivity(new Intent(ChooseCharacterActivity.this, CharacterCustomizationActivity.class));
+                            startActivity(new Intent(ChooseCharacterActivity.this, CharacterCustomizationCharacterActivity.class));
                         } else if (response.body().getState() != 200) {
                             UiUtils.dismissAllProgressDialogs();
                             //UiUtils.showSafeToast("Oops! Something went wrong!");
