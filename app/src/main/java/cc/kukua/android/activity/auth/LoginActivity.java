@@ -6,7 +6,6 @@ import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -38,12 +37,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
-import cc.kukua.android.activity.HomeActivity;
+import cc.kukua.android.activity.HomeCharacterActivity;
 import cc.kukua.android.activity.firstime.RegisterActivity;
 import cc.kukua.android.model.server_response_model.ForgotPasswordResponseModel;
 import cc.kukua.android.model.server_response_model.LoginResponseModel;
@@ -111,7 +109,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
-                //startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                //startActivity(new Intent(LoginActivity.this, HomeCharacterActivity.class));
             }
         });
 
@@ -451,7 +449,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                     @Override
                                     public void done(HashMap result, Exception e) {
                                         if(e==null){
-                                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                            Intent intent = new Intent(LoginActivity.this, HomeCharacterActivity.class);
                                             startActivity(intent);
                                             finish();
                                         }
@@ -491,7 +489,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             UiUtils.dismissAllProgressDialogs();
             if (success == true) {
-                Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+                Intent i = new Intent(LoginActivity.this, HomeCharacterActivity.class);
                 startActivity(i);
                 finish();
             } else {

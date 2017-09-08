@@ -48,10 +48,10 @@
             android:name=".activity.firstime.CharacterInfoActivity"
             android:label="@string/title_activity_character_info" />
         <activity
-            android:name=".activity.CharacterCustomizationActivity"
+            android:name=".activity.CharacterCustomizationCharacterActivity"
             android:label="@string/title_activity_customize" />
         <activity
-            android:name=".activity.HomeActivity"
+            android:name=".activity.HomeCharacterActivity"
             android:label="@string/title_activity_home"
             android:screenOrientation="portrait" />
         <activity android:name=".activity.BaseActivity" />

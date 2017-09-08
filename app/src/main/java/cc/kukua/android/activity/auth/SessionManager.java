@@ -44,6 +44,15 @@ public class SessionManager {
     public static final String KEY_LONGITUDE= "longitude";
     public static final String KEY_PURPOSE = "purpose";
 
+    public static final String KEY_HAT = "hat";
+    public static final String KEY_HEAD = "head";
+    public static final String KEY_ARM = "arm";
+    public static final String KEY_HAND= "hand";
+    public static final String KEY_SHIRT = "shirt";
+    public static final String KEY_PANTS = "pants";
+    public static final String KEY_LEG = "leg";
+    public static final String KEY_SHOES = "shoes";
+
     // Constructor
     public SessionManager(Context context) {
         this._context = context;
@@ -205,6 +214,62 @@ public class SessionManager {
 
     public String getPurpose() {
         return pref.getString(KEY_PURPOSE,"");
+    }
+
+    public void saveHat(int hart) {
+        editor.putInt(KEY_HAT, hart);
+        editor.commit();
+    }
+    public int  getHat() {
+        return pref.getInt(KEY_HAT,0);
+    }
+
+    public void saveHead(int head) {
+        editor.putInt(KEY_HEAD, head);
+        editor.commit();
+    }
+    public int  getHead() {
+        return pref.getInt(KEY_HEAD,0);
+    }
+
+    public void saveArm(int arm) {
+        editor.putInt(KEY_ARM, arm);
+        editor.commit();
+    }
+    public int  getArm() {
+        return pref.getInt(KEY_ARM,0);
+    }
+
+    public void saveHand(int hand) {
+        editor.putInt(KEY_HAND, hand);
+        editor.commit();
+    }
+    public int  getHand() {
+        return pref.getInt(KEY_HAND,0);
+    }
+
+    public void saveShirt(int shirt) {
+        editor.putInt(KEY_SHIRT, shirt);
+        editor.commit();
+    }
+    public int  getShirt() {
+        return pref.getInt(KEY_SHIRT,0);
+    }
+
+    public void savePants(int pants) {
+        editor.putInt(KEY_PANTS, pants);
+        editor.commit();
+    }
+    public int  getPants() {
+        return pref.getInt(KEY_PANTS,0);
+    }
+
+    public void saveShoes(int shoes) {
+        editor.putInt(KEY_SHOES, shoes);
+        editor.commit();
+    }
+    public int  getShoes() {
+        return pref.getInt(KEY_SHOES,0);
     }
 
 }

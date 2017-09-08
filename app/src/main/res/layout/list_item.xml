@@ -2,15 +2,12 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:background="@drawable/selector_list_item"
-              android:orientation="horizontal"
+              android:orientation="vertical"
+              android:gravity="center"
               android:layout_width="match_parent"
-              android:layout_height="80dp">
-    <TextView
-        android:gravity="center"
-        android:text="dummy"
+              android:layout_height="40dp">
+    <ImageView
         android:id="@+id/expandedListItem"
-        android:height="40dp"
-        android:textColor="@color/colorWhite"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
 </LinearLayout>

@@ -1,7 +1,9 @@
 package cc.kukua.android.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -30,10 +32,15 @@ public class SettingActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         
         setToolBarTitle(getString(R.string.settings));
+
     }
 
 
     public void setToolBarTitle(String title) {
         toolbarTitle.setText(title);
+    }
+
+    public void openCharacterCustomization(View view) {
+        startActivity(new Intent(SettingActivity.this, CharacterCustomizationCharacterActivity.class));
     }
 }

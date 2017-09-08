@@ -42,7 +42,7 @@ public class APIUtils {
                 @Override
                 public void onResponse(Call<RequestForecastResponseModel> call, Response<RequestForecastResponseModel> response) {
                     UiUtils.dismissAllProgressDialogs();
-                    LogUtils.log("HomeActivity", "OnResponse: " + response.body().toString());
+                    LogUtils.log("HomeCharacterActivity", "OnResponse: " + response.body().toString());
                     try {
                         if (response.isSuccessful()) {
                             if (response.body().getType().equalsIgnoreCase("ForecastData")) {
