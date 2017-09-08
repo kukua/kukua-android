@@ -53,6 +53,8 @@ public class ChooseCharacterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose_character);
         ButterKnife.bind(this);
         session = new SessionManager(getApplicationContext());
+
+        initCharacter2Session();
         
         tvToolbarTitle.setText(getString(R.string.choose_your_character));
 
@@ -65,27 +67,12 @@ public class ChooseCharacterActivity extends AppCompatActivity {
                 if (tab ==1) {
                     tab--;
                     DummyDataProvider.userDetail.put("character",String.valueOf(tab));
-                    session.saveHat(R.drawable.item_hat2);
-                    session.saveHead(R.drawable.item_face2);
-                    session.saveShirt(R.drawable.item_torso2);
-                    session.saveShoes(R.drawable.item_lower_leg2);
-                    session.savePants(R.drawable.item_upper_leg2);
-                    session.saveShoes(R.drawable.item_lower_arm2);
-                    session.savePants(R.drawable.item_upper_arm2);
-
-
-
+                    initCharacter2Session();
 
                     pager.setCurrentItem(tab);
                 } else if (tab == 0) {
                     pager.setCurrentItem(tab);
-                    session.saveHat(R.drawable.item_hat1);
-                    session.saveHead(R.drawable.item_face1);
-                    session.saveShirt(R.drawable.item_torso1);
-                    session.saveShoes(R.drawable.item_lower_leg1);
-                    session.savePants(R.drawable.item_upper_leg1);
-                    session.saveShoes(R.drawable.item_lower_arm1);
-                    session.savePants(R.drawable.item_upper_arm1);
+                    initCharacter1Session();
 
 
                     DummyDataProvider.userDetail.put("character",String.valueOf(tab));
@@ -111,6 +98,26 @@ public class ChooseCharacterActivity extends AppCompatActivity {
                 startActivity(new Intent(ChooseCharacterActivity.this, CharacterCustomizationCharacterActivity.class));
             }
         });
+    }
+
+    public void initCharacter1Session() {
+        session.saveHat(R.drawable.item_hat1);
+        session.saveHead(R.drawable.item_face1);
+        session.saveShirt(R.drawable.item_torso1);
+        session.saveShoes(R.drawable.item_lower_leg1);
+        session.savePants(R.drawable.item_upper_leg1);
+        session.saveHand(R.drawable.item_lower_arm1);
+        session.savePants(R.drawable.item_upper_arm1);
+    }
+
+    private void initCharacter2Session() {
+        session.saveHat(R.drawable.item_hat2);
+        session.saveHead(R.drawable.item_face2);
+        session.saveShirt(R.drawable.item_torso2);
+        session.saveShoes(R.drawable.item_lower_leg2);
+        session.savePants(R.drawable.item_upper_leg2);
+        session.saveHand(R.drawable.item_lower_arm2);
+        session.savePants(R.drawable.item_upper_arm2);
     }
 
     private void registerUser(){
