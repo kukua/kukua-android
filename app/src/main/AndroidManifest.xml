@@ -48,7 +48,7 @@
             android:name=".activity.firstime.CharacterInfoActivity"
             android:label="@string/title_activity_character_info" />
         <activity
-            android:name=".activity.CharacterCustomizationCharacterActivity"
+            android:name=".activity.CharacterCustomizationActivity"
             android:label="@string/title_activity_customize" />
         <activity
             android:name=".activity.HomeActivity"

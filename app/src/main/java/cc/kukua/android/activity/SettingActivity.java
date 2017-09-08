@@ -41,6 +41,6 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     public void openCharacterCustomization(View view) {
-        startActivity(new Intent(SettingActivity.this, CharacterCustomizationCharacterActivity.class));
+        startActivity(new Intent(SettingActivity.this, CharacterCustomizationActivity.class));
     }
 }

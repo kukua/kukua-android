@@ -17,7 +17,7 @@ import java.util.TimeZone;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
-import cc.kukua.android.activity.CharacterCustomizationCharacterActivity;
+import cc.kukua.android.activity.CharacterCustomizationActivity;
 import cc.kukua.android.activity.auth.SessionManager;
 import cc.kukua.android.adapters.ChooseCharacterPagerAdapter;
 import cc.kukua.android.constants.DummyDataProvider;
@@ -63,16 +63,14 @@ public class ChooseCharacterActivity extends AppCompatActivity {
         leftNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                initCharacter1Session();
                 int tab = pager.getCurrentItem();
                 if (tab ==1) {
                     tab--;
                     DummyDataProvider.userDetail.put("character",String.valueOf(tab));
-                    initCharacter2Session();
-
                     pager.setCurrentItem(tab);
                 } else if (tab == 0) {
                     pager.setCurrentItem(tab);
-                    initCharacter1Session();
 
 
                     DummyDataProvider.userDetail.put("character",String.valueOf(tab));
@@ -84,6 +82,7 @@ public class ChooseCharacterActivity extends AppCompatActivity {
         rightNav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                initCharacter2Session();
                 int tab = pager.getCurrentItem();
                 tab++;
                 pager.setCurrentItem(tab);
@@ -95,7 +94,7 @@ public class ChooseCharacterActivity extends AppCompatActivity {
                 DummyDataProvider.userDetail.put("timezone", TimeZone.getDefault().getID());
                 LogUtils.log(TAG,DummyDataProvider.userDetail.toString());
                 //registerUser();
-                startActivity(new Intent(ChooseCharacterActivity.this, CharacterCustomizationCharacterActivity.class));
+                startActivity(new Intent(ChooseCharacterActivity.this, CharacterCustomizationActivity.class));
             }
         });
     }
@@ -189,7 +188,7 @@ public class ChooseCharacterActivity extends AppCompatActivity {
                                     response.body().getId()
                             );
                             */
-                            startActivity(new Intent(ChooseCharacterActivity.this, CharacterCustomizationCharacterActivity.class));
+                            startActivity(new Intent(ChooseCharacterActivity.this, CharacterCustomizationActivity.class));
                         } else if (response.body().getState() != 200) {
                             UiUtils.dismissAllProgressDialogs();
                             //UiUtils.showSafeToast("Oops! Something went wrong!");

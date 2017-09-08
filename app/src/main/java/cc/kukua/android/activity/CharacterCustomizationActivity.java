@@ -1,5 +1,6 @@
 package cc.kukua.android.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
@@ -17,10 +18,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
 import cc.kukua.android.activity.auth.SessionManager;
+import cc.kukua.android.activity.firstime.ChooseCharacterActivity;
 import cc.kukua.android.adapters.CustomizeListAdapter;
 import cc.kukua.android.model.CustomizeList;
 
-public class CharacterCustomizationCharacterActivity extends BaseCharacterActivity {
+public class CharacterCustomizationActivity extends BaseCharacterActivity {
     @BindView(R.id.toolbar_title)
     TextView tvToolbarTitle;
     @BindView(R.id.btn_next3)
@@ -203,6 +205,13 @@ public class CharacterCustomizationCharacterActivity extends BaseCharacterActivi
                         return true;
                     }
                 });
+
+                btnNextButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivity(new Intent(CharacterCustomizationActivity.this, HomeActivity.class));
+                    }
+                });
             }
         });
 
@@ -217,11 +226,5 @@ public class CharacterCustomizationCharacterActivity extends BaseCharacterActivi
     @Override
     protected int getLayoutID() {
         return R.layout.activity_character_customization;
-    }
-
-    @Override
-    protected int getRenderSurfaceViewID() {
-        return R.id.xml_rendersurfaceview;
-
     }
 }

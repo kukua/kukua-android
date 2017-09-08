@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
 import cc.kukua.android.activity.BaseActivity;
-import cc.kukua.android.activity.CharacterCustomizationCharacterActivity;
+import cc.kukua.android.activity.CharacterCustomizationActivity;
 
 public class CharacterInfoActivity extends BaseActivity {
     @BindView(R.id.btn_submit)
@@ -33,7 +33,7 @@ public class CharacterInfoActivity extends BaseActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(CharacterInfoActivity.this, CharacterCustomizationCharacterActivity.class));
+                startActivity(new Intent(CharacterInfoActivity.this, CharacterCustomizationActivity.class));
             }
         });
     }
