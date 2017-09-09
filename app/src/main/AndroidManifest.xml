@@ -75,9 +75,6 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activity.firstime.LocationFragment"
-            android:label="@string/title_activity_location" />
-        <activity
             android:name=".activity.SettingActivity"
             android:label="Settings" />
         <activity

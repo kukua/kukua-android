@@ -17,6 +17,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
+import cc.kukua.android.activity.auth.LoginActivity;
 import cc.kukua.android.activity.auth.SessionManager;
 import cc.kukua.android.activity.firstime.ChooseCharacterActivity;
 import cc.kukua.android.adapters.CustomizeListAdapter;
@@ -209,7 +210,12 @@ public class CharacterCustomizationActivity extends BaseCharacterActivity {
                 btnNextButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        startActivity(new Intent(CharacterCustomizationActivity.this, HomeActivity.class));
+
+                        if(session.isLoggedIn()){
+                            startActivity(new Intent(CharacterCustomizationActivity.this, HomeActivity.class));
+                        }else {
+                            startActivity(new Intent(CharacterCustomizationActivity.this, LoginActivity.class));
+                        }
                     }
                 });
             }
