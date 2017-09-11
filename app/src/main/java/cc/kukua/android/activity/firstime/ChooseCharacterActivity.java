@@ -169,8 +169,7 @@ public class ChooseCharacterActivity extends AppCompatActivity {
 
                     if (response.isSuccessful()) {
                         if (response.body().getState() == 200 && response.body().getId()!=null) {
-
-                            /*session.createLoginSession("",
+                            session.createLoginSession(
                                     regQueryModel.getFirstName(),
                                     regQueryModel.getLastName(),
                                     regQueryModel.getEmail(),
@@ -184,10 +183,8 @@ public class ChooseCharacterActivity extends AppCompatActivity {
                                     regQueryModel.getPurpose(),
                                     regQueryModel.getLocation().get(0),
                                     regQueryModel.getLocation().get(1),
-                                    response.body().getId(),
                                     response.body().getId()
                             );
-                            */
                             startActivity(new Intent(ChooseCharacterActivity.this, CharacterCustomizationActivity.class));
                         } else if (response.body().getState() != 200) {
                             UiUtils.dismissAllProgressDialogs();

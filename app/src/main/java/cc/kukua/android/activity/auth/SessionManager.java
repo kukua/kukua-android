@@ -72,8 +72,8 @@ public class SessionManager {
                                    String location,
                                    String timezone,
                                    String purpose,
-                                   float latitude,
-                                   float longitude,
+                                   double latitude,
+                                   double longitude,
                                    String userID) {
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
