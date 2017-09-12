@@ -101,6 +101,7 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:id="@+id/menu_share"
+                android:onClick="shareWeatherInfo"
                 android:background="@drawable/menu_share"
                 />
             <ImageView

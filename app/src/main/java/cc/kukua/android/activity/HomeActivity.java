@@ -8,6 +8,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.share.model.ShareHashtag;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -62,6 +66,8 @@ public class HomeActivity extends BaseCharacterActivity {
     @BindView(R.id.iv_settings)
     ImageView ivSettings;
 
+    JSONObject response, profile_pic_data, profile_pic_url;
+    ShareDialog shareDialog;
 
     private String TAG = HomeActivity.class.getSimpleName();
 
@@ -69,6 +75,26 @@ public class HomeActivity extends BaseCharacterActivity {
     public void openSettings(View view) {
         startActivity(new Intent(HomeActivity.this, SettingActivity.class));
     }
+
+    public void shareWeatherInfo(View view) {
+        if (ShareDialog.canShow(ShareLinkContent.class)) {
+            ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                    .setContentTitle("Weather Forecast for " +
+                            getMonthWord()+ "/"+
+                    getCalendarDayNumber()+ ", temperature is "+ tvTemperature.getText() +" degrees"
+
+                    )
+                    .setContentDescription(
+                            "This tutorthrough Android Application")
+                    .setShareHashtag(new ShareHashtag.Builder()
+                            .setHashtag("#kuka")
+                            .setHashtag("#weather")
+                            .setHashtag("#kukaweather").build())
+                    .build();
+            shareDialog.show(linkContent);  // Show facebook ShareDialog
+        }
+    }
+
 
     @Override
     public void onCreateResources(OnCreateResourcesCallback pOnCreateResourcesCallback) throws IOException {
@@ -115,6 +141,9 @@ public class HomeActivity extends BaseCharacterActivity {
                         //TODO load previous day weather
                     }
                 });
+
+                shareDialog = new ShareDialog(HomeActivity.this);  // initialize facebook shareDialog.
+
             }
         });
 
@@ -202,12 +231,13 @@ public class HomeActivity extends BaseCharacterActivity {
     protected int getLayoutID() {
         return R.layout.activity_home;
     }
+
     @Override
     protected synchronized void onResume() {
         super.onResume();
-        try{
+        try {
             renderCharacter();
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }

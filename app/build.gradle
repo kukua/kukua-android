@@ -77,6 +77,9 @@ dependencies {
     // image manipulator
     compile 'com.squareup.picasso:picasso:2.5.2'
 
+    // facebook SDK
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+
 
 
 
