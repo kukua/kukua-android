@@ -80,12 +80,8 @@ public class HomeActivity extends BaseCharacterActivity {
         if (ShareDialog.canShow(ShareLinkContent.class)) {
             ShareLinkContent linkContent = new ShareLinkContent.Builder()
                     .setContentTitle("Weather Forecast for " +
-                            getMonthWord()+ "/"+
-                    getCalendarDayNumber()+ ", temperature is "+ tvTemperature.getText() +" degrees"
-
-                    )
-                    .setContentDescription(
-                            "This tutorthrough Android Application")
+                            getMonthWord())
+                    .setContentDescription("temperature is "+ tvTemperature.getText() +" degrees")
                     .setShareHashtag(new ShareHashtag.Builder()
                             .setHashtag("#kuka")
                             .setHashtag("#weather")
