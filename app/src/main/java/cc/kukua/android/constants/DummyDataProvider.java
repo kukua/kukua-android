@@ -14,8 +14,7 @@ public class DummyDataProvider {
     public static String PICK_LOCATION = "Pick your location";
     public static String App_USAGE = "App Usage";
     public static HashMap<String, String> userDetail = new HashMap<>();
-//    public static HashMap<String, String> fragmentToLaunch = new HashMap<>();
-
+//  public static HashMap<String, String> fragmentToLaunch = new HashMap<>();
 
 
 }

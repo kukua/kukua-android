@@ -64,17 +64,15 @@ public class SendMessageActivity extends AppCompatActivity {
         phoneNo = etPhone.getText().toString();
         message = etMessage.getText().toString();
 
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.SEND_SMS)) {
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.SEND_SMS},
-                        MY_PERMISSIONS_REQUEST_SEND_SMS);
-            }
-        }
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(phoneNo, null, message, null, null);
+        Toast.makeText(getApplicationContext(), "SMS sent.",
+                Toast.LENGTH_LONG).show();
+        etPhone.setText("");
+        etMessage.setText("");
+        //hitSendMessageEndpoint(phoneNo, message);
+
+
     }
 
     @Override
@@ -95,7 +93,7 @@ public class SendMessageActivity extends AppCompatActivity {
                     }
                 } else {
                     Toast.makeText(getApplicationContext(),
-                            "SMS faild, please try again.", Toast.LENGTH_LONG).show();
+                            "SMS failed, please try again.", Toast.LENGTH_LONG).show();
                     return;
                 }
             }
@@ -120,6 +118,7 @@ public class SendMessageActivity extends AppCompatActivity {
                     if (response.body().getState() == 200) {
                         clearInputFields();
                         Toast.makeText(SendMessageActivity.this, "Message Sent Successfully", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 }
 
