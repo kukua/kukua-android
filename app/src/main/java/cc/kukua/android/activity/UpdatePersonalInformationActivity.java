@@ -1,16 +1,15 @@
-package cc.kukua.android.activity.firstime;
+package cc.kukua.android.activity;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -21,12 +20,13 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
-import cc.kukua.android.constants.DummyDataProvider;
+import cc.kukua.android.activity.auth.SessionManager;
+import cc.kukua.android.activity.firstime.PersonalInfoFragment;
 import cc.kukua.android.eventbuses.TransactFragment;
 import cc.kukua.android.interfaces.FragmentInterface;
 import cc.kukua.android.utils.UiUtils;
 
-public class RegisterActivity extends AppCompatActivity implements FragmentInterface {
+public class UpdatePersonalInformationActivity extends AppCompatActivity implements FragmentInterface {
     //@BindView(R.id.btn_next) Button nextButton;
     @BindView(R.id.toolbar_title)
     TextView tvToolbarTitle;
@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity implements FragmentInter
         actionBar.setHomeButtonEnabled(false);
 
         Bundle bundle = new Bundle();
-        bundle.putBoolean("isNew", true);
+        bundle.putBoolean("isNew", false);
         PersonalInfoFragment personalInfoFragment = new PersonalInfoFragment();
         personalInfoFragment.setArguments(bundle);
 
@@ -54,8 +54,14 @@ public class RegisterActivity extends AppCompatActivity implements FragmentInter
   }
 
   public void goBack(View view){
-      super.onBackPressed();
+      finish();
   }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home){

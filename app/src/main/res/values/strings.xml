@@ -117,6 +117,15 @@
     <string name="title_activity_customize">Pimp character</string>
     <string name="title_activity_character_info">My character</string>
 
+    <string name="subtitle_personal_info_new">Great! Create your own account below to get started!</string>
+    <string name="subtitle_personal_info_edit">Update my personal info</string>
+    <string name="subtitle_account_info_new">Great! Create your own account below to get started!</string>
+    <string name="subtitle_account_info_edit">Update my account</string>
+    <string name="subtitle_location_info_new">Choose a location using the marker, or search one manually</string>
+    <string name="subtitle_location_info_edit">Update location</string>
+    <string name="next">Next</string>
+    <string name="done">Done</string>
+    <string name="save">Save</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="button_next">Next</string>

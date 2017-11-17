@@ -43,4 +43,13 @@ public class SettingActivity extends AppCompatActivity {
     public void openCharacterCustomization(View view) {
         startActivity(new Intent(SettingActivity.this, CharacterCustomizationActivity.class));
     }
+    public void openUpdatePersonalInformation(View view) {
+        startActivity(new Intent(SettingActivity.this, UpdatePersonalInformationActivity.class));
+    }
+    public void openUpdateAccount(View view) {
+        startActivity(new Intent(SettingActivity.this, UpdateAccountActivity.class));
+    }
+    public void openUpdateGps(View view) {
+        startActivity(new Intent(SettingActivity.this, UpdateLocationActivity.class));
+    }
 }

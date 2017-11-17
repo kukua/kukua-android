@@ -13,17 +13,20 @@
         android:id="@+id/btn_personal_information"
         style="@style/ButtonStyle.Button.Medium"
         android:text="Personal information"
+        android:onClick="openUpdatePersonalInformation"
         android:layout_below="@+id/include2"/>
 
     <Button
         android:id="@+id/btn_account_information"
         style="@style/ButtonStyle.Button.Medium"
         android:text="Account information"
+        android:onClick="openUpdateAccount"
         android:layout_below="@+id/btn_personal_information"/>
     <Button
         android:id="@+id/btn_gps_information"
         style="@style/ButtonStyle.Button.Medium"
         android:text="GPS information"
+        android:onClick="openUpdateGps"
         android:layout_below="@+id/btn_account_information"/>
 
     <Button

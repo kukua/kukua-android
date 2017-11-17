@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -53,6 +54,11 @@ public class UiUtils {
     public static void runOnMain(final @NonNull Runnable runnable) {
         if (isMainThread()) runnable.run();
         else handler.post(runnable);
+    }
+
+    public static void showSnackbar(String message, View v) {
+        final Snackbar snackbar = Snackbar.make(v, message, Snackbar.LENGTH_LONG);
+        snackbar.show();
     }
 
     public static void blinkView(View mView) {

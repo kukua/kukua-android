@@ -11,8 +11,9 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/personal_account_subtitle"
             style="@style/TextStyle.Title"
-            android:text="Great! Create your own account below to get started!"/>
+            android:text=""/>
 
         <TextView
             style="@style/TextStyle.Center"
@@ -46,5 +47,5 @@
         android:id="@+id/btn_next_reg"
         style="@style/ButtonStyle.Button.Large"
         android:layout_marginBottom="19dp"
-        android:text="Next"/>
+        android:text="@string/next"/>
 </RelativeLayout>

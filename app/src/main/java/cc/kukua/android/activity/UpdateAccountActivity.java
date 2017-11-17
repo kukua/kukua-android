@@ -1,16 +1,15 @@
-package cc.kukua.android.activity.firstime;
+package cc.kukua.android.activity;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -21,12 +20,13 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
-import cc.kukua.android.constants.DummyDataProvider;
+import cc.kukua.android.activity.firstime.AccountInfoFragment;
+import cc.kukua.android.activity.firstime.PersonalInfoFragment;
 import cc.kukua.android.eventbuses.TransactFragment;
 import cc.kukua.android.interfaces.FragmentInterface;
 import cc.kukua.android.utils.UiUtils;
 
-public class RegisterActivity extends AppCompatActivity implements FragmentInterface {
+public class UpdateAccountActivity extends AppCompatActivity implements FragmentInterface {
     //@BindView(R.id.btn_next) Button nextButton;
     @BindView(R.id.toolbar_title)
     TextView tvToolbarTitle;
@@ -45,17 +45,23 @@ public class RegisterActivity extends AppCompatActivity implements FragmentInter
         actionBar.setHomeButtonEnabled(false);
 
         Bundle bundle = new Bundle();
-        bundle.putBoolean("isNew", true);
-        PersonalInfoFragment personalInfoFragment = new PersonalInfoFragment();
-        personalInfoFragment.setArguments(bundle);
+        bundle.putBoolean("isNew", false);
+        AccountInfoFragment accountInfoFragment = new AccountInfoFragment();
+        accountInfoFragment.setArguments(bundle);
 
         //Inflate a Fragment
-        transactFragment(personalInfoFragment);
+        transactFragment(accountInfoFragment);
   }
 
-  public void goBack(View view){
-      super.onBackPressed();
-  }
+    public void goBack(View view){
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home){

@@ -14,9 +14,10 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/location_subtitle"
             style="@style/TextStyle.Title"
             android:layout_gravity="center_horizontal"
-            android:text="Choose a location using the marker, or search one manually"/>
+            android:text=""/>
 
 
         <EditText

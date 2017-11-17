@@ -51,9 +51,11 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cc.kukua.android.R;
+import cc.kukua.android.activity.auth.SessionManager;
 import cc.kukua.android.constants.DummyDataProvider;
 import cc.kukua.android.eventbuses.TransactFragment;
 import cc.kukua.android.interfaces.FragmentInterface;
+import cc.kukua.android.utils.UiUtils;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -66,6 +68,8 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
     int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     private String TAG = LocationFragment.class.getSimpleName();
 
+    @BindView(R.id.location_subtitle)
+    TextView subTitle;
     @BindView(R.id.btn_proceed)
     Button btnProceed;
     @BindView(R.id.edit_location)
@@ -73,7 +77,10 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
     protected GoogleApiClient mGoogleApiClient;
     private double lat = 0, lng = 0;
 
-    private FragmentInterface fragmentInterface;
+    boolean isNew = true;
+
+    FragmentInterface fragmentInterface;
+    SessionManager session;
     private LocationRequest mLocationRequest;
 
     private MapView mapView;
@@ -83,15 +90,31 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_location, container, false);
         ButterKnife.bind(this, rootView);
-        setFragmentTitle();
-        btnProceed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DummyDataProvider.userDetail.put("latLong", lat + "," + lng);
-                AppUsageFragment appUsageFragment = new AppUsageFragment();
-                EventBus.getDefault().post(new TransactFragment(appUsageFragment));
-            }
-        });
+        session = new SessionManager(getContext());
+
+        this.isNew = getArguments().getBoolean("isNew");
+        updateFragmentUI();
+        if(this.isNew) {
+            btnProceed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DummyDataProvider.userDetail.put("latLong", lat + "," + lng);
+                    AppUsageFragment appUsageFragment = new AppUsageFragment();
+                    EventBus.getDefault().post(new TransactFragment(appUsageFragment));
+                }
+            });
+        }else{
+            btnProceed.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    session.saveLatitude(String.valueOf(lat));
+                    session.saveLongitude(String.valueOf(lng));
+                    session.saveLocation(String.valueOf(lat) +","+String.valueOf(lng));
+                    UiUtils.showSnackbar("You location has been updated", v);
+                }
+            });
+        }
+
         edLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -372,9 +395,17 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback, Go
 
     }
 
-    private void setFragmentTitle() {
+    private void updateFragmentUI() {
         if (fragmentInterface != null) {
             fragmentInterface.setToolBarTitle(DummyDataProvider.PICK_LOCATION);
+
+            if (this.isNew) {
+                subTitle.setText(getResources().getString(R.string.subtitle_account_info_new));
+                btnProceed.setText(getResources().getString(R.string.next));
+            } else {
+                subTitle.setText(getResources().getString(R.string.subtitle_account_info_edit));
+                btnProceed.setText(getResources().getString(R.string.save));
+            }
         }
     }
 

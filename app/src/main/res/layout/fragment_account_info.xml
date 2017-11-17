@@ -11,9 +11,10 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/account_subtitle"
             style="@style/TextStyle.Title"
             android:layout_gravity="center_horizontal"
-            android:text="Great! Create your own account below to get started!"/>
+            android:text=""/>
 
         <TextView
             style="@style/TextStyle.Center"

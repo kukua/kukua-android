@@ -45,6 +45,15 @@
             android:name=".activity.firstime.RegisterActivity"
             android:label="Personal info" />
         <activity
+            android:name=".activity.UpdatePersonalInformationActivity"
+            android:label="Update personal info" />
+        <activity
+            android:name=".activity.UpdateAccountActivity"
+            android:label="Update account info" />
+        <activity
+            android:name=".activity.UpdateLocationActivity"
+            android:label="Update location info" />
+        <activity
             android:name=".activity.firstime.CharacterInfoActivity"
             android:label="@string/title_activity_character_info" />
         <activity

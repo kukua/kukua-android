@@ -188,14 +188,30 @@ public class SessionManager {
     public Integer getUserID() {
         return pref.getInt(KEY_USER_ID,0);
     }
+    public void saveFirstName(String firstName) {
+        editor.putString(KEY_FIRST_NAME, firstName);
+        editor.commit();
+    }
     public String getFirstName() {
         return pref.getString(KEY_FIRST_NAME,"");
+    }
+    public void saveLastName(String lastName) {
+        editor.putString(KEY_LAST_NAME, lastName);
+        editor.commit();
     }
     public String getLastName() {
         return pref.getString(KEY_LAST_NAME,"");
     }
+    public void saveEmail(String email) {
+        editor.putString(KEY_EMAIL, email);
+        editor.commit();
+    }
     public String getEmail() {
         return pref.getString(KEY_EMAIL,"");
+    }
+    public void savePhoneNumber(String phone) {
+        editor.putString(KEY_PHONE_NUMBER, phone);
+        editor.commit();
     }
     public String getKeyPhoneNumber() {
         return pref.getString(KEY_PHONE_NUMBER,"");
@@ -205,11 +221,23 @@ public class SessionManager {
     }
     public String getTimezone(){return pref.getString(KEY_TIMEZONE,"");}
 
+    public void saveLatitude(String lastName) {
+        editor.putString(KEY_LATITUDE, lastName);
+        editor.commit();
+    }
     public String getLatitude() {
         return pref.getString(KEY_LATITUDE,null);
     }
+    public void saveLongitude(String lastName) {
+        editor.putString(KEY_LONGITUDE, lastName);
+        editor.commit();
+    }
     public String  getLongitude() {
         return pref.getString(KEY_LONGITUDE,null);
+    }
+    public void saveLocation(String lastName) {
+        editor.putString(KEY_LOCATION, lastName);
+        editor.commit();
     }
 
     public String getPurpose() {
